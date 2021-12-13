@@ -43,7 +43,7 @@ def contact(request):
       from_email= 'geraldlayderos202@gmail.com',
       to = ['axionultra@gmail.com','geraldlayderos202@gmail.com'],
     )
-    #email.send()
+    email.send()
     
 
     return render(request,'contact.html',{
@@ -102,7 +102,7 @@ def service(request):
       from_email= 'geraldlayderos202@gmail.com',
       to = ['axionultra@gmail.com','geraldlayderos202@gmail.com'],
     )
-    #email.send()
+    email.send()
 
 
     return render(request,'service.html',{
@@ -154,7 +154,7 @@ def appointment(request):
       from_email= 'geraldlayderos202@gmail.com',
       to = ['axionultra@gmail.com','geraldlayderos202@gmail.com'],
     )
-    #email.send()
+    email.send()
     
     
     return render(request,'appointment.html',{
