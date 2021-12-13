@@ -1,0 +1,103 @@
+{% extends 'adminTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activeDoctor %}active open{% endblock %}
+{% block activeDoctorList %}active open{% endblock %}
+
+
+
+{% block content %}
+<!-- start page content -->
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div class="page-bar">
+            <div class="page-title-breadcrumb">
+                <div class=" pull-left">
+                    <div class="page-title">Doctors Tables</div>
+                </div>
+                <ol class="breadcrumb page-breadcrumb pull-right">
+                    <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    </li>
+                    <li class="active">Doctors</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card  card-box">
+                    <div class="card-head">
+                        <header>Manage Doctor's Account</header>
+                    </div>
+
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="btn-group">
+                                    <a href="{% url 'registerDoctor' %}" id="addRow1" class="btn btn-success">
+                                    Add New 
+                                        <i style="color:white;" class="fa fa-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        </br>
+                            <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover  order-column full-width" id="example4">
+                                    <thead style="background-color:#36DB51;">
+                                        <tr>
+                                            <th> Account Id</th>
+                                            <th> Doctor Name </th>
+                                            <th> Department </th>
+                                            <th> Schedule </th>
+                                            <th> Day </th>
+                                            <th> Contact No. </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for doctor in doctor %}
+                                        <tr class="odd gradeX">
+                                            <td>
+                                                {{doctor.id}}
+                                            </td>
+                                            <td>
+                                                {{doctor.account.full_name}} 
+                                            </td>
+                                            <td>
+                                                {{doctor.account.department}}
+                                            </td>
+                                            <td>
+                                                {{doctor.account.schedule_time_In}}-
+                                                {{doctor.account.schedule_time_Out}}
+                                            </td>
+                                            <td>
+                                                {{doctor.account.schedule_day.all|join:','}}
+                                            </td>
+                                            <td>
+                                                {{doctor.account.phone}}
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                     
+                                            <center style="font-size:20px;">There are no items in this Table</center><br>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                </div>  
+                            </div>  
+                        </div>  
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page content -->
+
+
+
+
+
+{% endblock %}

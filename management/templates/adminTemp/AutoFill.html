@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <style type="text/css">
+
+    </style>
+    <script type="text/javascript">
+var ids = new Array();
+var use = new Array();
+var ful = new Array();
+
+ids[0] = "";
+use[0] = "";
+ful[0] = "";
+
+ids[1] = 6;
+use[1] = "bsmith";
+ful[1] = "Buddy Smith";
+
+ids[2] = 2;
+use[2] = "lsmith";
+ful[2] = "Libbie Smith";
+
+ids[3] = 4;
+use[3] = "asmith";
+ful[3] = "Andy Smith";
+
+
+        function Choice() {
+            //x = document.getElementById("users");
+            y = document.getElementById("selectUsers");
+
+              //x.value = y.options[y.selectedIndex].text;
+              document.getElementById("ful").value = ids[y.selectedIndex];
+              document.getElementById("use").value = use[y.selectedIndex];
+              document.getElementById("ids").value = ful[y.selectedIndex];
+         }
+
+
+    </script>
+  </head>
+  <body>
+<form name="form1" method="post" action="">
+<select id="selectUsers" name="users" onChange='Choice();'><option> </option>
+<option value="1">bsmith</option>
+<option value="2">lsmith</option>
+<option value="3">asmith</option>
+</select>
+<p>ids <input type="text" id="ids" name="id" ></p>
+<p>use <input type="text" id="use" name="username" ></p>
+<p>ful <input type="text" id="ful" name="full_name" ></p>
+</form>
+  </body>
+</html>

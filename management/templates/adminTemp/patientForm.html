@@ -1,0 +1,787 @@
+{% extends 'adminTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activePatient %}active open{% endblock %}
+{% block activePatientList %}active open{% endblock %}
+{% load static %}
+
+
+
+
+{% block content %}
+
+<!-- start page content -->
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div class="page-bar">
+            <div class="page-title-breadcrumb">
+                <div class=" pull-left">
+                    <ul class="page-title nav navbar-nav navbar-right ">
+                        <li class="material-icons" style="font-size: 1.2em;">  info
+                        </li>&nbsp;&nbsp;
+                     <span><b>Patient   #&nbsp;  {{patientInfo.id}}</b></span>
+                    </ul>
+                </div>
+                <ol class="breadcrumb page-breadcrumb pull-right">
+                    <li>
+                        <i class="fa fa-home"></i>&nbsp;
+                        <a class="parent-item" href="index.html">Home</a>&nbsp;
+                        <i class="fa fa-angle-right"></i>
+                    </li>
+                    <li><a class="parent-item" href="#">Forms</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    </li>
+                    <li class="active">Form Layouts</li>
+                </ol>
+            </div>
+        </div>
+                    
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="card card-box">
+                    <div class="card-head">
+                        <header>Add Patient</header>
+                    </div>
+                                
+                                
+                    <form  action="" method="POST">
+                        <div class="form-horizontal">
+                            {% csrf_token %} 
+                            <div class="form-body">
+                            <div style="padding:12px">
+                                <div class="card-body " id="bar-parent2">
+                                    <center><h1 style="color:green;">Remove Me</h1> {{form.errors}}</center>
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4">   
+                                            <div class="form-group">
+                                                <label >Last Name:
+                                                <span class="required"> * </span></label>
+                                                {% if form.patient_lastName.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_lastName}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <div class="form-group">
+                                                <label>First Name:<span class="required"> * </span></label>
+                                                {% if form.patient_firstName.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_firstName}} 
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-4">
+                                            <div class="form-group">
+                                                <label>Middle Name:<span class="required"> * </span></label>
+                                                {% if form.patient_middleName.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_middleName}} 
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-4">
+                                            <div class="form-group">
+                                                <label>Suffix Name:</label>
+                                                {% if form.patient_suffixName.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_suffixName}} 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-2 col-sm-4">
+                                            <div class="form-group">
+                                                <label>Age:<span class="required"> * </span></label>
+                                            <div>
+                                                {% if form.patient_age.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_age}}
+                                            </div>
+                                        </div>        
+                                        </div>
+                                        <div class="col-md-2 col-sm-4">
+                                            <div class="form-group">
+                                                <label>Sex:<span class="required"> * </span></label>
+                                                {{form.patient_sex}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-4">
+                                            <div class="form-group">
+                                                <label>Birth Day:<span class="required"> * </span></label>
+                                                {{form.birth_date}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-4">
+                                            <div class="form-group">
+                                                <label>Weight (kg):<span class="required"> * </span></label>
+                                                {% if form.patient_weight.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_weight}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-4">
+                                            <div class="form-group">
+                                                <label>Height (cm):<span class="required"> * </span></label>
+                                                {% if form.patient_height.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_height}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-4">
+                                            <div class="form-group">
+                                                <label>Contact Number:<span class="required"> * </span></label>
+                                                {% if form.patient_phone.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_phone}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <div class="form-group">
+                                                <label>Religion:<span class="required"> * </span></label>
+                                                {% if form.patient_religion.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_religion}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <div class="form-group">
+                                                <label>Nationality:<span class="required"> * </span></label>
+                                                {% if form.patient_nationality.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_nationality}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label>Residential Address:<span class="required"> * </span></label>
+                                            </div>
+                                            {% if form.patient_address.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                            {{form.patient_address}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Occupation:</label>
+                                                {% if form.patient_occupation.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_occupation}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Company Name:</label>
+                                                {% if form.patient_company_name.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_company_name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Person to Call in case of Emergency:<span class="required"> * </span></label>
+                                                {% if form.patient_personToCall.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_personToCall}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Relation to Patient:<span class="required"> * </span></label>
+                                                {% if form.patient_personToCallRelation.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_personToCallRelation}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label>Address:<span class="required"> * </span></label>
+                                                {% if form.patient_personToCallAddress.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_personToCallAddress}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Contact Number<i>(Cellphone):</i><span class="required"> * </span></label>
+                                                {% if form.patient_personToCallPhone.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_personToCallPhone}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <label><i>(Office Tel. No):</i></label>
+                                                {% if form.patient_personToCallWorkTel.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_personToCallWorkTel}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label>Patient Complaint<span class="required"> * </span></label>
+                                                {% if form.patient_complaint.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.patient_complaint}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Reffered By:<span class="required"> * </span></label>
+                                                {% if form.refferedBy.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                {{form.refferedBy}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                        
+                                    <h3>For Minors</h3>
+
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Fathers Name:</label>
+                                                    {% if form.patient_fatherName.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                    {{form.patient_fatherName}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Occupation:</label>
+                                                    {% if form.patient_fatherOccupation.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                    {{form.patient_fatherOccupation}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Nationality:</label>
+                                                    {% if form.patient_fathernationality.errors %}
+                                                <small style="color:red;">
+                                                Enter Valid Input</small>
+                                                {% endif %}
+                                                    {{form.patient_fathernationality}}
+                                                </div>
+                                            </div>  
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Contact Number<i>(Cellphone):</i></label>
+                                                    {% if form.patient_fatherContact.errors %}
+                                                    <small style="color:red;">
+                                                    Enter Valid Input</small>
+                                                    {% endif %}
+                                                    {{form.patient_fatherContact}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <label><i>(Office Tel. No):</i></label>
+                                                    {% if form.patient_fatherOfficeContact.errors %}
+                                                    <small style="color:red;">
+                                                    Enter Valid Input</small>
+                                                    {% endif %}
+                                                    {{form.patient_fatherOfficeContact}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Mothers Name:</label>
+                                                    {% if form.patient_motherName.errors %}
+                                                    <small style="color:red;">
+                                                    Enter Valid Input</small>
+                                                    {% endif %}
+                                                    {{form.patient_motherName}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Occupation:</label>
+                                                    {% if form.patient_motherOccupation.errors %}
+                                                    <small style="color:red;">
+                                                    Enter Valid Input</small>
+                                                    {% endif %}
+                                                    {{form.patient_motherOccupation}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Nationality:</label>
+                                                    {% if form.patient_mothernationality.errors %}
+                                                    <small style="color:red;">
+                                                    Enter Valid Input</small>
+                                                    {% endif %}
+                                                    {{form.patient_mothernationality}}
+                                                </div>
+                                            </div>  
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Contact Number<i>(Cellphone):</i></label>
+                                                    {% if form.patient_motherContact.errors %}
+                                                    <small style="color:red;">
+                                                    Enter Valid Input</small>
+                                                    {% endif %}
+                                                    {{form.patient_motherContact}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <label><i>(Office Tel. No):</i></label>
+                                                    {% if form.patient_motherOfficeContact.errors %}
+                                                    <small style="color:red;">
+                                                    Enter Valid Input</small>
+                                                    {% endif %}
+                                                    {{form.patient_motherOfficeContact}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <h3>Dental History</h3> 
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Previous Dentist: Dr.</label>
+                                                    {% if form.patient_previousDentist.errors %}
+                                                    <small style="color:red;">
+                                                    Enter Valid Input</small>
+                                                    {% endif %}
+                                                    {{form.patient_previousDentist}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Last Dental Visit</label>
+                                                    {% if form.patient_lastDentalVisit.errors %}
+                                                    <small style="color:red;">
+                                                    Enter Valid Input</small>
+                                                    {% endif %}
+                                                    {{form.patient_lastDentalVisit}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Last Treatment Done:</label>
+                                                    {% if form.patient_lastTreatmentDone.errors %}
+                                                    <small style="color:red;">
+                                                    Enter Valid Input</small>
+                                                    {% endif %}
+                                                    {{form.patient_lastTreatmentDone}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+
+                                        <h3>Medical History</h3>
+
+                                        <div class="row">
+                                            <div class="col-md-7 col-sm-7">
+                                                <div class="form-group">
+                                                    <label>Name of Physician: Dr.</label>
+                                                    {% if form.patient_previousDoctor.errors %}
+                                                    <small style="color:red;">
+                                                    Enter Valid Input</small>
+                                                    {% endif %}
+                                                    {{form.patient_previousDoctor}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 col-sm-5">
+                                                <div class="form-group">
+                                                    <label>Specialty, if applicable:</label>
+                                                    {% if form.patient_specialtyDoctor.errors %}
+                                                    <small style="color:red;">
+                                                    Enter Valid Input</small>
+                                                    {% endif %}
+                                                    {{form.patient_specialtyDoctor}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-7 col-sm-7">
+                                                <div class="form-group">
+                                                    <label>Office Address:</label>
+                                                    {% if form.patient_officeAddressDoctor.errors %}
+                                                    <small style="color:red;">
+                                                    Enter Valid Input</small>
+                                                    {% endif %}
+                                                    {{form.patient_officeAddressDoctor}}
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <ol>
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <label>Current medications/Vitamins:</label>
+                                                            {% if form.patient_medications.errors %}
+                                                    <small style="color:red;">
+                                                    Enter Valid Input</small>
+                                                    {% endif %}
+                                                            {{form.patient_medications}}
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <label>Previous Hospitalization/Surgery:</label>
+                                                            {% if form.patient_hospitalization.errors %}
+                                                    <small style="color:red;">
+                                                    Enter Valid Input</small>
+                                                    {% endif %}
+                                                            {{form.patient_hospitalization}}
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <label>Developmental Abnormalities:</label>
+                                                            {% if form.patient_devAbnormalities.errors %}
+                                                    <small style="color:red;">
+                                                    Enter Valid Input</small>
+                                                    {% endif %}
+                                                            {{form.patient_devAbnormalities}}
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <label>Are you allergic to any of the following?</label>
+                                                        </div>
+                                                        
+                                                    <div class="row">
+                                                    
+                                                            <!-- checkbox -->
+                                                        <div class="col-md-3 col-sm-2">
+                                                        <div class="form-check">
+                                                            {{form.patient_allergyLocalAnesthetics}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Local Anesthetics
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-2">
+                                                        <div class="form-check">
+                                                            {{form.patient_allergyAntibiotics}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Penicillin, Antibiotics
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                        <div class="form-check">
+                                                            {{form.patient_allergyAspirin}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Aspirin
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                        <div class="form-check">
+                                                            {{form.patient_allergyLatex}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Latex
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                        <div class="form-check">
+                                                            {{form.patient_allergyMint}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Mint
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-1 col-sm-1">
+                                                        <div class="form-check">
+                                                        
+                                                            <input class="form-check-input" type="checkbox" >
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Others
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            {{form.patient_allergyOthers}}
+                                                            </div>
+                                                    </div>
+                                                    </li>
+                                                    <!-- Make The Input Field a CheckBox -->
+                                                    <li>
+                                                        <div class="form-group">
+                                                        <label>Do you use Tobacco Products? </label>
+                                                        <div class="col-md-2">
+                                                            {{form.patient_tabacco}}
+                                                            </div>
+                                                        </div> 
+                                                    </li>
+                                                    <li> 
+                                                        <div class="form-group">
+                                                            <label>Do you use alchohol, cocaine, or other drugs?</label>
+                                                        <div class="col-md-2">
+                                                             {{form.patient_drugs}}
+                                                        </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <label>Any history of the following:</label>
+                                                            <div class="row">
+                                                            
+                                                            <!-- checkbox -->
+                                                        <div class="col-md-3 col-sm-2">
+                                                        <div class="form-check">
+                                                            {{form.patient_highBloodPressure}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                High Blood Pressure
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-2">
+                                                        <div class="form-check">
+                                                            {{form.patient_lowBloodPressure}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Low Blood Pressure
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                        <div class="form-check">
+                                                            {{form.patient_respiratoryProblems}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Respiratory Problem
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                        <div class="form-check">
+                                                            {{form.patient_bleedingDisorder}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Bleeding Disorder
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-2">
+                                                        <div class="form-check">
+                                                            {{form.patient_convulsion}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Convulsion
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-2">
+                                                        <div class="form-check">
+                                                            {{form.patient_asthma}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Asthma
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                        <div class="form-check">
+                                                            {{form.patient_rheurnaticFever}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Rheumatic Fever
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                        <div class="form-check">
+                                                            {{form.patient_glandularProblem}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Glandular Disorder
+                                                            </label>
+                                                        </div>
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-2">
+                                                        <div class="form-check">
+                                                            {{form.patient_aidsHIVInfection}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                AIDS/HIV Infection
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-2">
+                                                        <div class="form-check">
+                                                            {{form.patient_strokes}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Stroke
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                        <div class="form-check">
+                                                            {{form.patient_diabetes}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Diabetes
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                        <div class="form-check">
+                                                            {{form.patient_seizures}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Seisures
+                                                            </label>
+                                                        </div>
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-2">
+                                                        <div class="form-check">
+                                                            {{form.patient_lungProblem}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Lung Problem
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-2">
+                                                        <div class="form-check">
+                                                            {{form.patient_liverProblem}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Liver Proble
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                        <div class="form-check">
+                                                            {{form.patient_kidneyProblem}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Kidney Problem
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                        <div class="form-check">
+                                                            {{form.patient_hearthProblem}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Hearth Problem
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-2">
+                                                        <div class="form-check">
+                                                            {{form.patient_thyroidProblem}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Thyriod Problem
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                        <div class="form-check">
+                                                            {{form.patient_tuberculosis}}
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Tuberculosis
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-1 col-sm-1">
+                                                        <div class="form-check">
+                                                        
+                                                            <input class="form-check-input" type="checkbox" >
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                Others
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input type="text" class="form-control"  >
+                                                            </div>
+                                                        
+                                                        
+                                                    </div>
+                                                    </li>
+                                                        </div>
+                                                    </li>
+                                                </ol>
+                                                
+                                                
+
+                                            </div>
+                                        </div>
+                                                <div class="form-actions">
+                                                    <div class="row">
+                                                        <div class="offset-md-3 col-md-9">
+                                                            <button type="submit" class="btn btn-success">Submit</button>
+                                                            <a href="{% url 'patient' %}" type="button" class="btn btn-default">Cancel</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>    
+                            </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page content -->
+{% endblock %}

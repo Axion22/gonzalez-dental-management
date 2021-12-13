@@ -1,0 +1,220 @@
+{% extends 'staffTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activeInventory %}active open{% endblock %}
+{% block activeInventoryList %}active open{% endblock %}
+{% load static %}
+
+
+{% block extracss %}
+<style>
+    th {
+    text-align: center;
+    }
+</style>
+  {% endblock extracss %}
+
+{% block content %}
+{% load management_extras %}
+
+			<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Advance Tables</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="#">Data Tables</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active">Advance Tables</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card  card-box">
+                                <div class="card-head">
+                                    <header>MANAGED INVENTORY</header>
+                                </div>
+
+                                <div class="card-body ">
+                                  <br><br>
+                                </div>
+                                <div class="card-body" id="bar-parent">
+                                    {% for message in messages %}
+                                    <div class="alert alert-info" role="alert">
+                                        <p>{{message}}</p>
+                                    </div>
+                                    {% endfor %}
+
+                                    <table class="table table-striped table-bordered table-hover  order-column full-width" id="example4">
+                                        <thead style="background-color:#F0F8FF;">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th> Product Name </th>
+                                                <th> Company Name </th>
+                                                <th> Unit Price </th>
+                                                <th> Quantity </th>
+                                                <th> Reorder Level </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="odd gradeX">
+                                                <td>{{inventoryManage.id}}</td>
+                                                <td>{{inventoryManage.product_name}}</td>
+                                                <td>{{inventoryManage.company_name}}</td>
+                                                <td>{{inventoryManage.unit_prize}}</td>
+                                                <td>{{inventoryManage.quantity}}</td>
+                                                <td>
+                                                    <a href="{% url 'reorder_levelStaff' inventoryManage.id %}">
+                                                    {{inventoryManage.reorder_level}}
+                                                    </a>
+                                                </td>
+
+                                                </tr>  
+                                                    
+                                        </tbody>
+                                    </table>  
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="offset-md-6 col-md-9">
+                                            <a href="{% url 'inventoryIssueStaff' inventoryManage.id %}" type="button" class="btn btn-success">Issue Item </a>
+
+                                            <a href="{% url 'inventoryReceiveStaff' inventoryManage.id %}" type="button" class="btn btn-danger">Recieve Item</a>
+
+                                            <a href="{% url 'inventoryStaff' %}" type="button" class="btn btn-default">Cancel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <div class="card-head">
+                                    <header>{{inventoryManage.product_name}} History</header>
+                                </div>
+                                <div class="card-body" id="bar-parent">
+                                <table class="table table-striped table-bordered table-hover  order-column full-width" id="example4">
+                                    <thead style="background-color:#F0F8FF;">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th> Product Name </th>
+                                            <th> Prize </th>
+                                            <th> Reorder Level </th>
+                                            <th> Receive By </th>
+                                            <th> Receive Quantity </th>
+                                            <th> Issue By </th>
+                                            <th> Issue To </th>
+                                            <th> Issue Quantity </th>
+                                            <th> History Date </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for history in historypage %}
+                                        <tr class="odd gradeX">
+                                            <td>{{history.history_id}}</td>
+                                            <td>{{history.product_name}}</td>
+                                            <td>{{history.unit_prize}}</td>
+                                            <td>{{history.reorder_level}}</td>
+                                            <td>{{history.receive_by}}</td>
+                                            <td>{{history.receive_quantity}}</td>
+                                            <td>{{history.issue_by}}</td>
+                                            <td>{{history.issue_to}}</td>
+                                            <td>{{history.issue_quantity}}</td>
+                                            <td>{{history.history_date}}</td>
+
+                                            </tr>  
+                                            {% empty %}
+                                     
+                                            <center style="font-size:20px;">There are no History in this Table</center><br>
+                                            {% endfor %}  
+                                             
+                                    </tbody>
+                                </table> 
+
+
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col d-flex justify-content-center">
+                                            <nav >
+                                                <ul class="pagination justify-content-end">
+                                                    {% if historypage.has_previous %}
+                                                    <li class="page-item ">
+                                                        <a style="color:green;" class="page-link" href="{% my_url 1 'page' request.GET.urlencode %}">&laquo First</a>
+                                                    </li>
+                                                    
+                                                    {% if not search %}
+                                                    <li class="page-item">
+                                                        <a  style="color:green;" class="page-link" href="{% my_url historypage.previous_page_number 'page' request.GET.urlencode %}" tabindex="-1">Previous</a>
+                                                    </li>
+                                                    {% else %}
+                                                    <li class="page-item ">
+                                                        <a style="color:green;" class="page-link" href="{% my_url historypage.previous_page_number 'page' request.GET.urlencode %}">Previous</a>
+                                                    </li> 
+                                                    {% endif %}
+                                                    {% else %}
+                                                    <li class="page-item disabled">
+                                                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                                    </li>
+                                                    {% endif %}
+                
+                                                    
+                                                    {% for object in historypage.paginator.page_range %}
+                                                    <li class="page-item">
+                                                        <a style="color:green;" class="page-link" href="{% my_url forloop.counter 'page' request.GET.urlencode %}">{{ forloop.counter }}</a>
+                                                    </li>
+                                                    {% endfor %}
+                                                    
+                
+                                                    {% if historypage.has_next %}
+                                                    {% if not search %}
+                                                    <li class="page-item">
+                                                        <a style="color:green;" class="page-link" href="{% my_url historypage.next_page_number 'page' request.GET.urlencode %}"> Next</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a style="color:green;" class="page-link" href="{% my_url historypage.paginator.num_pages 'page' request.GET.urlencode %}"> Last &raquo</a>
+                                                    </li>
+                                                    {% else %}
+                                                    
+                                                    {% endif %}
+                                                    {% else %}
+                                                    <li class="page-item disabled">
+                                                        <a class="page-link" href="#">Next</a>
+                                                    </li>
+                                                    
+                                                    {% endif %}
+                                                    
+                
+                
+                
+                                                </ul>
+                                            </nav>
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                
+                
+                                        </div>
+                                    </div>
+                
+                                </div>
+
+                                
+                            </div>   
+                            </div>   
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <!-- end page content -->
+
+{% endblock %}
+        

@@ -1,0 +1,291 @@
+{% extends 'adminTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activePayment %}active open{% endblock %}
+{% block activePaymentList %}active open{% endblock %}
+{% load static %}
+
+{% block extracss %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+
+{% endblock extracss %}
+
+{% block content %}
+
+
+
+			<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Advance Tables</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="#">Data Tables</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active">Advance Tables</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-box">
+                                <div class="card-head">
+                                    <header>Create Form Controls</header>
+                                </div>
+                            </br>
+
+                                
+
+
+                            <center>
+                                <p style="font-size: 50px;">Teeth Diagram</p></br>
+                            <img style="width: 50%;height: auto;opacity: 0.7;" src="{% static 'management/img/TeethChart.jpg' %}" alt="">                       
+                            </center>
+                        </br>
+                    <hr>
+
+
+
+
+
+
+                                <div class="card-body" id="bar-parent">
+                                    <form action="" method="POST" id="payment" data-treatment-url="{% url 'ajax_treatment_fee' %}" data-branches-url="{% url 'ajax_load_treatment' %}"  novalidate>
+                                    <div class="form-horizontal">
+                                    {% csrf_token %}
+                                        <div class="form-body">
+                                              
+                                            
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Patient LastName
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {% if form.patient_name.errors %}
+                                                    <small style="color:red;">This field is required</small>
+                                                    {% endif %}
+                                                    {{form.patient_name}}
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Doctor Name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {% if form.doctor_name.errors %}
+                                                    <small style="color:red;">This field is required</small>
+                                                    {% endif %}
+                                                    {{form.doctor_name}}
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Department
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {% if form.department.errors %}
+                                                    <small style="color:red;">This field is required</small>
+                                                    {% endif %}
+                                                    {{form.department}}
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Treatment
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {% if form.treatment.errors %}
+                                                    <small style="color:red;">This field is required</small>
+                                                    {% endif %}
+                                                    {{form.treatment}}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Teeth No#
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {{form.tooth_number}}
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Payment Date 
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {% if form.payment_date.errors %}
+                                                    <small style="color:red;">This field is required</small>
+                                                    {% endif %}
+                                                    <div class="input-group date form_date " data-date="" data-date-format="MM dd yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                                        
+		                                                {{form.payment_date}}
+		                                                
+		                                            </div>
+                                            		<input type="hidden" id="dtp_input2" value="" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Method
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {% if form.method.errors %}
+                                                    <small style="color:red;">This field is required</small>
+                                                    {% endif %}
+                                                    {{form.method}} 
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Status 
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {% if form.status.errors %}
+                                                    <small style="color:red;">This field is required</small>
+                                                    {% endif %}
+                                                    {{form.status}} 
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Fee
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {% if form.fee.errors %}
+                                                    <small style="color:red;">Enter Valid Input</small>
+                                                    {% endif %}
+                                                    {{form.fee}} 
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">
+                                                    Balance<span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {% if form.balance.errors %}
+                                                    <small style="color:red;">Enter Valid Input</small>
+                                                    {% endif %}
+                                                    {{form.balance}} 
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="offset-md-3 col-md-9">
+                                                    <button type="submit" class="btn btn-success">Submit</button>
+                                                    <a href="{% url 'paymentStaff' %}" type="button" class="btn btn-default">Cancel</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end page content -->
+            </div>
+
+ 
+{% endblock %}
+
+{% block extrascripts %}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+
+    <script>
+        $(function(){
+            $('.select2').select2({
+                theme: 'bootstrap4',    
+            });
+        });
+    </script>
+
+    <script>
+        $(document.body).ready(function(){
+        $('#id_status').change(function() {
+                var selected = $(this).val();
+                if(selected == 'paid') {
+                $('#id_balance').val('0');
+                }
+            });
+        });
+    </script>
+    <script>
+        $("#id_department").change(function () {
+          var url = $("#payment").attr("data-branches-url");  
+          var departmentId = $(this).val();  
+    
+          $.ajax({                      
+            url: url,                    
+            data: {
+              'department': departmentId       
+            },
+            success: function (data) {  
+              $("#id_treatment").html(data);  
+            }
+          });
+    
+        });
+      </script>
+      <script>
+        $("#id_treatment").change(function () {
+          var url = $("#payment").attr("data-treatment-url");  
+          var treatmentId = $(this).val();  
+    
+          $.ajax({                      
+            url: url,                    
+            data: {
+                'treatment': treatmentId      
+            },
+            success: function (data) {  
+              $("#id_fee").html(data);  
+            }
+          });
+    
+        });
+      </script>
+
+      <script type="text/javascript" language="javascript"> 
+        $(function () {
+            $('#id_treatment').change(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: {
+                        treatment: $(this).val()
+                    },
+                    dataType: 'json',
+                    success: function (data) //on recieve of reply
+                    {
+                        var skuId = data[0]; 
+                        $('#id_fee').val(skuId);
+                    }
+                });
+            });  
+        });  
+        </script>
+
+
+{% endblock extrascripts %}
+      
+      
+      

@@ -1,0 +1,288 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BEGIN HEAD -->
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta name="description" content="Responsive Admin Template" />
+  <meta name="author" content="Sunray" />
+  <title>Sunray | Bootstrap Responsive Hospital Admin Template</title>
+  <!-- google font -->
+    
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" type="text/css" />
+	<!-- icons -->
+  <link href="{% static 'management/fonts/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	<!--CSS-->
+	{% include 'adminTemp/css.html' %}
+
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'website/img/core-img/favicon5.ico' %}">
+</head>
+
+<!-- END HEAD -->
+
+
+
+<body class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-white dark-color white-sidebar-color logo-dark" style="height:100%; min-height:100vh;">
+    <div class="page-wrapper">
+        <!-- start header -->
+		<div class="page-header navbar navbar-fixed-top">
+            <div class="page-header-inner ">
+                <!-- logo start -->
+                <div class="page-logo">
+                    <a href="index.html">
+                    <span class="logo-default" >Gonzalez Dental Clinic</span> </a>
+                </div>
+                <!-- logo end -->
+                <!-- start mobile menu -->
+                <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span></span>
+                </a>
+               <!-- end mobile menu -->
+            </div>
+        </div>
+        <!-- end header -->
+
+        <!-- start page container -->
+        <div class="page-container">
+        <!-- start sidebar menu -->
+ 			<div class="sidebar-container">
+ 				<div class="sidemenu-container navbar-collapse collapse fixed-menu">
+	                <div id="remove-scroll" class="left-sidemenu">
+	                    <ul class="sidemenu  page-header-fixed slimscroll-style" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+	                        <li class="sidebar-toggler-wrapper hide">
+	                            <div class="sidebar-toggler">
+	                                <span></span>
+	                            </div>
+	                        </li>
+	                        <li class="sidebar-user-panel">
+	                            <div class="user-panel">
+																	<div >
+	                                    <img style="background-color:white;" src="{% static 'login/img/logo5.png' %}">
+	                                </div>
+																	<br>
+	                                <div>
+																			<small>Admin</small>
+	                                    <p><b>{{request.user.first_name}} {{request.user.last_name}}</b></p>  
+	                                </div>
+	                            </div>
+	                        </li>
+	                        <li class="nav-item {% block activeDashboard %}{% endblock %}">
+	                            <a href="{% url 'dashboardAdmin' %}" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Dashboard</span>
+	                                <span class="selected"></span>
+	                            </a>
+	                        </li>
+													<li class="nav-item {% block activeDepartment %}{% endblock %}">
+	                            <a href="{% url 'department' %}" class="nav-link nav-toggle">
+	                                <i class="material-icons">group</i>
+	                                <span class="title">Department</span>
+	                                <span class="selected"></span>
+	                            </a>
+	                        </li>
+	                        <li class="nav-item {% block activeAppointment %}{% endblock %} ">
+	                            <a href="#" class="nav-link nav-toggle"><i class="material-icons">assignment</i>
+	                            <span class="title">Appointment</span><span class="arrow"></span></a>
+	                            <ul class="sub-menu">
+																	<li class="nav-item {% block activeAppointmentList %}{% endblock %} ">
+	                                    <a href="{% url 'manage' %}" class="nav-link "> <span class="title">All Book Appointment</span>
+	                                    </a>
+	                                </li>
+	                                <li class="nav-item {% block activeVirtualConsultation %}{% endblock %} ">
+	                                    <a href="{% url 'virtualConsultations' %}" class="nav-link "> <span class="title">	Virtual Consultation </span>
+	                                    </a>
+	                                </li>
+	                                 <li class="nav-item {% block activeContactForm %}{% endblock %} ">
+	                                    <a href="{% url 'contactForm' %}" class="nav-link "> <span class="title">Contact Form</span>
+	                                    </a>
+	                                </li>
+	                                
+	                            </ul>
+	                        </li>
+	                        <li class="nav-item active open ">
+	                            <a href="#" class="nav-link nav-toggle"> 
+															<i class="fa fa-user-md"></i>
+	                                <span class="title">Doctors</span> <span class="arrow"></span>
+	                            </a>
+	                            <ul class="sub-menu">
+																	<li class="nav-item active open ">
+	                                    <a href="{% url 'schedule' %}" class="nav-link "> <span class="title">Doctor Schedule</span>
+	                                    </a>
+	                                </li>
+	                                <li class="nav-item {% block activeDoctorList %}{% endblock %} ">
+	                                    <a href="{% url 'doctor' %}" class="nav-link "> <span class="title">All Doctor</span>
+	                                    </a>
+	                                </li>
+	                                
+	                            </ul>
+	                        </li>
+	                        <li class="nav-item {% block activeStaff %}{% endblock %} ">
+	                            <a href="{% url 'staff' %}" class="nav-link nav-toggle"> <i class="material-icons">person</i>
+	                                <span class="title">Staff</span>
+	                            </a>
+
+	                        </li>
+	                        <li class="nav-item {% block activePatient %}{% endblock %} ">
+	                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">accessible</i>
+	                                <span class="title">Patients</span> <span class="arrow"></span>
+	                            </a>
+	                            <ul class="sub-menu">
+																	<li class="nav-item {% block activePatientCreate %}{% endblock %} ">
+	                                    <a href="{% url 'patientCreate' %}" class="nav-link "> <span class="title">Add Patient</span>
+	                                    </a>
+	                                </li>
+	                                <li class="nav-item {% block activePatientList %}{% endblock %} ">
+	                                    <a href="{% url 'patient' %}" class="nav-link "> <span class="title">All Patients</span>
+	                                    </a>
+	                                </li>
+	                            </ul>
+	                        </li>
+	                        <li class="nav-item {% block activePayment %}{% endblock %} ">
+	                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">monetization_on</i>
+	                                <span class="title">Payments</span> <span class="arrow"></span>
+	                            </a>
+	                            <ul class="sub-menu">
+	                                <li class="nav-item {% block activePaymentList %}{% endblock %} ">
+	                                    <a href="{% url 'payment' %}" class="nav-link "> <span class="title">Payments</span>
+	                                    </a>
+	                                </li>
+	                                <li class="nav-item {% block activePaymentCreate %}{% endblock %} ">
+	                                    <a href="{% url 'paymentCreate' %}" class="nav-link "> <span class="title">Add Payments</span>
+	                                    </a>
+	                                </li>
+	                            </ul>
+	                        </li>
+
+													<li class="nav-item {% block activeInventory %}{% endblock %} ">
+	                            <a href="#" class="nav-link nav-toggle"> 
+										        <i class="material-icons f-left">assignment_turned_in</i> 
+	                                <span class="title">Inventory</span> <span class="arrow"></span>
+	                            </a>
+	                            <ul class="sub-menu">
+																	<li class="nav-item {% block activeInventoryList %}{% endblock %} ">
+	                                    <a href="{% url 'inventory' %}" class="nav-link "> <span class="title">Inventory</span>
+	                                    </a>
+	                                </li>
+	                                <li class="nav-item {% block activeInventoryCreate %}{% endblock %} ">
+	                                    <a href="{% url 'inventoryCreate' %}" class="nav-link "> <span class="title">Add Inventory</span>
+	                                    </a>
+	                                </li>
+																	<li class="nav-item {% block activeInventoryInvoice %}{% endblock %} ">
+	                                    <a href="{% url 'inventoryInvoice' %}" class="nav-link "> <span class="title"> Inventory Invoice</span>
+	                                    </a>
+	                                </li>
+	                                
+	                            </ul>
+	                        </li>
+
+													<li class="nav-item {% block activeAccount %}{% endblock %} ">
+	                            <a href="{% url 'account' %}" class="nav-link nav-toggle"> 
+										        <i class="material-icons f-left">account_circle</i> 
+	                                <span class="title">Account</span> 
+	                            </a>
+	                        </li>
+
+													
+													<li class="nav-item  ">
+	                            <a href="{% url 'logout' %}" class="nav-link nav-toggle"> 
+										        <i class="material-icons f-left">input</i> 
+	                                <span class="title">Logout</span>
+	                            </a>
+	                        </li>
+
+
+
+	                    </ul>
+	                </div>
+                </div>
+            </div>
+			 <!-- end sidebar menu -->
+
+			<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Doctor Schedule</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="#">Appointment</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active">Doctor Schedule</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                    	<div class="col-md-9 col-sm-12">
+                             <div class="card-box">
+                                 <div class="card-head">
+                                     <header>Calendar</header>
+                                 </div>
+                                 <div class="card-body ">
+                                 	<div class="panel-body">
+                                            <div id="calendar" class="has-toolbar"> </div>
+                                        </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="col-md-3 col-sm-12">
+                             <div class="card-box">
+                                 <div class="card-head">
+                                     <header>Draggable Events</header>
+                                 </div>
+                                 <div class="card-body ">
+                                 	<div id="external-events">
+                                        <form class="inline-form">
+                                            <input type="text" value="" class="form-control" placeholder="Event Title..." id="event_title" />
+                                            <br/>
+                                            <a href="javascript:;" id="event_add" class="btn deepPink-bgcolor"> Add Event </a>
+                                        </form>
+                                        <hr/>
+                                        <div id="event_box" class="mg-bottom-10"></div>
+                                        <label class="rt-chkbox rt-chkbox-single rt-chkbox-outline" for="drop-remove"> remove after drop
+                                            <input type="checkbox" class="group-checkable" id="drop-remove" />
+                                            <span></span>
+                                        </label>
+                                        <hr class="visible-xs" /> 
+                                    </div>
+                                 </div>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end page content -->
+            
+        </div>
+        <!-- end page container -->
+        <!-- start footer -->
+        <div class="page-footer">
+            <div class="page-footer-inner"> 2018 &copy; Sunray Template By
+                <a href="https://radixtouch.com/cdn-cgi/l/email-protection#8dffe8e9fef9ecfff9e5e8e0e8cdeae0ece4e1a3eee2e0" target="_top" class="makerCss">Redstar Theme</a>
+            </div>
+            <div class="scroll-to-top">
+                <i class="material-icons">eject</i>
+            </div>
+        </div>
+        <!-- end footer -->
+    </div>
+		{% include 'adminTemp/js.html' %}
+    <script src="{% static 'management/js/jquery-ui.min.js' %}" ></script>
+    <!-- calendar -->
+    <script src="{% static 'management/js/fullcalendar.min.js' %}" ></script>
+    <!-- end js include path -->
+</body>
+
+
+</html>

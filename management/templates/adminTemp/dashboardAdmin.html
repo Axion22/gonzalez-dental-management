@@ -1,0 +1,204 @@
+{% extends 'adminTemp/base.html' %}
+
+{% load static %}
+
+
+
+
+{% block content %}
+			<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content"style="min-height:100vh;">
+                  <div class="page-bar">
+                    <div class="page-title-breadcrumb">
+                      <div class=" pull-left">
+                        <div class="page-title">Dashboard</div>
+                      </div>
+											<ol class="breadcrumb page-breadcrumb pull-right">
+													<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a><i class="fa fa-angle-right"></i>
+													</li>
+													<li class="active">Dashboard</li>
+											</ol>
+                    </div>
+              		</div>
+												<div class="row">
+													<div class="col-sm-12">
+														<div class="card-box">
+															<div class="card-body ">
+																<div class="col-lg-12 p-t-20 p-b-20">
+																	<center><h1><strong>Welcome Admin!</strong></h1></center>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												</br>
+
+										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											<div class="row clearfix justify-content-md-center"> 
+
+
+												<div class="col-xl-4 col-md-6 col-xs-4">
+													<a href="{% url 'department' %}">
+													<div class="info-box bg-white">
+														<span class="info-box-icon push-bottom bg-secondary"><i class="material-icons" style="color:white;">person</i></span>
+														<div class="info-box-content">
+															<span class="info-box-text">Department</span>
+															<div class="progress">
+																<div class="progress-bar bg-secondary" style="width: {{total_department}}%"></div>
+															</div>
+															<span class="progress-description">
+																Total {{total_department}}
+																	</span>
+														</div>
+													</div>
+												</a>
+												</div>
+
+												<div class="col-xl-4 col-md-6 col-xs-4">
+													<a href="{% url 'manage' %}">
+													<div class="info-box bg-white">
+														<span class="info-box-icon push-bottom bg-success"><i class="fa fa-calendar-o"></i></span>
+														<div class="info-box-content">
+															<span class="info-box-text">Appointment</span>
+															<div class="progress">
+																<div class="progress-bar bg-success" style="width: {{total_appointment}}%"></div>
+															</div>
+															<span class="progress-description">
+																Total {{total_appointment}}
+																	</span>
+														</div>
+													</div>
+													</a>
+												</div>
+
+												<div class="col-xl-4 col-md-6 col-xs-4">
+													<a href="{% url 'virtualConsultations' %}">
+													<div class="info-box bg-white">
+														<span class="info-box-icon push-bottom bg-danger"><i class="material-icons"> assignment_late</i></span>
+														<div class="info-box-content">
+															<span class="info-box-text">Virtual Consultation</span>
+															<div class="progress">
+																<div class="progress-bar bg-danger" style="width: {{total_consult}}%"></div>
+															</div>
+															<span class="progress-description">
+																Total {{total_consult}}
+																	</span>
+														</div>
+													</div>
+												</a>
+												</div>
+
+												<div class="col-xl-4 col-md-6 col-xs-4">
+													<a href="{% url 'doctor' %}">
+													<div class="info-box bg-white">
+														<span class="info-box-icon push-bottom bg-info"><i class="fa fa-user-md"></i></span>
+														<div class="info-box-content">
+															<span class="info-box-text">Doctor</span>
+															<div class="progress">
+																<div class="progress-bar bg-info" style="width: {{total_doctor}}%"></div>
+															</div>
+															<span class="progress-description">
+																Total {{total_doctor}}
+																	</span>
+														</div>
+													</div>
+												</a>
+												</div>
+
+												<div class="col-xl-4 col-md-6 col-xs-4">
+													<a href="{% url 'staff' %}">
+													<div class="info-box bg-white">
+														<span class="info-box-icon push-bottom bg-light"><i class="material-icons">person</i></span>
+														<div class="info-box-content">
+															<span class="info-box-text">Staff</span>
+															<div class="progress">
+																<div class="progress-bar bg-light" style="width: {{total_staff}}%"></div>
+															</div>
+															<span class="progress-description">
+																Total {{total_staff}}
+																	</span>
+														</div>
+													</div>
+												</a>
+												</div>
+
+												<div class="col-xl-4 col-md-6 col-xs-4">
+													<a href="{% url 'patient' %}">
+													<div class="info-box bg-white">
+														<span class="info-box-icon push-bottom bg-dark"><i class="material-icons">accessible</i></span>
+														<div class="info-box-content">
+															<span class="info-box-text">Patient</span>
+															<div class="progress">
+																<div class="progress-bar bg-dark" style="width: {{total_patient}}%"></div>
+															</div>
+															<span class="progress-description">
+																Total {{total_patient}}
+																	</span>
+														</div>
+													</div>
+												</a>
+												</div>
+
+
+
+												<div class="col-xl-4 col-md-6 col-xs-4 ">
+													<a href="{% url 'payment' %}">
+													<div class="info-box bg-white">
+														<span class="info-box-icon push-bottom bg-purple"><i class="material-icons">monetization_on</i></span>
+														<div class="info-box-content">
+															<span class="info-box-text">Payment</span>
+															<div class="progress">
+																<div class="progress-bar bg-purple" style="width: {{total_payment}}%"></div>
+															</div>
+															<span class="progress-description">
+																Total {{total_payment}}
+																	</span>
+														</div>
+													</div>
+												</a>
+												</div>
+
+												<div class="col-xl-4 col-md-6 col-xs-4 ">
+													<a href="{% url 'inventory' %}">
+													<div class="info-box bg-white">
+														<span class="info-box-icon push-bottom bg-warning"><i class="material-icons">assignment_turned_in</i></span>
+														<div class="info-box-content">
+															<span class="info-box-text">Inventory</span>
+															<div class="progress">
+																<div class="progress-bar bg-warning" style="width: {{total_inventory}}%"></div>
+															</div>
+															<span class="progress-description">
+																Total {{total_inventory}}
+																	</span>
+														</div>
+													</div>
+												</a>
+												</div>
+
+
+
+
+
+
+
+
+
+											</div>
+										</div>
+
+
+										
+
+													
+											
+											
+											
+											
+
+								</div>	
+            </div>
+
+            <!-- end page content -->
+{% endblock %}

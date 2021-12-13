@@ -1,0 +1,29 @@
+<div class="card-body" id="bar-parent" hx-target="this" hx-swap="outerHTML">  
+  <form method="POST">
+  {% csrf_token %}
+    <div class="form-horizontal">
+      <div class="form-body">
+        <div class="form-group row">
+          
+          <label class="control-label col-md-3">Treatment:</label>
+          <div class="col-md-5">
+              <label>{{ treatment.treatment}}</label>
+          </div>
+          <div class="form-actions">
+            <div class="row">
+                <button hx-get="{% url 'treatmentUpdateForm' treatment.id %}" class="btn btn-sm btn-success">Update</button>
+                <button hx-post="{% url 'treatmentDeleteForm' treatment.id %}" class="btn btn-sm btn-secondary">Delete</button>
+            </div>
+          </div>
+          <label class="control-label col-md-3">Treatment Fee:</label>
+          <div class="col-md-5">
+              <label>{{ treatment.treatment_fee}}</label>
+          </div>
+        
+        </div>
+      </div>
+    </div>
+    
+  </form>
+
+</div>

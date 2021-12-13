@@ -1,0 +1,191 @@
+{% extends 'staffTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activePatient %}active open{% endblock %}
+{% block activePatientList %}active open{% endblock %}
+{% load static %}
+
+
+
+
+{% block content %}
+{% load management_extras %}
+<!-- start page content -->
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div class="page-bar">
+            <div class="page-title-breadcrumb">
+                <div class=" pull-left">
+                    <div class="page-title">Patients Tables</div>
+                </div>
+
+                <ol class="breadcrumb page-breadcrumb pull-right">
+                    <li>
+                        <i class="fa fa-home"></i>&nbsp;
+                        <a class="parent-item" href="index.html">Home</a>&nbsp;
+                        <i class="fa fa-angle-right"></i>
+                    </li>
+                    <li class="active">Patients</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card  card-box">
+                    <div class="card-head">
+                        <header>PATIENT TABLE</header>
+                    </div>
+
+                    <div class="card-body "></br>
+                        <div class="row justify-content-between">
+                            <div class="col-md-2 col-sm-5 col-xs-6 ">
+                                <div class="btn-group" style="margin-bottom:10px;">
+                                    <a href="{% url 'patientCreateStaff' %}" class="btn btn-success" id="addRow1">
+                                        Add New <i style="color:white;" class="fa fa-plus"></i></a> 
+                                </div>
+                            </div>   
+                        
+                            <div class="col-md-5 col-sm-6 col-xs-6 align-self-end" style="margin-bottom:10px;">
+                                <form action="" method="GET">
+                                    <div class="input-group">
+                                        
+                                        {{ filter_patient.form.id}}
+                                        {{ filter_patient.form.patient_name}}
+                                        <div class="input-group-prepend">
+                                            <button type="submit" class="btn btn-secondary btn-sm"  value="search">
+                                            <i class="fa fa-search"></i>
+                                        </div>
+                                      </div>
+                                </form>
+                            </div>
+                        </div></br>
+
+                            <div class="table-responsive">
+                            <table class="table  table-striped table-bordered mydatatable" >
+                                <thead style="background-color:#c3e6cb;">
+                                    <tr>
+                                        <th> Patient ID </th>
+                                        <th> Patient Name </th>
+                                        <th> Age </th>
+                                        <th> Sex </th>
+                                        <th> Contact No. </th>
+                                        <th> Birth Date </th>
+                                        <th> Edit </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for patient in patient_page %}
+                                    <tr class="odd gradeX">
+                                    
+                                        <td>{{patient.id}}</td>
+                                        <td>
+                                        <a style="color:#32CD32;"href="{% url 'patientInfoStaff' patient.id %}">
+                                        {{patient.patient_firstName}} {{patient.patient_middleName}} {{patient.patient_lastName}} {{patient.patient_suffixName}}
+                                        </a>
+                                        </td>
+                                        <td>{{patient.patient_age}}</td>
+                                        <td>{{patient.patient_sex}}</td>
+                                        <td>{{patient.patient_phone}}</td>
+                                        <td>{{patient.birth_date}}</td>
+                                        <td class="valigntop">
+                                            <div class="btn-group">
+                                                <a style="color:#32CD32;" href="{% url 'patientEditStaff' patient.id %}" class="btn btn-xs btn-success dropdown-toggle no-margin" type="button">
+                                                    Update<i style="color:white;" class="fa fa-wrench"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    
+                                    </tr>
+                                    {% empty %}
+                                     
+                                            <center style="font-size:20px;">There are no items in this Table</center><br>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            </div>
+
+                            <hr>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col d-flex justify-content-center">
+                                        <nav >
+                                            <ul class="pagination justify-content-end">
+                                                {% if patient_page.has_previous %}
+                                                <li class="page-item ">
+                                                    <a style="color:green;" class="page-link" href="{% my_url 1 'page' request.GET.urlencode %}">&laquo First</a>
+                                                </li>
+                                                
+                                                {% if not search %}
+                                                <li class="page-item">
+                                                    <a  style="color:green;" class="page-link" href="{% my_url patient_page.previous_page_number 'page' request.GET.urlencode %}" tabindex="-1">Previous</a>
+                                                </li>
+                                                {% else %}
+                                                <li class="page-item ">
+                                                    <a style="color:green;" class="page-link" href="{% my_url patient_page.previous_page_number 'page' request.GET.urlencode %}">Previous</a>
+                                                </li> 
+                                                {% endif %}
+                                                {% else %}
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                                </li>
+                                                {% endif %}
+            
+                                                
+                                                {% for object in patient_page.paginator.page_range %}
+                                                <li class="page-item">
+                                                    <a style="color:green;" class="page-link" href="{% my_url forloop.counter 'page' request.GET.urlencode %}">{{ forloop.counter }}</a>
+                                                </li>
+                                                {% endfor %}
+                                                
+            
+                                                {% if patient_page.has_next %}
+                                                {% if not search %}
+                                                <li class="page-item">
+                                                    <a style="color:green;" class="page-link" href="{% my_url patient_page.next_page_number 'page' request.GET.urlencode %}"> Next</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a style="color:green;" class="page-link" href="{% my_url patient_page.paginator.num_pages 'page' request.GET.urlencode %}"> Last &raquo</a>
+                                                </li>
+                                                {% else %}
+                                                
+                                                {% endif %}
+                                                {% else %}
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#">Next</a>
+                                                </li>
+                                                
+                                                {% endif %}
+                                                
+            
+            
+            
+                                            </ul>
+                                        </nav>
+                                        </div>
+                                    </div>
+                                </div>
+            
+            
+            
+                                    </div>
+                                </div>
+            
+                            </div>
+
+
+
+                            
+
+                        </div>
+                    </div> 
+                       
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page content -->
+
+
+{% endblock %}

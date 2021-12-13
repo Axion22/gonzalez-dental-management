@@ -1,0 +1,181 @@
+{% extends 'doctorTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activeAppointment %}active open{% endblock %}
+{% block activeVirtualConsultation %}active open{% endblock %}
+
+{% block extracss %}
+<style>
+    .center {
+    
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- start page content -->
+<div class="page-content-wrapper">
+    <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Virtual Consultation</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardAdmin' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active">Virtual Consultation</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                            <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="card card-box">
+
+                    {% if messages %}
+                        <div class="card notification-card notification-invitation">
+                            <div class="card-body">
+                            {% for message in messages %}
+                                    <div class="card-title">{{message}} </div>
+                                {% endfor %}
+                            </div>
+                        </div> 
+                    {% endif %}
+
+                        <div class="container mt-5">
+                            <div class="col-11 text-center mt-4 mb-4">
+                                <h2>
+                                    Manage Consultation
+                                </h2>
+                            </div>
+                            <div class="row">
+
+                    {% for vc in virtualconsultations %}
+                        <div class="col-lg-4">
+                            <div class="card card-margin">
+                                <div class="card-header no-border">
+                                    <center class="card-title"><h4><b>{{vc.first_name}} {{vc.last_name}}</b></h4></center>
+                                </div>
+                                            
+                                <div class="card-body pt-0">
+                                    <div class="widget-49">
+                                        <div class="widget-49-title-wrapper">
+                                                    
+                                            <div class="widget-49-title-wrapper">
+                                                <span class="info-box-icon push-bottom bg-transprnt">
+                                                    <font size="3">
+                                                        <span>{{vc.date_created|date:"d"}}</span>
+                                                        <span class="widget-49-date-month">{{vc.date_created|date:"M"}}
+                                                        </span>
+                                                    </font>
+                                                </span>
+                                            </div>
+
+                                            <div class="info-box-content">
+                                                <div class="widget-49-meeting-info">
+                                                    <h5 style="color:#708090;"><span>{{vc.email}}</span></h5>
+                                                    <small><span class="widget-49-meeting-time">{{vc.phone}}
+                                                    </span></small>
+                                                </div>
+                                            </div>
+                                               <center> 
+                                                   <hr>
+                                            {% if vc.full_face %}
+                                                <a href="{{ vc.full_face.url }}"  target="_blank">
+                                                    <img src="{{ vc.full_face.url }}"  width="100" height="100">
+                                                </a>
+                                            {% endif %}
+                                            {% if vc.close_up %}  
+                                                <a href="{{ vc.close_up.url }}"  target="_blank">
+                                                    <img src="{{ vc.close_up.url }}"width="100" height="100">
+                                                </a>
+                                            {% endif %}   
+                                                </center><br>
+                                            <div class="widget-49-meeting-points">
+                                                <center>
+                                                    <small>Message: </small>
+                                                    <small class="messagebtn" style="opacity:0.3;cursor:pointer">Hide|Show </small>
+                                                    <br>
+                                                    <small class="message" style="color:green;">{{vc.message}}</small>
+                                                </center>
+                                            </div><hr>
+                                            {% if vc.accepted == True %}
+                                                
+                                            <div class="form-horizontal">
+
+                                            <center>
+                                                <small>Accepted Date:</small><small style="color:green;"> {{vc.accepted_date}}</small>
+                                            </center>
+                                            <hr>
+                                            <center>
+                                                <small >Your Reply:</small>
+                                                <small style="opacity:0.3;cursor:pointer" class="replybtn">Hide|Show</small><br>
+                                                
+                                                <small class="reply" style="color:green;"> {{vc.my_message}}</small>
+                                            </center>
+                                                    
+                                            </div>
+                                                
+                                            {% endif %}
+
+                                            </div>
+
+
+                                           
+                                            {% if vc.accepted == False %}
+                                            <form method="POST" action="">
+                                            {% csrf_token %}
+                                                <div class="form-group">
+                                                    <textarea type="textarea" name="my_message" class="form-control mb-2" placeholder="Reply"></textarea>
+
+                                                    </br>
+                                                        
+                                                    <input hidden="true" name="virtualconsult-id" value="{{vc.id}}">
+                                                    <input class="btn-block btn-success form-control" type="submit" value="Send">
+                                                </div>
+                                            </form>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        {% endfor %}
+                
+                    
+                        <div class="container">
+                            <div class="row">
+                                <div class="col d-flex justify-content-center">
+                                    {% if is_paginated %}
+                                    <div >
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                {% if page_obj.has_previous %}
+                                                <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+                                                {% endif %}
+                                                {% for number in page_obj.paginator.page_range %}
+                                                <li class="page-item"><a class="page-link" href="?page={{number}}">{{number}}</a></li>
+                                                {% endfor %}
+                                                {% if page_obj.has_next %}
+                                                <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a></li>
+                                                {% endif %}
+                                            </ul>
+                                        </nav>
+                                    </div>
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                            
+                        </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+        
+<!-- end page content -->
+{% endblock %}

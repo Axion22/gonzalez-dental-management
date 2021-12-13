@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Pricing Service - Gonzalez Dental Clinic {% endblock %}
+{% block meta_discription %} Pricing Service page of Gonzalez Dental Clinic {% endblock %}
+{% block content %}
+
+  <!-- ***** Breadcrumb Area Start ***** -->
+  <div id="pricing1" class="breadcumb-area bg-gradient-overlay">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-12">
+          <h2  class="title">Our Pricing</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div  class="breadcumb--con">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Our Pricing</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Breadcrumb Area End ***** -->
+
+
+
+  <!-- ***** Dento Pricing Table Area Start ***** -->
+  <section class="dento-pricing-table-area mt-50 section-padding-0-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="dento-price-table table-responsive">
+              {% for department in department %}         
+            <table class="table table-borderless mb-0"><br><br><br><br>
+              <div style="font-size:36px; font-family:'Monserrat',sans-serif; color:black; inline-height:1.4; font-weight:600;">
+                {{ forloop.counter }}. {{department.department}}
+                
+              <thead>
+                    <tr>
+                      <th> Treatment </th>
+                      <th> Fee </th>
+                  </tr>
+              </thead><hr>
+                {% for treatment in department.treatment_set.all %}
+              <tbody>                                    
+                <tr class="odd gradeX">
+                    <td id="{{ forloop.counter }}">{{treatment.treatment}}</td>
+                    {% load humanize %}
+                    <td>	&#8369; {{treatment.treatment_fee|intcomma}}</td>
+                </tr>                     
+                {% endfor %}<br>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="pricing4"class="col-12">
+          <div class="more-btn text-center mt-50">
+            <a href="{% url 'home' %}#booking" class="btn dento-btn">Book Now <i class="fa fa-angle-double-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ***** Dento Pricing Table Area End ***** -->
+
+
+
+
+{% endblock %}

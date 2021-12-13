@@ -1,0 +1,110 @@
+{% extends 'doctorTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activeMyAccount %}active open{% endblock %}
+{% load static %}
+
+
+{% block content %}
+<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Blank page</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active">Blank Page</li>
+                            </ol>
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-box">
+                            <div class="card-head">
+                                    <header>Add Item</header>
+                            </div>
+                                
+                                <div class="card-body" id="bar-parent">
+                                    <form action="" method="POST">
+                                    <div class="form-body">
+                                    {% csrf_token %}      
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Full Name:
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {{form.full_name}}
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Department:
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {{form.department}}
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                            <label class="control-label col-md-3">Time In:</label>
+                                            <div class="input-group date form_time col-md-5" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                                {{form.schedule_time_In}}
+                                            </div>
+                                            <input type="hidden" id="dtp_input3" value="" />
+                                            <br/>
+                                            </div> 
+                                            <div class="form-group row">
+                                            <label class="control-label col-md-3">Time Out:</label>
+                                            <div class="input-group date form_time col-md-5" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                                {{form.schedule_time_Out}}
+                                            </div>
+                                            <input type="hidden" id="dtp_input3" value="" />
+                                            <br/>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Day:
+                                                </label>
+                                                <div class="btn-group" > 
+                                                {% for checkbox in form.schedule_day %}
+                                                <label class="btn">
+                                                    {{ checkbox.tag }} {{ checkbox.choice_label }}
+                                                </label>
+                                                {% endfor %}
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Address:
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {{form.address}}
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Contact Number:
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {{form.phone}}
+                                                </div>
+                                            </div>
+
+                                                  
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="offset-md-3 col-md-9">
+                                                    <button type="submit" class="btn btn-success">Submit</button>
+                                                    <a href="{% url 'profileDoctor' %}" type="button" class="btn btn-default">Cancel</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end page content -->
+
+{% endblock %}

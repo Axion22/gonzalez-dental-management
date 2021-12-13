@@ -1,0 +1,35 @@
+<!--CSS-->
+{% include 'adminTemp/css.html' %}
+<div hx-target="this" hx-swap="outerHTML">
+  <form method="POST">
+  {% csrf_token %}
+    <div class="form-horizontal">
+      <div class="form-body">
+        <div class="form-group row">
+        <label class="control-label col-md-3">Treatment:
+          </label>
+          <div class="col-md-5">
+              <h4>
+                  {{form.treatment}}
+              </h4>
+              
+          </div><div class="col-md-2"></div>
+        <label class="control-label col-md-3">Treatment Fee:
+          </label>
+          <div class="col-md-5">
+              <h4>
+                  {{form.treatment_fee}}
+              </h4>
+              {% if treatment %}
+              <button class="btn btn-success" hx-post="{% url 'treatmentUpdateForm' treatment.id %}">Submit</button>
+              {% else %}
+              <button hx-post=".">Submit</button>
+              {% endif %}
+          </div><div class="col-md-2"></div>
+          
+
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

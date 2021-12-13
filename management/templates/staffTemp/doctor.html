@@ -1,0 +1,174 @@
+{% extends 'staffTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activeDoctor %}active open{% endblock %}
+{% block activeDoctorList %}active open{% endblock %}
+
+{% block extracss %}
+    <style>
+        table {
+            table-layout: fixed ;
+            width: 100% ;
+        }
+        td {
+            width: 25% ;
+            text-align: center;
+        }
+
+    </style>
+{% endblock extracss %}
+
+{% block content %}
+<!-- start page content -->
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div class="page-bar">
+            <div class="page-title-breadcrumb">
+                <div class=" pull-left">
+                    <div class="page-title">Doctors Tables</div>
+                </div>
+                <ol class="breadcrumb page-breadcrumb pull-right">
+                    <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    </li>
+                    <li class="active">Doctors</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card  card-box">
+                    <div class="card-head">
+                        <center>
+                        <h1 style="font-family: Arial, Helvetica, sans-serif;font-weight: bold;" >Doctor's Schedule This week</h1>
+                        </center>
+                    </div>
+
+                    <div class="card-body ">
+
+
+
+                        <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover  order-column full-width" id="example4">
+                                        <thead style="background-color:#E5E5E5;">
+                                            <tr>
+                                                <th>
+                                                    <center > Monday </center>
+                                                    </th>
+                                                <th>
+                                                    <center> Tuesday </center>  
+                                                </th>
+                                                <th>
+                                                    <center> Wednesday </center>  
+                                                </th>
+                                                <th>
+                                                    <center> Thursday </center>  
+                                                </th>
+                                                <th>
+                                                    <center> Friday </center>  
+                                                </th>
+                                                <th>
+                                                    <center> Saturday </center>  
+                                                </th>
+                                                <th>
+                                                    <center> Sunday </center>  
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for doctor in day1 %}
+                                            <tr class="odd gradeX">
+
+                                                        
+                                                <td>
+                                                    <h5 style="font-weight:bold;">{{day1.all|join:', <br>'|default:" "}}</h5>
+                                                </td>
+                                                <td>
+                                                    <h5 style="font-weight:bold;">{{day2.all|join:', <br>'|default:" "}}</h5>
+                                                </td>
+                                                <td>
+                                                    <h5 style="font-weight:bold;">{{day3.all|join:', <br>'|default:" "}}</h5> 
+                                                </td>
+                                                <td>
+                                                    <h5 style="font-weight:bold;">{{day4.all|join:', <br>'|default:" "}}</h5>
+                                                </td>
+                                                <td>
+                                                    <h5 style="font-weight:bold;">{{day5.all|join:', <br>'|default:" "}}</h5>
+                                                </td>
+                                                <td>
+                                                    <h5 style="font-weight:bold;">{{day6.all|join:', <br>'|default:" "}}</h5>
+                                                </td>
+                                                <td>
+                                                    <h5 style="font-weight:bold;">{{day7.all|join:', <br>'|default:" "}}</h5>
+                                                </td>
+                                                
+                                            </tr>
+                                            {% empty %}
+                                        
+                                                <center style="font-size:20px;">There are no items in this Table</center><br>
+                                            {% endfor %}
+                                        </tbody>
+                                </table>
+                            </div>
+                                <hr>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                            
+                                   <center><p style="font-family: Arial, Helvetica, sans-serif;font-weight: bold;font-size:25px;"> Doctors Tables</p></center><hr>
+                                   <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover  order-column full-width" id="example4">
+                                            <thead style="background-color:#c3e6cb;">
+                                                <tr>
+                                                    <th> Doctor Name </th>
+                                                    <th> Department </th>
+                                                    <th> Schedule </th>
+                                                    <th> Day </th>
+                                                    <th> Contact No. </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for doctor in doctor %}
+                                                <tr class="odd gradeX">
+                                                    <td>
+                                                        {{doctor.account.full_name}} 
+                                                    </td>
+                                                    <td>
+                                                        {{doctor.account.department}}
+                                                    </td>
+                                                    <td>
+                                                        {{doctor.account.schedule_time_In}}-
+                                                        {{doctor.account.schedule_time_Out}}
+                                                    </td>
+                                                    <td>
+                                                        {{doctor.account.schedule_day.all|join:','}}
+                                                    </td>
+                                                    <td>
+                                                        {{doctor.account.phone}}
+                                                    </td>
+                                                </tr>
+                                                {% empty %}
+                                             
+                                                    <center style="font-size:20px;">There are no items in this Table</center><br>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        </div>  
+                                </div>  
+                                
+                            </div>  
+                        </div>  
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page content -->
+
+
+
+
+
+{% endblock %}

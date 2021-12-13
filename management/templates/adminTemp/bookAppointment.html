@@ -1,0 +1,242 @@
+{% extends 'adminTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activeAppointment %}active open{% endblock %}
+{% block activeAppointmentList %}active open{% endblock %}
+
+
+{% block content %}
+<div class="page-content-wrapper">
+    <div class="page-content">
+
+            <div class="page-bar">
+                <div class="page-title-breadcrumb">
+                    <div class=" pull-left">
+                        <div class="page-title">Book Appointment</div>
+                    </div>
+                    <ol class="breadcrumb page-breadcrumb pull-right">
+                        <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                        </li>
+                        <li class="active">Book Appointment</li>
+                    </ol>
+                </div>
+            </div>
+
+                    
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="card card-box">
+
+                    {% for message in messages %}
+                        <div class="alert alert-info" role="alert">
+                            <p>{{message}}</p>
+                        </div>
+                    {% endfor %}
+
+                        <div class="container mt-5">
+                            <div class="col-11 text-center mt-4 mb-4">
+                                <h2>
+                                    Manage Appointments
+                                </h2>
+                            </div>
+                            <div class="row">
+
+                    {% for app in appointments %}
+
+                        <div class="col-lg-4" >
+                            <div class="card card-margin">
+                                <div class="card-header no-border">
+                                    <center class="card-title"><h4><b>{{app.first_name}} {{app.last_name}}</b></h4></center>
+                                </div>
+                                            
+                                <div class="card-body pt-0">
+                                    <div class="widget-49">
+                                        <div class="widget-49-title-wrapper">
+                                            <div class="widget-49-date-primary">
+                                                <span class="widget-49-date-day">{{app.sent_date|date:"d"}}</span>
+                                                <span class="widget-49-date-month">{{app.sent_date|date:"M"}}</span>
+                                            </div>
+                                                    
+                                            <div class="widget-49-title-wrapper">
+                                                <span class="info-box-icon push-bottom bg-transprnt">
+                                                    <font size="3">
+                                                        <span>{{app.date_created|date:"d"}}</span>
+                                                        <span class="widget-49-date-month">{{app.date_created|date:"M"}}
+                                                        </span>
+                                                    </font>
+                                                </span>
+                                            </div>
+
+                                            <div class="info-box-content">
+                                                <div class="widget-49-meeting-info">
+                                                    <h5 style="color:#708090;"><span>{{app.your_email}}</span></h5>
+                                                    <small><span class="widget-49-meeting-time">{{app.your_phone}}
+                                                    </span></small>
+                                                </div>
+                                            </div>
+                                                
+                                            <div class="widget-49-meeting-points">
+                                                <center>
+                                                    <p style="color:#2E8B57; font-size:25px;">{{app.service_required}}</p>
+                                                </center>
+                                            </div>
+                                            <div class="widget-49-meeting-points">
+                                                <center>
+                                                    <h4>{{app.your_schedule}} | {{app.your_date}}</h4>
+                                                </center>
+                                            </div>
+                                            <div class="widget-49-meeting-points">
+                                                <center>
+                                                    <small>{{app.your_message}}</small>
+                                                </center><br>   
+                                            </div>
+                                            {% if app.accepted == False %}
+                                            <form method="POST" action="{% url 'manage' %}">
+                                                {% csrf_token %}
+                                                <input hidden="true" name="appointment-id" value="{{app.id}}">
+
+                                                <input class="btn-block btn-success form-control" type="submit" name="accept">
+                                            </form>
+                                            {% endif %}
+
+                                            <hr>
+                                            {% if app.accepted == True %}
+                                            
+                                            <div class="form-horizontal">
+                                                    
+                                                    
+                                                    
+                                            <center>
+                                                <small>Approved Date:</small><small style="color:green;"> {{app.approved_date}}</small>
+                                            </center>
+                                                    
+                                            <center>
+                                                <small>Approved Time:</small><small style="color:green;"> {{app.approved_time}}</small>
+                                            </center>
+                                            <hr>
+                                            <center>
+                                                <small>Accepted Date:</small><small style="color:green;"> {{app.accepted_date}}</small>
+                                            </center>
+                                            
+                                            
+                                            
+                                            </div>
+                                            {% if app.assign_doctor == None %}
+                                                <center>
+                                                    
+                                                    <a class="btn btn-success" href="{% url 'appointDoctor' app.id %}">Assign to Doctor</a>
+                                                </center>
+                                            {% else %}
+
+                                                <center>
+                                                    <small>Assigned to:</small>
+                                                    Dr. {{app.assign_doctor}}   
+                                                    <a href="{% url 'appointDoctor' app.id %}">
+                                                        <i class="fa fa-edit"></i
+                                                    ></a>
+                                                </center>
+                                            {% endif %}
+                                            {% endif %}
+                                                <!--  For Approved Time & Date
+                                                {% if app.accepted == True %}
+                                                <div class="widget-49-meeting-points">
+                                                
+                                                    <center>
+                                                        <small>{{app.your_message}}</small>
+                                                    </center>
+                                                </div>
+                                                {% endif %}
+                                                -->
+
+                                                
+                                            </div>
+
+
+                                           
+                                            {% if app.accepted == False %}
+                                            <form method="POST" action="{% url 'manage' %}">
+                                            {% csrf_token %}
+                                                <div class="form-group">
+                                                    <input type="date" name="date" class="form-control mb-2" 
+                                                        placeholder="dd-mm-yyyy" value=""
+                                                        min="1900-01-01" max="2200-12-31" required>
+
+
+                                                    <select class="form-control form-control-sm" name="time" required>
+                                                        <option selected disabled required>--:--</option>
+                                                        <option>09:00 AM</option>
+                                                        <option>09:30 AM</option>
+                                                        <option>10:00 AM</option>
+                                                        <option>10:30 AM</option>
+                                                        <option>11:00 AM</option>
+                                                        <option>11:30 AM</option>
+                                                        <option>01:00 PM</option>
+                                                        <option>01:30 PM</option>
+                                                        <option>02:00 PM</option>
+                                                        <option>02:30 PM</option>
+                                                        <option>03:00 PM</option>
+                                                        <option>03:30 PM</option>
+                                                        <option>04:00 PM</option>
+                                                        <option>03:30 PM</option>
+                                                    </select>
+
+                                                    </br>
+                                                        
+                                                    <input hidden="true" name="appointment-id" value="{{app.id}}">
+                                                    <input class="btn-block btn-primary form-control" type="submit" value="Set" >
+                                                    
+                                                    
+                                                </div>
+                                            </form>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <div class="col-11 text-center mt-4 mb-4">
+                                <div style="text-align: center;">
+                                    <p style="font-size:20px;">There are no items in this Table</p>
+                                </div>
+                            </div><br>
+                        {% endfor %}
+ 
+                    
+                        <div class="container">
+                            <div class="row">
+                                <div class="col d-flex justify-content-center">
+                                    {% if is_paginated %}
+                                    <div >
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                {% if page_obj.has_previous %}
+                                                <li class="page-item"><a style="color:green;" class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+                                                {% endif %}
+                                                {% for number in page_obj.paginator.page_range %}
+                                                <li class="page-item"><a style="color:green;" class="page-link" href="?page={{number}}">{{number}}</a></li>
+                                                {% endfor %}
+                                                {% if page_obj.has_next %}
+                                                <li class="page-item"><a style="color:green;" class="page-link" href="?page={{page_obj.next_page_number}}">Next</a></li>
+                                                {% endif %}
+                                            </ul>
+                                        </nav>
+                                    </div>
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                            
+                        </div>
+                </div>
+            </div>
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+{% endblock %}

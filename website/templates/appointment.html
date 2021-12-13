@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Appointment - Gonzalez Dental Clinic {% endblock %}
+{% block meta_discription %} Appointment Page in Gonzalez Dental Clinic {% endblock %}
+{% block content %}
+
+  <!-- ***** Breadcrumb Area Start ***** -->
+  <div class="breadcumb-area bg-img bg-gradient-overlay" style="background-image: url({% static 'website/img/bg-img/12.jpg' %});">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-12">
+          <h4 class="title">Appointment</h4><br>
+          <center><h4 style="color:#fff;">Please be advised that this is not yet a confirmed appointment.</h4>
+            <p style="color:#fff;">Our Clinic Receptionist will contact you to finalize your preferred date and time.</p></center>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="breadcumb--con">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Appointment</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Breadcrumb Area End ***** -->
+  <!--Thanks reply to the email-->
+  
+
+<div class="row justify-content-md-center">
+  <div class="col col-lg-6">
+    <h3> Review Your Information:</h3>
+
+    <strong> First Name:</strong><em>{{ first_name }}</em> 
+    <strong> Last Name:</strong><em>{{ last_name }}</em>  <br/> 
+    <strong> Phone:</strong>{{ your_phone }} <br/>
+    <strong> Email:</strong>{{ your_email }} <br/>
+    <strong> Address:</strong>{{ your_address }} <br/>
+    <strong> Appointment Time:</strong>{{ your_schedule }} <br/>
+    <strong> Appointment Day:</strong>{{ your_date }} <br/>
+    <strong> Service Required:</strong>{{ service_required }} <br/>
+    <strong> Message:</strong>{{ your_message }}<br/>
+    <br/><br/><br/>
+
+    <strong>Note:</strong> This appointment hasn't been set yet. We will contact you shortly via Email or Telephone to confirm your appointment.
+  </div>
+</div>
+<br/><br/><br/>
+  <!-- ***** Contact Area End ***** -->
+
+{% endblock %}

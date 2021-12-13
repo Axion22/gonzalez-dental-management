@@ -1,0 +1,849 @@
+{% extends 'doctorTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activePatient %}active open{% endblock %}
+{% block activePatientList %}active open{% endblock %}
+{% load static %}
+
+
+
+
+{% block content %}
+
+<!-- start page content -->
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div class="page-bar">
+            <div class="page-title-breadcrumb">
+                <div class=" pull-left">
+                    <ul class="page-title nav navbar-nav navbar-right ">
+                        <li class="material-icons" style="font-size: 1.2em;">  info
+                        </li>&nbsp;&nbsp;
+                     <span><b>Patient   #&nbsp;  {{patientInfo.id}}</b></span>
+                    </ul>
+                </div>
+                
+                <ol class="breadcrumb page-breadcrumb pull-right">
+
+                    <li>
+                    <i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">
+                    Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    </li>
+
+                    <li><a class="parent-item" href="#">
+                    Forms</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    </li>
+
+                    <li class="active">Form Layouts</li>
+
+                </ol>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="card card-box">
+                    <div class="card-head">
+                        <header>Form Controls</header>
+                    </div>
+                    
+                    <div class="form-body">
+                        
+                    <div style="padding:12px">
+
+                        
+                    <div class="card-body " id="bar-parent2">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-5">
+                                <div class="form-group row">
+                                    <small style="color:gray;">Patient No: &nbsp;</small>
+                                        <small>{{patientInfo.id}}</small>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-5"></div>
+                            <div class="col-md-4 col-sm-5">
+                                <div class="form-group row">
+                                    <small style="color:gray;">Date Created:&nbsp;</small>
+                                        <small>{{patientInfo.date_created}}</small>
+                                </div>
+							</div>
+						</div>
+                    
+                        <div class="alert alert-success" role="alert"><p style="font-size:25px;text-align:center;">Patient Information Record</p></div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">&nbsp;</div>
+                            <div class="col-md-12 col-sm-12">&nbsp;</div>
+
+
+
+
+
+
+							<div class="col-md-6 col-sm-6">
+                                <div class="form-group row">
+                                    <label  for="horizontalFormEmail" class="control-label"><small>Full Name:</small>
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_lastName}}, {{patientInfo.patient_firstName}} {{patientInfo.patient_middleName}}, {{patientInfo.patient_suffixName}}</label>
+                                    </div>
+                                </div>
+							</div>
+
+
+                            
+                            <div class="col-md-2 col-sm-5">
+                                <div class="form-group row">
+                                    <label ><small>Age:</small></label>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_age}}</label>
+                                    </div>
+                                </div>
+							</div>
+							<div class="col-md-2 col-sm-5">
+                                <div class="form-group row">
+                                    <label ><small>Sex:</small></label>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_sex}}</label>
+                                    </div>
+                                </div>
+							</div>
+                            <div class="col-md-4 col-sm-5">
+                                <div class="form-group row">
+                                    <label ><small>Birth Day:</small></label>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.birth_date}}</label>
+                                    </div>
+                                </div>
+							</div>
+                            <div class="col-md-2 col-sm-5">
+                                <div class="form-group row">
+                                    <label ><small>Weight:</small></label>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_weight}}</label>
+                                    </div>
+                                </div>
+							</div>
+                            <div class="col-md-2 col-sm-5">
+                                <div class="form-group row">
+                                    <label ><small>Height:</small></label>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_height}}</label>
+                                    </div>
+                                </div>
+							</div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="form-group row">
+                                    <label><small>Contact Number:</small></label>
+                                    <div class="col-sm-4">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_phone}}</label>
+                                    </div>
+                                </div>
+							</div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="form-group row">
+                                    <label ><small>Religion:</small></label>
+                                    <div class="col-sm-4">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_religion}}</label>
+                                    </div>
+                                </div>
+							</div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="form-group row">
+                                    <label ><small>Nationality:</small></label>
+                                    <div class="col-sm-4">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_nationality}}</label>
+                                    </div>
+                                </div>
+							</div>
+
+							<div class="col-md-12 col-sm-5">
+                                <div class="form-group row">
+                                    <label ><small>Residential Address:</small></label>
+                                    <div class="col-sm-10">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_address}}</label>
+                                    </div>
+                                </div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+                                <div class="form-group row">
+                                    <label ><small>Occation:</small></label>
+                                    <div class="col-sm-8">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_occupation}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group row">
+                                    <label><small>Company Name:</small></label>
+                                    <div class="col-sm-8">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_company_name}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-8 col-sm-8">
+                                <div class="form-group row">
+                                    <label><small>Person to Call in case of Emergency:</small></label>
+                                    <div >
+                                        <label class="control-label" style=" text-decoration: underline;">&nbsp;&nbsp;&nbsp;{{patientInfo.patient_personToCall|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="form-group row">
+                                    <label><small>Relation to Patient:</small></label>
+                                    <div class="col-sm-4">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_personToCallRelation|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-group row">
+                                    <label><small>Address:</small></label>
+                                    <div class="col-sm-10">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_personToCallAddress|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group row">
+                                    <label ><small>Contact Number<i>(Cellphone)</i>:</small></label>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_personToCallPhone|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group row">
+                                    <label><small><i>(Office Tel. No):</i></small></label>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_personToCallWorkTel|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-7 col-sm-7">
+                                <div class="form-group row">
+                                    <label><small>Patient Complaint:</small></label>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_complaint}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-5 col-sm-5">
+                                <div class="form-group row">
+                                    <label><small>refferedBy:</small></label>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.refferedBy|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                        </div><br>
+                        <br>
+
+
+                        <div class="alert alert-success" role="alert"><p style="font-size:20px;">For Minors</p></div>
+
+
+                        
+                        <div class="row">
+                            <div class="col-md-5 col-sm-5">
+                                <div class="form-group row">
+                                    <small>Fathers Name:</small>
+                                    <div class="col-sm-8">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_fatherName|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-3 col-sm-3">
+                                <div class="form-group row">
+                                    <small>Occupation:</small>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_fatherOccupation|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-3 col-sm-3">
+                                <div class="form-group row">
+                                    <label>Nationality:</label>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_fathernationality|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-5 col-sm-5">
+                                <div class="form-group row">
+                                    <small>Contact Number<i>(Cellphone)</i>:</small>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_fatherContact|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="form-group row">
+                                    <small><i>(Office Tel. No):</i></small>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_fatherOfficeContact|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+
+                            <div class="col-md-5 col-sm-5">
+                                <div class="form-group row">
+                                    <small>Mothers Name:</small>
+                                    <div class="col-sm-8">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_motherName|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-3 col-sm-3">
+                                <div class="form-group row">
+                                    <small>Occupation:</small>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_mothernationality|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-3 col-sm-3">
+                                <div class="form-group row">
+                                    <label>Nationality:</label>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_motherOccupation|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-5 col-sm-5">
+                                <div class="form-group row">
+                                    <small>Contact Number<i>(Cellphone)</i>:</small>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_motherContact|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="form-group row">
+                                    <small><i>(Office Tel. No):</i></small>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" style=" text-decoration: underline;">{{patientInfo.patient_motherOfficeContact|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+						</div>
+                        <br>
+
+
+
+                        <div class="alert alert-success" role="alert"><p style="font-size:20px;">Dental History</p></div>
+                        <h2></h2>
+                        <h2></h2>
+
+                        <div class="row">  
+                            <div class="col-md-7 col-sm-7">
+                                <div class="form-group row">
+                                    <small>Previous Dentist:</small>
+                                    <div class="col-sm-8">
+                                        <label class="control-label" style=" text-decoration: underline;"> {{patientInfo.patient_previousDentist|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="form-group row">
+                                    <small>Last Dental Visit:</small>
+                                    <div >
+                                        <label class="control-label" style=" text-decoration: underline;">&nbsp;&nbsp;&nbsp;&nbsp;{{patientInfo.patient_lastDentalVisit|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group row">
+                                    <small>Last Treatment Done:</small>
+                                    <div>
+                                        <label class="control-label" style=" text-decoration: underline;">&nbsp;&nbsp;&nbsp;&nbsp;{{patientInfo.patient_lastTreatmentDone|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>                 
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+
+
+
+
+                        
+                        <div class="alert alert-success" role="alert"><p style="font-size:20px;">Medical History</p></div>
+
+                        <div class="row">
+                            <div class="col-md-7 col-sm-7">
+                                <div class="form-group row">
+                                    <label>Name of Physician:</label>
+                                    <div class="col-sm-8">
+                                        <label class="control-label" style=" text-decoration: underline;"> {{patientInfo.patient_previousDoctor|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="form-group row">
+                                    <lable>Specialty, if applicable:</lable>
+                                    <div >
+                                        <label class="control-label" style=" text-decoration: underline;">&nbsp;&nbsp;&nbsp;&nbsp;{{patientInfo.patient_specialtyDoctor|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                    </div>
+                                </div>
+						    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="form-group row">
+                                            <lable>Office Address:</lable>
+                                            <div>
+                                                <label class="control-label" style=" text-decoration: underline;">&nbsp;&nbsp;&nbsp;&nbsp;{{patientInfo.patient_officeAddressDoctor|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ol>
+                                    <li>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group row">
+                                                <lable>Current medications/Vitamins:</lable>
+                                                <div>
+                                                    <label class="control-label" style=" text-decoration: underline;">&nbsp;&nbsp;&nbsp;&nbsp;{{patientInfo.patient_medications|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group row">
+                                                <lable>Previous Hospitalization/Surgery:</lable>
+                                                <div>
+                                                    <label class="control-label" style=" text-decoration: underline;">&nbsp;&nbsp;&nbsp;&nbsp;{{patientInfo.patient_hospitalization|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group row">
+                                                <lable >Developmental Abnormalities:</lable>
+                                                <div>
+                                                    <label class="control-label" style=" text-decoration: underline;">&nbsp;&nbsp;&nbsp;&nbsp;{{patientInfo.patient_devAbnormalities|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group row">
+                                                <lable >Are you allergic to any of the following?</lable>
+                                            </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 col-sm-3">
+                                                        {% if patientInfo.patient_allergyLocalAnesthetics == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                        
+                                                        <label>
+                                                        Local Anesthetics
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-3">
+                                                        {% if patientInfo.patient_allergyAntibiotics == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                        <label>
+                                                        Penicillin, Antibiotics
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-3">
+                                                        {% if patientInfo.patient_allergyAspirin == False %}
+                                                       <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+
+                                                        <label>
+                                                        Aspirin 
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-3">
+                                                        {% if patientInfo.patient_allergyLatex == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+
+                                                        <label>
+                                                        Latex
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-3">
+                                                        {% if patientInfo.patient_allergyMint == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                        <label>
+                                                        Mint
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label>
+                                                        Others: &nbsp;&nbsp;&nbsp;
+                                                        </label>
+                                                        <label style=" text-decoration: underline;">
+                                                            
+                                                        {{patientInfo.patient_allergyOthers|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}
+                                                        <label>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group row">
+                                                <label>Do you use Tobacco Products? Yes/No:</label>
+                                                <div>
+                                                    <label class="control-label"style=" text-decoration: underline;">&nbsp;&nbsp;&nbsp;&nbsp;{{patientInfo.patient_tabacco|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group row">
+                                                <label>Do you use alchohol, cocaine, or other drugs? Yes/No, if yes please specify:</label>
+                                                <div>
+                                                    <label class="control-label" style=" text-decoration: underline;">&nbsp;&nbsp;&nbsp;&nbsp;{{patientInfo.patient_drugs|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group row">
+                                                <label>Any history of the following:</label>
+                                                </div>
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_highBloodPressure == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                            <label>
+                                                            High Blood Pressure
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_lowBloodPressure == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                            <label >
+                                                            Low Blood Pressure
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_respiratoryProblems == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                            <label >
+                                                            Respiratory Problem 
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_bleedingDisorder == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+
+                                                            <label >
+                                                            Bleeding Disorder
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_convulsion == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                            <label >
+                                                            Convulsion
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_asthma == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                            <label >
+                                                            Asthma
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_rheurnaticFever == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                            <label >
+                                                            Rheumatic Fever 
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_glandularProblem == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                            <label>Glandular Disorder
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_allergyMint == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                            <label >
+                                                            AIDS/HIV Infection 
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_allergyMint == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+
+                                                            <label >
+                                                            Stroke
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_allergyMint == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                            <label >
+                                                            Diabetes
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_allergyMint == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                            <label >
+                                                            Seisures
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_allergyMint == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                            <label >
+                                                            Lung Problem
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_allergyMint == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                            <label >
+                                                            Liver Proble
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_allergyMint == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                            <label >
+                                                            Kidney Problem
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_allergyMint == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                            <label >
+                                                            Hearth Problem
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_allergyMint == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                            <label >
+                                                            Thyriod Problem
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                            {% if patientInfo.patient_allergyMint == False %}
+                                                        <i class="fa fa-square-o"></i>
+                                                        
+                                                        {% else %}
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        {% endif %}
+                                                            <label >
+                                                            Tuberculosis
+                                                            </label>
+                                                        </div>
+
+
+
+
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label >
+                                                            Others: &nbsp;&nbsp;&nbsp;
+                                                            </label>
+                                                            <label style=" text-decoration: underline;">
+                                                              {{patientInfo.patient_historyothers|default:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}}
+                                                            </label>
+                                                        </div>
+                                                        
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                </ol>
+                            </div>
+                        </div><br>
+                        <br>
+                        <br>
+                        
+                        <div class="container">
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg-10">
+                                    <div class="alert alert-success" role="alert"><p style="font-size:20px;">Patient Procedure</p></div>
+                                <div class="table-responsive">
+                                    <table class="table  table-striped table-bordered mydatatable" >
+                                        <thead style="background-color:#E5E5E5;">
+                                            <tr>
+                                                <th> Date </th>
+                                                <th> Procedure </th>
+                                                <th> Doctor </th>
+                                                <th> Tooth No# </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            {% for patient in patientPayment %}
+                                            <tr class="odd gradeX">
+                                            
+                                                <td>{{patient.date_created.date}}</td>
+                                                <td>{{patient.treatment}}</td>
+                                                <td>{{patient.doctor_name}}</td>
+                                                <td>{{patient.tooth_number}}</td>
+
+                                            
+                                            </tr>
+                                            {% empty %}
+                                            
+                                                <tr>
+                                                    <td colspan="4">
+                                                        <center >There are no items in this Table</center>
+                                                    </td>
+                                                </tr><br>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="offset-md-3 col-md-9">
+                                        <a href="{% url 'patientEditDoctor' patientInfo.id %}" type="submit" class="btn btn-success">Edit</a>
+                                        <a href="{% url 'patientDoctor' %}"type="button" class="btn btn-default">Back</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        
+                    </div>
+                    </div>
+                    </div>
+                    
+                </div> 
+
+                    
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page content -->
+
+{% endblock %}
+
+
+
+
+
+

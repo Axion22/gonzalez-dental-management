@@ -1,0 +1,138 @@
+{% extends 'adminTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activeDoctor %}active open{% endblock %}
+{% block activeDoctorList %}active open{% endblock %}
+{% load static %}
+
+
+{% block content %}
+
+
+<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Add Doctor</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="#">Doctor</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active"> Add Doctor</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-box">
+                            <div class="card-head">
+                                    <header>Register Doctor</header>
+                            </div>
+                                
+                                <div class="card-body" id="bar-parent">
+                                    {% for message in messages %}
+						<div class="alert alert-info" role="alert">
+							<p>{{message}}</p>
+						</div>
+					{% endfor %}
+                                    
+                                    <form action="" method="POST">
+                                    <div class="form-horizontal">
+                                    {% csrf_token %}
+                                        <div class="form-body">
+                                              <center>
+                                                {% if form.username.errors %}
+                                                    <small style="color:red;">the username is already taken.</small>
+                                                {% endif %}
+                                                </center>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Username
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {{form.username}}
+                                                </div>   
+                                            </div>
+                                              
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Email
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {{form.email}} 
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">First Name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {{form.first_name}} </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Last Name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {{form.last_name}} </div>
+                                            </div>
+                                            <center>
+                                                {% if form.password2.errors %}
+                                                    <small style="color:red;">the two password did't match.</small>
+                                                {% endif %}
+                                                </center>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Password
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                  <div class="col-md-5">
+                                                    {{form.password1}} 
+                                                  </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Confirm Password
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                  {{form.password2}} 
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                            
+        {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <p> {{ error }} </p>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+                                            
+
+                                          
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="offset-md-3 col-md-9">
+                                                    <button type="submit" class="btn btn-success">Submit</button>
+                                                    <a href="{% url 'doctor' %}" type="button" class="btn btn-default">Cancel</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body" id="bar-parent">
+                                
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end page content -->
+
+
+{% endblock %}

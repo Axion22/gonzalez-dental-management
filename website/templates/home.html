@@ -1,0 +1,383 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <!-- ***** Welcome Area Start ***** -->
+  <section class="welcome-area">
+      <!-- Single Welcome Slide -->
+      <div class="welcome-welcome-slide  bg-gradient-overlay">
+        <div class="container h-100">
+          <div class="row h-100 align-items-center">
+            <div class="col-12">
+              <!-- Welcome Text -->
+              <div class="welcome-text text-center">
+                <h2 data-animation="fadeInUp" data-delay="100ms">Hello There!</h2>
+                <p data-animation="fadeInUp" data-delay="300ms">A lot of times, dental clinics can be frightening. At Teeth for Keeps, our mission is to make sure kids have a pleasant experience and feel at ease on their every appointment.</p>
+
+                <p>In order to achieve that, we work hand-in-hand with parents, guardians, and other professionals who are involve with the child's overall health and well-being. We want the kids to enjoy and have fun while taking care of their oral health.</p>
+                <div class="welcome-btn-group">
+                  <a href="{% url 'home' %}#booking" class="btn dento-btn mx-4" data-animation="fadeInUp" data-delay="500ms">BOOK NOW</a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ***** Welcome Area End ***** -->
+
+  <!-- ****** About Us Area Start ******* -->
+  <section class="dento-about-us-area section-padding-100-0">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- About Us Thumbnail -->
+        <div class="col-12 col-md-6">
+          <div class="about-us-thumbnail mb-50">
+            <img src="{% static 'website/img/bg-img/about.jpg' %}" alt="">
+          </div>
+        </div>
+        <!-- About Content -->
+        <div class="col-12 col-md-6">
+          <div class="about-us-content mb-50">
+            <!-- Section Heading -->
+            <div class="section-heading">
+              <h2>About Us</h2>
+              <div class="line"></div>
+            </div>
+            <p>A healthy mouth is more important than you might think. Consider everything you expect your mouth to do each day. You use your mouth to eat, to smile, to speak, and more. Poor oral health can affect all of these things.
+              Having a healthy mouth, teeth, and gums can also have overall health benefits. Systemic diseases such as diabetes and heart disease are improved with better dental health.
+              Good oral health isn’t hard to achieve but it does take discipline. Use these tips for a lifetime of taking care of your mouth and teeth. </p>
+                            <p >
+                            "Experienced Dentists providing the best dental care for you and your family since 1986"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ****** About Us Area End ****** -->
+
+  <div class="container">
+    <div class="dento-border clearfix"></div>
+  </div>
+
+
+  <!-- Dento Service Area Start -->
+  <section class="dento-service-area section-padding-100-0 bg-img bg-gradient-overlay">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- Service Content -->
+        <div class="col-12 col-lg-6">
+          <div class="service-content mb-30">
+            <!-- Section Heading -->
+            <div class="section-heading white">
+              <h2>Our Services</h2>
+              <div class="line"></div>
+            </div>
+
+            
+
+            <div class="row">
+              <!-- Single Service -->
+            <div class="col-6 col-md-3">
+              <div class="single-service mb-70">
+                <img src="{% static 'website/img/core-img/s20.png' %}" alt="">
+                <h6>Pediatric Dentistry</h6>
+              </div>
+            </div>
+
+              <!-- Single Service -->
+              <div class="col-6 col-md-3">
+                <div class="single-service mb-70">
+                  <img src="{% static 'website/img/core-img/s21.png' %}" alt="">
+                  <h6>Dental Inlays and Onlays</h6>
+                </div>
+              </div>
+
+              <!-- Single Service -->
+              <div class="col-6 col-md-3">
+                <div class="single-service mb-70">
+                  <img src="{% static 'website/img/core-img/s18.png' %}" alt="">
+                  <h6>Oral Surgery</h6>
+                </div>
+              </div>
+
+              <!-- Single Service -->
+              <div class="col-6 col-md-3">
+                <div class="single-service mb-70">
+                  <a  href="{% url 'pricing' %}#pricing3"><img src="{% static 'website/img/core-img/s19.png' %}" alt="">
+                  <h6>Orthodontics</h6></a>
+                </div>
+              </div>
+
+
+              <!-- Single Service -->
+              <div class="col-6 col-md-3">
+                <div class="single-service mb-70">
+                   <a  href="{% url 'pricing' %}#pricing4"><img src="{% static 'website/img/core-img/s22.png' %}" alt="">
+                  <h6>Preventive Dentistry</h6></a>
+                </div>
+              </div>
+
+              <!-- Single Service -->
+              <div class="col-6 col-md-3">
+                <div class="single-service mb-70">
+                  <a  href="{% url 'pricing' %}#pricing2"><img src="{% static 'website/img/core-img/s23.png' %}" alt="">
+                  <h6>Prosthodontics</h6></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Area -->
+        <div class="col-12 col-lg-6">
+          <div class="dento-video-area mb-100">
+            <div class="section-heading white">
+              <h3 style="color:white;">Try out our Free Virtual Consultation</h3>
+              <div class="line">
+            </div>
+            <br>
+            <div class="section-heading">
+              <center><h4 style="color:white;">How it works</h4></center>
+            </div>
+
+
+              <div class="row">
+
+              <div class="col-4">
+                <div class="card">
+                  <div class="card-body">
+                    <center><h6>STEP 1</h6></center>
+                    <hr>
+                    <center><h6>Upload one full-face picture showing us your smile.</h6></center>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="card">
+                  <div class="card-body">
+                    <center><h6>STEP 2</h6></center>
+                    <hr>
+                    <center><h6>Upload one close-up picture of area of concern.</h6></center>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="card">
+                  <div class="card-body">
+                    <center><h6>STEP 3</h6></center>
+                    <hr>
+                    <center><h6>Fill out the form below and submit. It’s fully confidential.</h6></center>
+                  </div>
+                </div>
+              </div>
+              
+              
+              <div class="col-12" >
+                <div class="more-btn text-center mt-50">
+                  <a href="{% url 'service' %}" class="btn dento-btn">Go now <i class="fa fa-angle-double-right"></i></a>
+                </div>
+              </div>
+            
+            <!-- Play Button -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Dento Service Area End -->
+
+  <!-- Dento Pricing Table Area Start -->
+  <section class="dento-pricing-table-area section-padding-100">
+    <div class="container">
+      <div class="row">
+        <!-- Section Heading -->
+        <div class="col-12">
+          <div class="section-heading text-center">
+            <h2>Pricing</h2>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="dento-price-table table-responsive">
+            {% for department in department|slice:":1" %}         
+          <table class="table table-borderless mb-0"><br><br><br><br>
+            <div style="font-size:36px; font-family:'Monserrat',sans-serif; color:black; inline-height:1.4; font-weight:600;">
+              {{ forloop.counter }}. {{department.department}}
+            <thead>
+                  <tr>
+                    <th> Treatment </th>
+                    <th> Fee </th>
+                </tr>
+            </thead><hr>
+              {% for treatment in department.treatment_set.all %}
+            <tbody>                                    
+              <tr class="odd gradeX">
+                  <td id="{{ forloop.counter }}">{{treatment.treatment}}</td>
+                  {% load humanize %}
+                  <td>	&#8369; {{treatment.treatment_fee|intcomma}}</td>
+              </tr>  
+                               
+              {% endfor %}<br>
+              {% endfor %}
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+        <div class="col-12" id="booking">
+          <div class="more-btn text-center mt-50" id="booking">
+            <a href="{% url 'pricing' %}" class="btn dento-btn">Show More <i class="fa fa-angle-double-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ***** Dento Pricing Table Area End ***** -->
+
+  <!-- Book An Oppointment Area Start -->
+  <section   class="book-an-oppointment-area section-padding-100 bg-img bg-gradient-overlay">
+    <div class="container">
+      <div class="row">
+        <!-- Section Heading -->
+        <div class="col-12">
+          <div class="section-heading text-center white">
+            <h2>Book An Apointment</h2>
+            <div class="line "></div><br>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <!-- Appointment Form -->
+          <div class="appointment-form" >
+            <form action="{% url 'appointment' %}" method="post">
+            {% csrf_token %}
+              <div class="row ">
+                <div class="col-md-6">
+                  <div class="form-group mb-25">
+                    <input type="text" name="first-name" class="form-control" placeholder="First Name" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-25">
+                    <input type="text" name="last-name" class="form-control" placeholder="Last Name" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-25">
+                    <input type="tel" name="your-phone" class="form-control" placeholder="Your Phone" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-25">
+                    <input type="email" name="your-email" class="form-control" placeholder="Your Email" required>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group mb-25">
+                    <input placeholder="Preferred Appointment Date" class="form-control" type="text" name="your-date" onfocus="(this.type = 'date')"  id="date"  required>
+                  </div>
+                </div>
+               
+                <div class="col-md-6">
+                  <div class="form-group mb-25">
+                    <select placeholder="Preferred Appointment Time" name="your-schedule" class="form-control">
+                      <option value="">Preferred Appointment Date</option>
+                      <option value="9 AM">9 AM</option>
+                      <option value="10 AM ">10 AM</option>
+                      <option value="11 AM ">11 AM</option>
+                      <option value="1 PM ">1 PM</option>
+                      <option value="2 PM ">2 PM</option>
+                      <option value="3 PM ">3 PM</option>
+                      <option value="4 PM ">4 PM</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group mb-25">
+                    <input type="text" name="service-required" class="form-control" placeholder="Service Required - Please type &quot;NOT SURE&quot;   if you dont know"> 
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group mb-25">
+                    <textarea name="your-message" class="form-control" placeholder="Your Message"></textarea>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <button type="submit" class="btn dento-btn">Booking Now</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Book An Oppointment Area End -->
+
+  <!-- ***** Dento Dentist Area Start ***** -->
+  <section id="ourDentist"class="dentist-area section-padding-100-0">
+    <div class="container">
+      <div class="row">
+        <!-- Section Heading -->
+        <div class="col-12">
+          <div class="section-heading text-center">
+            <h2>Our Dentist</h2>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Single Dentist Area -->
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="single-dentist-area mb-100">
+            <img src="{% static 'website/img/bg-img/p2.jpg' %}" alt="">
+          </div>
+        </div>
+
+        <!-- Single Dentist Area -->
+        <div class="col-12 col-md-6 col-md-8">
+          <div class=" mb-100">
+            <!-- Section Heading -->
+            <div class="section-heading">
+              <h5>Dr. Reynaldo A. Gonzalez</h5>
+                <p>Surgical Dentistry</p>
+              <div class="dentist-social-info">
+                <a href="https://www.facebook.com/docreygonzalez" target="_blank"><i class="fa fa-facebook"></i></a>
+
+              </div>
+            </div>
+            <p>
+              Studied at Central Escolar University, Former President  and Adviser at Philippine Dental Association Laguna Chapter. Now he is a doctor at Gonzalez Partoza Dental clinic.</p>
+            <p>“Ÿour smile may be the brightest part of someones day. So wear it often and share it freely!” </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+          <div class="more-btn text-center mb-100">
+            <a href="{% url 'about' %}#ourDentist" class="btn dento-btn">Show More <i class="fa fa-angle-double-right"></i></a>
+          </div>
+        </div>
+</section>
+  <!-- ***** Dento Dentist Area End ***** -->
+<div class="container">
+    <div class="dento-border clearfix"></div>
+  </div>
+  
+
+
+  
+{% endblock %}
+

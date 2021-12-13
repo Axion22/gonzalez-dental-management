@@ -1,0 +1,120 @@
+{% extends 'adminTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activeInventory %}active open{% endblock %}
+{% block activeInventoryList %}active open{% endblock %}
+{% load static %}
+
+
+
+
+{% block content %}
+
+
+<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Inventory</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="#">Inventory</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active"> Add Inventory</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-box">
+                            <div class="card-head">
+                                    <header>Add Item</header>
+                            </div>
+                                
+                                <div class="card-body" id="bar-parent">
+                                    <form action="" method="POST">
+                                    <div class="form-horizontal">
+                                    {% csrf_token %}
+                                        <div class="form-body">
+                                              
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Product Name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {{form.product_name}}
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Company Name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {{form.company_name}} </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Company Contact
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                {% if form.company_contact.errors %}
+                                    <small style="color:red;">{{form.company_contact.errors}}</small>
+                                    {% endif %}
+                                                    {{form.company_contact}} </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Unit Price
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                {% if form.unit_prize.errors %}
+                                    <small style="color:red;">{{form.unit_prize.errors}}</small>
+                                    {% endif %}
+                                                    {{form.unit_prize}} </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Expiration Date 
+                                                </label>
+                                                <div class="col-md-3">
+                                                    <div class="input-group date form_date " data-date="" data-date-format="MM dd yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+		                                                {{form.exp_date}}
+		                                                
+		                                            </div>
+                                            		<input type="hidden" id="dtp_input2" value="" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Quantity
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                {% if form.quantity.errors %}
+                                    <small style="color:red;">Enter Valid Input</small>
+                                    {% endif %}
+                                                    {{form.quantity}} </div>
+                                            </div>
+                                            
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="offset-md-3 col-md-9">
+                                                    <button type="submit" class="btn btn-info">Submit</button>
+                                                    <a href="{% url 'inventory' %}" type="button" class="btn btn-default">Cancel</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end page content -->
+
+
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'adminTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activeDepartment %}active open{% endblock %}
+{% load static %}
+
+
+
+
+{% block content %}
+
+
+<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Department Form</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="#">Department</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active"> Department Form</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-box">
+                                <div class="card-head">
+                                        <header>Edit {{ department.department }}</header>
+                                </div>
+                          
+                                
+                            <div class="card-body" id="bar-parent">
+                                <form action="" method="POST">
+                                        {% csrf_token %}
+                                    <div class="form-horizontal">
+                                    
+
+                                        <div class="form-body">
+                                              
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Department:</label>
+                                                <div class="col-md-7">
+                                                    <h4>
+                                                        <label>
+                                                            {{department.department}}
+                                                        </label>
+                                                    </h4>
+                                                    
+                                                </div>
+                                                
+                                                <label class="control-label col-md-3">Description:</label>
+                                                
+                                                <div class="col-md-7">
+                                                    <h4>
+                                                        <label>
+                                                            {{department.description|linebreaks}}
+                                                        </label>
+                                                    </h4>
+                                                </div>
+                                                    
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="offset-md-1 col-md-2">
+                                                    <a class="btn btn-success" href="{% url 'departmentEdit' department.id %}">
+                                                    Edit<i class="fa fa-wrench"></i>
+                                                    </a>
+                                                    </div>
+                                                </div><hr>
+
+                                            <div class="form-group row justify-content-md-center">
+                                                <div id="TreatmentForm">
+                                                    {% for treatment in treatment %}
+                                                        {% include 'adminTemp/partials/treatmentDetailForm.html' %}
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="offset-md-1 col-md-2">
+                                                    <button class="btn btn-success " hx-get="{% url 'treatmentCreateForm' %}" hx-swap="beforeend" hx-target="#TreatmentForm">Add
+                                                    <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            
+                                        
+                                            
+                                            <hr>
+                                            <div class="form-actions">
+                                                <div class="row">
+                                                    <div class="offset-md-3 col-md-9">
+                                                        <a href="{% url 'department' %}" class="btn btn-success">Save</a>
+                                                        <a href="{% url 'department' %}" type="button" class="btn btn-default"
+                                                        >Cancel</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end page content -->
+
+
+{% endblock %}

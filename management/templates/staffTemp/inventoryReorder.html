@@ -1,0 +1,78 @@
+{% extends 'staffTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activeInventory %}active open{% endblock %}
+{% block activeInventoryList %}active open{% endblock %}
+{% load static %}
+
+
+{% block extracss %}
+<style>
+    th {
+    text-align: center;
+    }
+</style>
+  {% endblock extracss %}
+
+{% block content %}
+
+
+<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Inventory</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="#">Inventory</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active"> Add Inventory</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-box">
+                            <div class="card-head">
+                                    <header>{{instance.product_name}}</header>
+                            </div>
+
+                                <div class="card-body" id="bar-parent">
+                                    <form action="" method="POST">
+                                    <div class="form-horizontal">
+                                    {% csrf_token %}
+                                        <div class="form-body">
+                                              
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">ReorderLevel:
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {{form.reorder_level}}
+                                                </div>
+                                            </div>
+                                          
+                                            
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="offset-md-3 col-md-9">
+                                                    <button type="submit" class="btn btn-info">Submit</button>
+                                                    <a href="{% url 'inventoryManageStaff' instance.id%}" type="button" class="btn btn-default">Cancel</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end page content -->
+
+
+{% endblock %}

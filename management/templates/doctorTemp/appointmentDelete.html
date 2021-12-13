@@ -1,0 +1,56 @@
+{% extends 'doctorTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activeAppointment %}active open{% endblock %}
+{% block activeBookAppointment %}active open{% endblock %}
+{% load static %}
+
+{% block content %}
+
+
+<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Payment Form</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active">Payment</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-box">
+                                <div class="card-head">
+                                    <header>Create Form Controls</header>
+                                </div>
+                            </br>
+
+                                <div class="card-body" id="bar-parent">
+                                   
+                                    <h3> Do you want to Delete "{{appoint.first_name}} {{appoint.last_name}}'s Appointment"?</h3>
+                                    <form action="{% url 'appointmentDeleteDoctor' appoint.id %}" method="POST">
+                                      <div class="form-horizontal">
+                                      {% csrf_token %}
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="offset-md-3 col-md-9">
+                                                    <button type="submit" class="btn btn-success" name="confirm">Confirm</button>
+                                                    <a href="{% url 'appointmentDoctor' %}" type="button" class="btn btn-default">Cancel</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end page content -->
+{% endblock %}

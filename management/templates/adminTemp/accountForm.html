@@ -1,0 +1,133 @@
+{% extends 'adminTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activeAccount %}active open{% endblock %}
+{% block activeAccountList %}active open{% endblock %}
+{% load static %}
+
+{% block content %}
+
+<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Advance Tables</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="#">Data Tables</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active">Advance Tables</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card  card-box">
+                                <div class="card-head">
+                                    <header>Create New Admin</header>
+                                </div>
+                                
+                                <div class="card-body" id="bar-parent">
+                                    {% for message in messages %}
+						<div class="alert alert-info" role="alert">
+							<p>{{message}}</p>
+						</div>
+					{% endfor %}
+                                
+
+                                <div class="card-body" id="bar-parent">
+                                    <form action="" method="POST">
+                                    <div class="form-horizontal">
+                                    {% csrf_token %}
+                                        <div class="form-body">
+                                              
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">User Name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {{form.username}} </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">First Name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {{form.first_name}} </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Last Name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {{form.last_name}} </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">E-mail
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    
+                                                    {{form.email}} </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3"> Password
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {% if form.password1.errors %}
+                                                    <small style="color:red;">
+                                                    Please make sure your password match </small>
+                                                    {% endif %}
+                                                    {{form.password1}} 
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Confirm Password
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    {{form.password2}} 
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group row">
+                                                <div class="control-label col-md-3"></div>
+                                                <div class="col-md-5">
+                                                {% if form.errors %}
+                                                    {% for field in form %}
+                                                        {% for error in field.errors %}
+                                                        <small style="color:red;"><p> {{ error }} </p></small>
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                </div>
+                                            </div>
+                                            
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="offset-md-3 col-md-9">
+                                                    <button type="submit" class="btn btn-success">Submit</button>
+                                                    <a href="{% url 'account' %}" type="button" class="btn btn-default">Cancel</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!-- end page content -->
+
+
+{% endblock %}

@@ -1,0 +1,176 @@
+{% extends 'adminTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activeAppointment %}active open{% endblock %}
+{% block activeVirtualConsultation %}active open{% endblock %}
+{% load static %}
+
+
+
+
+{% block content %}
+
+<!-- start page content -->
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div class="page-bar">
+            <div class="page-title-breadcrumb">
+                <div class=" pull-left">
+                    <div class="page-title">Virtual Consultation</div>
+                </div>
+                <ol class="breadcrumb page-breadcrumb pull-right">
+                    <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardAdmin' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    </li>
+                    <li><a class="parent-item" href="#">Appointment</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    </li>
+                    <li class="active">Virtual Consultation</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="card card-box">
+
+                    {% for message in messages %}
+                        <div class="alert alert-info" role="alert">
+                            <p>{{message}}</p>
+                        </div>
+                    {% endfor %}
+
+                    <div class="container mt-5">
+                        <div class="col-11 text-center mt-4 mb-4">
+                            <h2>Manage Appointments</h2>
+                        </div>
+
+                        <div class="row">
+
+                            {% for vc in virtualconsultation %}
+                            <div class="col-lg-4">
+                                <div class="card card-margin">
+                                    <div class="card-header no-border">
+                                        <center class="card-title"><h4><b>{{vc.first_name}} {{vc.last_name}}</b></h4></center>
+                                    </div>
+                                                
+                                    <div class="card-body pt-0">
+                                        <div class="widget-49">
+                                            <div class="widget-49-title-wrapper">
+                                                        
+                                                <div class="widget-49-title-wrapper">
+                                                    <span class="info-box-icon push-bottom bg-transprnt">
+                                                        <font size="3">
+                                                            <span>{{vc.date_created|date:"d"}}</span>
+                                                            <span class="widget-49-date-month">{{vc.date_created|date:"M"}}
+                                                            </span>
+                                                        </font>
+                                                    </span>
+                                                </div>
+
+                                                <div class="info-box-content">
+                                                    <div class="widget-49-meeting-info">
+                                                        <h5 style="color:#708090;"><span>{{vc.email}}</span></h5>
+                                                        <small><span class="widget-49-meeting-time">{{vc.phone}}
+                                                        </span></small>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div style="justify-content: center; display: flex;"> 
+                                                {% if vc.full_face %}
+                                                    <a href="{{ vc.full_face.url }}"  target="_blank">
+                                                        <img src="{{ vc.full_face.url }}"  width="100" height="100" style="margin: 5px; border: 2px solid #444; display: block;">
+                                                    </a>
+                                                {% endif %}
+                                                {% if vc.close_up %}  
+                                                    <a href="{{ vc.close_up.url }}"  target="_blank">
+                                                        <img src="{{ vc.close_up.url }}"width="100" height="100" style="margin: 5px; border: 2px solid #444; display: block;">
+                                                    </a>
+                                                {% endif %}   
+                                                    </div><br>
+                                                <div class="widget-49-meeting-points">
+                                                    <center>
+                                                        <small>Message: </small>
+                                                        <small class="messagebtn" style="opacity:0.3;cursor:pointer">Hide|Show </small>
+                                                        <br>
+                                                        <small class="message" style="color:green;">{{vc.message}}</small>
+                                                    </center>
+                                                </div><hr>
+                                                <form method="POST" action="{% url 'virtualConsultations' %}">
+                                                    {% csrf_token %}
+
+                                                {% if vc.assign_doctor == None %}
+                                                <input hidden="true" name="virtualconsult-id" value="{{vc.id}}">
+                                                    <center>
+                                                        
+                                                        <a class="btn btn-success" href="{% url 'assignDoctorVC' vc.id %}">Assign to Doctor</a>
+                                                    </center>
+                                                {% else %}
+                                                {% if vc.accepted == True %}
+                                                    
+                                                    {% else %}
+                                                    <center>
+                                                        <small>Assigned to:</small>
+                                                        Dr. {{vc.assign_doctor}}   
+                                                        <a href="{% url 'assignDoctorVC' vc.id %}">
+                                                            <i class="fa fa-edit"></i
+                                                        ></a>
+                                                    </center>
+                                                    {% endif %}
+                                                {% endif %}
+                                                </form> 
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+                            {% empty %}
+                                <div class="col-11 text-center mt-4 mb-4">
+                                    <div style="text-align: center;">
+                                        <p style="font-size:20px;">There are no items in this Table</p>
+                                    </div>
+                                </div><br>
+                            {% endfor %}
+                            <hr>
+
+
+
+
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col d-flex justify-content-center">
+                                        {% if is_paginated %}
+                                        <div >
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination">
+                                                    {% if page_obj.has_previous %}
+                                                    <li class="page-item"><a style="color:green;" class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+                                                    {% endif %}
+                                                    {% for number in page_obj.paginator.page_range %}
+                                                    <li class="page-item"><a style="color:green;" class="page-link" href="?page={{number}}">{{number}}</a></li>
+                                                    {% endfor %}
+                                                    {% if page_obj.has_next %}
+                                                    <li class="page-item"><a style="color:green;" class="page-link" href="?page={{page_obj.next_page_number}}">Next</a></li>
+                                                    {% endif %}
+                                                </ul>
+                                            </nav>
+                                        </div>
+    
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            
+                                
+                            </div>
+                        
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+        
+<!-- end page content -->
+{% endblock %}
+
+    

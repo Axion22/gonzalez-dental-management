@@ -1,0 +1,204 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<!-- BEGIN HEAD -->
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta name="description" content="Responsive Admin Template" />
+    <meta name="author" content="Sunray" />
+    <title>Sunray | Bootstrap Responsive Hospital Admin Template</title>
+    <!-- google font -->
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" type="text/css" />
+		<!-- icons -->
+  <link href="{% static 'management/fonts/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	<!--CSS-->
+	{% include 'adminTemp/css.html' %}
+	<!--HTMX-->
+	<script src="https://unpkg.com/htmx.org@1.6.0" integrity="sha384-G4dtlRlMBrk5fEiRXDsLjriPo8Qk5ZeHVVxS8KhX6D7I9XXJlNqbdvRlp9/glk5D" crossorigin="anonymous"></script>
+	
+  {% block extracss %}
+	
+  {% endblock extracss %}
+
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'website/img/core-img/favicon5.ico' %}">
+
+
+</head>
+<!-- END HEAD -->
+
+
+
+<body class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-white dark-color white-sidebar-color logo-dark" style="height:100%; min-height:100vh;">
+    <div class="page-wrapper">
+      <!-- start header -->
+			<div class="page-header navbar navbar-fixed-top">
+        <div class="page-header-inner ">
+          <!-- logo start -->
+          <div class="page-logo">
+            <a href="{% url 'dashboardAdmin' %}">
+            <span class="logo-default" >Gonzalez Dental Clinic</span> 
+						</a>
+					</div>
+					<!--wews-->
+          <!-- logo end -->
+					<div class="row  justify-content-around">
+						<div class="col-11">
+							<!-- start header menu -->
+							<div class="top-menu">
+								<ul class="nav navbar-nav">
+									<!-- start notification dropdown -->
+									<li class="dropdown dropdown-extended dropdown-notification">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+											<i class="material-icons" style="font-size: 20px; float: left; color: white">notifications</i>
+
+										{% if countVCDoctor > 0 %}
+											<span class="notify"></span>
+											<span class="heartbeat"></span>
+										{% endif %}
+										</a>
+											<!-- start notification dropdown -->
+											<ul class="dropdown-menu">
+												<li class="external">
+													<h3><span class="bold">Notifications</span></h3>
+													<span class="notification-label purple-bgcolor"></span>
+												</li>
+												<li>
+												
+												
+														<ul class="dropdown-menu-list small-slimscroll-style" data-handle-color="#637283">
+		
+															{% if countVCDoctor > 0 %}
+															<li>
+																<a href="{% url 'virtualConsultationAssign' %}">
+																	<span class="details">
+																	<span class="notification-icon circle blue-bgcolor">{{countVCDoctor}}</span>
+																	Assigned virtual consultation to Doctor.</span>
+																</a>
+															</li>
+															{% else %}
+															{% endif %}
+															
+		
+														</ul>
+												</li>
+											</ul>
+									</li>
+								</ul>
+							</div>
+							<!-- end notification dropdown -->
+						</div>
+					</div>
+
+				</div>
+      </div>
+      <!-- end header -->
+
+
+
+
+
+
+			
+				<!-- start page container -->
+				<div class="page-container" style="min-height:100vh;">
+					<!-- start sidebar menu -->
+					<div class="sidebar-container" >
+						<div class="sidemenu-container navbar-collapse collapse fixed-menu">
+							<div id="remove-scroll" class="left-sidemenu">
+								<ul class="sidemenu  page-header-fixed slimscroll-style" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+									<li class="sidebar-toggler-wrapper hide">
+										<div class="sidebar-toggler">
+											<span></span>
+										</div>
+									</li>
+
+										<li class="sidebar-user-panel">
+	                            <div class="user-panel">
+																	<div >
+	                                    <img style="background-color:white;" src="{% static 'login/img/logo5.png' %}">
+	                                </div>
+																	<br>
+	                                <div>
+																			<small>Doctor</small>
+	                                    <p><b>{{request.user.first_name}} {{request.user.last_name}}</b></p>  
+	                                </div>
+	                            </div>
+	                        </li>
+	                        <li class="nav-item {% block activeDashboard %}active open{% endblock %}">
+	                            <a href="{% url 'dashboardAdmin' %}" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Dashboard</span>
+	                                <span class="selected"></span>
+	                            </a>
+	                        </li>
+													<li class="nav-item {% block activeMyAccount %}{% endblock %}">
+	                            <a href="{% url 'profileDoctor' %}" class="nav-link nav-toggle">
+	                                <i class="material-icons">account_circle</i>
+	                                <span class="title">My Account</span>
+	                                <span class="selected"></span>
+	                            </a>
+	                        </li>
+	                        <li class="nav-item {% block activeAppointment %}{% endblock %} ">
+	                            <a href="#" class="nav-link nav-toggle"><i class="material-icons">assignment</i>
+	                            <span class="title">Appointment</span><span class="arrow open"></span></a>
+	                            <ul class="sub-menu">
+	                                <li class="nav-item {% block activeBookAppointment %}{% endblock %} ">
+	                                    <a href="{% url 'appointmentDoctor' %}" class="nav-link "> <span class="title"> Appointment</span>
+	                                    </a>
+																			
+	                                </li>
+
+	                                <li class="nav-item {% block activeVirtualConsultation %}{% endblock %} ">
+	                                    <a href="{% url 'virtualConsultationAssign' %}" class="nav-link "> <span class="title">Virtual Consultation</span>
+	                                    </a>
+	                                </li>
+	                            </ul>
+	                        </li>
+	                        <li class="nav-item {% block activePatient %}{% endblock %} ">
+	                            <a href="{% url 'patientDoctor' %}" class="nav-link nav-toggle"> <i class="material-icons">accessible</i>
+	                                <span class="title">Patients</span>
+	                            </a>
+	                        </li>
+	                        <li class="nav-item {% block activePayment %}{% endblock %} ">
+	                          <a href="{% url 'paymentDoctor' %}" class="nav-link nav-toggle"> <i class="material-icons">monetization_on</i>
+	                            <span class="title">Payments</span> 
+	                          </a>
+	                        </li>	
+													<li class="nav-item  ">
+	                            <a href="{% url 'logout' %}" class="nav-link nav-toggle"> 
+										        <i class="material-icons f-left">input</i> 
+	                                <span class="title">Logout</span>
+	                            </a>
+	                        </li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- end sidebar menu -->
+
+        {% block content %}
+
+
+
+
+        {% endblock %}
+                   
+        </div>
+        <!-- end page container -->
+				
+    
+		<!-- js scripts from other templates -->
+		{% block extrascripts %}
+    {% endblock extrascripts %}
+
+		{% include 'adminTemp/js.html' %}
+</body>
+</html>
