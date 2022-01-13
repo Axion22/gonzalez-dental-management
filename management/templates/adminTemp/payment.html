@@ -2,6 +2,9 @@
 {% block activeDashboard %}{% endblock %}
 {% block activePayment %}active open{% endblock %}
 {% block activePaymentList %}active open{% endblock %}
+{% block title %} Admin - Payment | Gonzalez Dental Clinic {% endblock %}
+
+
 {% load static %}
 
 
@@ -21,10 +24,10 @@
         <div class="page-bar">
             <div class="page-title-breadcrumb">
                 <div class=" pull-left">
-                    <div class="page-title">Payments Tables</div>
+                    <div class="page-title">Payments</div>
                 </div>
                 <ol class="breadcrumb page-breadcrumb pull-right">
-                    <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardAdmin' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                     </li>
                     <li class="active">Payments</li>
                 </ol>
@@ -35,7 +38,7 @@
             <div class="col-md-12">
                 <div class="card  card-box">
                     <div class="card-head">
-                        <header>Manage Payments</header>
+                        <header>Payments Table</header>
                         <button id = "panel-button" 
                                 class = "mdl-button mdl-js-button mdl-button--icon pull-right" 
                                 data-upgraded = ",MaterialButton">
@@ -88,7 +91,7 @@
                                         <th> Status </th>
                                         <th> Fee </th>
                                         <th> Balance </th>
-                                        <th> Edit </th>
+                                        <th> Action </th>
                                     </tr>
                                 </thead>
 
@@ -129,9 +132,7 @@
                                             </td>
                                             <td class="valigntop">
                                             <div class="btn-group">
-                                                <a href="{% url 'paymentEdit' payment.id %}" class="btn btn-xs btn-success dropdown-toggle no-margin" type="button" > Edit
-                                                    <i style="color:white;" class="fa fa-wrench"></i>
-                                                </a>
+                                                <a href="{% url 'paymentEdit' payment.id %}"class="btn btn-xs dropdown-toggle no-margin" style="color:#18ce0f;">Update<i style="color:#18ce0f;" class="fa fa-wrench"></i></a>
                                             </div>
                                         </td>
                                         </tr>

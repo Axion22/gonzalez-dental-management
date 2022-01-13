@@ -2,6 +2,8 @@
 {% block activeDashboard %}{% endblock %}
 {% block activePatient %}active open{% endblock %}
 {% block activePatientList %}active open{% endblock %}
+{% block title %} Admin - Patient Form | Gonzalez Dental Clinic {% endblock %}
+
 {% load static %}
 
 
@@ -24,12 +26,12 @@
                 <ol class="breadcrumb page-breadcrumb pull-right">
                     <li>
                         <i class="fa fa-home"></i>&nbsp;
-                        <a class="parent-item" href="index.html">Home</a>&nbsp;
+                        <a class="parent-item" href="{% url 'dashboardAdmin' %}">Home</a>&nbsp;
                         <i class="fa fa-angle-right"></i>
                     </li>
-                    <li><a class="parent-item" href="#">Forms</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    <li><a class="parent-item" href="{% url 'patient' %}">Patients</a>&nbsp;<i class="fa fa-angle-right"></i>
                     </li>
-                    <li class="active">Form Layouts</li>
+                    <li class="active">Patients Form </li>
                 </ol>
             </div>
         </div>
@@ -38,7 +40,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="card card-box">
                     <div class="card-head">
-                        <header>Add Patient</header>
+                        <header>Patient Form</header>
                     </div>
                                 
                                 
@@ -48,7 +50,6 @@
                             <div class="form-body">
                             <div style="padding:12px">
                                 <div class="card-body " id="bar-parent2">
-                                    <center><h1 style="color:green;">Remove Me</h1> {{form.errors}}</center>
                                     <div class="row">
                                         <div class="col-md-3 col-sm-4">   
                                             <div class="form-group">

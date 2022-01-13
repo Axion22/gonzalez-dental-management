@@ -2,6 +2,7 @@
 {% block activeDashboard %}{% endblock %}
 {% block activePatient %}active open{% endblock %}
 {% block activePatientList %}active open{% endblock %}
+{% block title %} Staff - Patient | Gonzalez Dental Clinic {% endblock %}
 {% load static %}
 
 
@@ -15,13 +16,13 @@
         <div class="page-bar">
             <div class="page-title-breadcrumb">
                 <div class=" pull-left">
-                    <div class="page-title">Patients Tables</div>
+                    <div class="page-title">Patient</div>
                 </div>
 
                 <ol class="breadcrumb page-breadcrumb pull-right">
                     <li>
                         <i class="fa fa-home"></i>&nbsp;
-                        <a class="parent-item" href="index.html">Home</a>&nbsp;
+                        <a class="parent-item" href="{% url 'dashboardStaff' %}">Home</a>&nbsp;
                         <i class="fa fa-angle-right"></i>
                     </li>
                     <li class="active">Patients</li>
@@ -33,7 +34,7 @@
             <div class="col-md-12">
                 <div class="card  card-box">
                     <div class="card-head">
-                        <header>PATIENT TABLE</header>
+                        <header>Patients Table</header>
                     </div>
 
                     <div class="card-body "></br>
@@ -62,7 +63,7 @@
 
                             <div class="table-responsive">
                             <table class="table  table-striped table-bordered mydatatable" >
-                                <thead style="background-color:#c3e6cb;">
+                                <thead style="background-color:#36DB51;">
                                     <tr>
                                         <th> Patient ID </th>
                                         <th> Patient Name </th>
@@ -80,9 +81,7 @@
                                     
                                         <td>{{patient.id}}</td>
                                         <td>
-                                        <a style="color:#32CD32;"href="{% url 'patientInfoStaff' patient.id %}">
-                                        {{patient.patient_firstName}} {{patient.patient_middleName}} {{patient.patient_lastName}} {{patient.patient_suffixName}}
-                                        </a>
+                                            {{patient.patient_firstName}} {{patient.patient_middleName}} {{patient.patient_lastName}} {{patient.patient_suffixName}}
                                         </td>
                                         <td>{{patient.patient_age}}</td>
                                         <td>{{patient.patient_sex}}</td>
@@ -90,9 +89,10 @@
                                         <td>{{patient.birth_date}}</td>
                                         <td class="valigntop">
                                             <div class="btn-group">
-                                                <a style="color:#32CD32;" href="{% url 'patientEditStaff' patient.id %}" class="btn btn-xs btn-success dropdown-toggle no-margin" type="button">
-                                                    Update<i style="color:white;" class="fa fa-wrench"></i>
-                                                </a>
+
+                                                <a href="{% url 'patientInfoStaff' patient.id %}"class="btn btn-xs dropdown-toggle no-margin" style="color:#337ab7;">View<i style="color:#337ab7;" class="fa fa-eye"></i></a>
+                                                    
+                                                <a href="{% url 'patientEditStaff' patient.id %}"class="btn btn-xs dropdown-toggle no-margin" style="color:#18ce0f;">Update<i style="color:#18ce0f;" class="fa fa-wrench"></i></a>
                                             </div>
                                         </td>
                                     

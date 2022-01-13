@@ -2,6 +2,7 @@
 {% block activeDashboard %}{% endblock %}
 {% block activeAppointment %}active open{% endblock %}
 {% block activeAppointmentList %}active open{% endblock %}
+{% block title %} Staff - Appointment Assign to Doctor | Gonzalez Dental Clinic {% endblock %}
 
 {% block content %}
 
@@ -12,14 +13,12 @@
                     <div class="page-bar">
                         <div class="page-title-breadcrumb">
                             <div class=" pull-left">
-                                <div class="page-title">Inventory</div>
+                                <div class="page-title">Assign an appointment</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardStaff' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
-                                <li><a class="parent-item" href="#">Inventory</a>&nbsp;<i class="fa fa-angle-right"></i>
-                                </li>
-                                <li class="active"> Add Inventory</li>
+                                <li class="active"> Assign an appointment </li>
                             </ol>
                         </div>
                     </div>
@@ -28,7 +27,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="card card-box">
                             <div class="card-head">
-                                    <header>Add Item</header>
+                                    <header>Assign an appointment</header>
                             </div>
                                 
                                 <div class="card-body" id="bar-parent">

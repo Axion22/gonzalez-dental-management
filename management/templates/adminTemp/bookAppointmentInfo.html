@@ -1,0 +1,145 @@
+{% extends 'adminTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activeAppointment %}active open{% endblock %}
+{% block activeAppointmentTable %}active{% endblock %}
+{% block title %} Admin - Appointment Information | Gonzalez Dental Clinic {% endblock %}
+{% load static %}
+
+{% block extracss %}
+<style>
+    th {
+    text-align: center;
+    }
+</style>
+  {% endblock extracss %}
+
+
+{% block content %}
+{% load management_extras %}
+<!-- start page content -->
+<div class="page-content-wrapper">
+  <div class="page-content">
+      <div class="page-bar">
+          <div class="page-title-breadcrumb">
+              <div class=" pull-left">
+                  <div class="page-title">Appointment Information</div>
+              </div>
+              <ol class="breadcrumb page-breadcrumb pull-right">
+                  <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardAdmin' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                  </li>
+                  <li class="active">Appointment Information</li>
+              </ol>
+          </div>
+      </div>
+
+
+
+
+
+
+
+
+
+       <div class="row">
+          <div class="col-md-12 col-sm-12">
+              <div class="card card-box">
+              <div class="card-head">
+                      <header>Appointment of {{BookAppointmentInfo.first_name}}
+                        {{BookAppointmentInfo.last_name}}</header>
+              </div>
+                  
+                  <div class="card-body" id="bar-parent">
+                      <form action="" method="POST">
+                      <div class="form-body">
+                      {% csrf_token %}      
+                              <div class="form-group row">
+                                  <label class="control-label col-md-3">Full Name:
+                                  </label>
+                                  <div class="col-md-5">
+                                      {{BookAppointmentInfo.first_name}}
+                                      {{BookAppointmentInfo.last_name}}
+                                  </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label class="control-label col-md-3">Phone:
+                                </label>
+                                <div class="col-md-5">
+                                    {{BookAppointmentInfo.your_phone}}
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label class="control-label col-md-3">Email:
+                                </label>
+                                <div class="col-md-5">
+                                    {{BookAppointmentInfo.your_email}}
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label class="control-label col-md-3">Service Required:
+                                </label>
+                                <div class="col-md-5">
+                                    {{BookAppointmentInfo.service_required}}
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label class="control-label col-md-3">Requested Schedule:
+                                </label>
+                                <div class="col-md-5">
+                                    {{BookAppointmentInfo.your_schedule}} | {{BookAppointmentInfo.your_date}}
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label class="control-label col-md-3">Approved Schedule:
+                                </label>
+                                <div class="col-md-5">
+                                    {{BookAppointmentInfo.approved_time}} | {{BookAppointmentInfo.approved_date}} 
+                                </div>
+                              </div>
+
+
+                              <div class="form-group row">
+                                <label class="control-label col-md-3">Assign Doctor:
+                                </label>
+                                <div class="col-md-5">
+                                    Dr. {{BookAppointmentInfo.assign_doctor}}
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label class="control-label col-md-3">Accepted Date:
+                                </label>
+                                <div class="col-md-5">
+                                    {{BookAppointmentInfo.accepted_date}}
+                                </div>
+                              </div>
+
+                              
+
+
+                              
+
+                                    
+                          <div class="form-actions">
+                              <div class="row">
+                                  <div class="offset-md-3 col-md-9">
+                                      <a href="{% url 'BookAppointmentTable' %}" type="button" class="btn btn-default">Back</a>
+                                  </div>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- end page content -->
+
+
+{% endblock %}
+        

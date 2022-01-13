@@ -1,3 +1,4 @@
+from django.http import response
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.http import JsonResponse
@@ -24,7 +25,8 @@ from .decorators import *
 from django.db.models import F
 
 
-
+def error_404_view(request, exception):
+  return render(request, 'adminTemp/404.html' )
 
 # Login
 @unauthenticated_user
@@ -58,15 +60,6 @@ def logoutView(request):
 @login_required(login_url='login')
 @admin_only
 def dashboardAdmin(request):
-  department = Department.objects.all()
-  total_department = department.count()
-  
-  appointment = BookAppointment.objects.filter(assign_doctor=None)
-  total_appointment = appointment.count()
-  
-  consult = VirtualConsult.objects.filter(assigned=False)
-  total_consult = consult.count()
-  
   doctor = User.objects.all()
   doctor = User.objects.filter(groups__name__in=['doctor'])
   total_doctor = doctor.count()
@@ -75,24 +68,30 @@ def dashboardAdmin(request):
   staff = User.objects.filter(groups__name__in=['staff'])
   total_staff = staff.count()
   
-  inventory = Inventory.objects.all()
-  total_inventory = inventory.count()
-  
   patient = Patient.objects.all()
   total_patient = patient.count()
   
-  payment = Payment.objects.all()
-  total_payment = payment.count()
+  appointment = BookAppointment.objects.filter(assign_doctor=None)
   
+  consult = VirtualConsult.objects.filter(assigned=False)
+  
+
+  payment = Payment.objects.filter(status = 'unpaid') 
+
+  
+  inventory = Inventory.objects.filter(quantity__lte=F('reorder_level')) 
+  
+
   context={
-    'total_department':total_department,
-    'total_appointment':total_appointment,
-    'total_consult':total_consult,
     'total_doctor':total_doctor,
     'total_staff':total_staff,
     'total_patient':total_patient,
-    'total_payment':total_payment,
-    'total_inventory':total_inventory,
+    'appointment':appointment,
+    'consult':consult,
+    'payment':payment,
+    'inventory':inventory,
+    
+
     
     }
   return render(request, 'adminTemp/dashboardAdmin.html', context)
@@ -106,13 +105,14 @@ def dashboardAdmin(request):
 @login_required(login_url='login')
 @admin_only
 def department(request):
-  department = Department.objects.all()
+  department = Department.objects.all().exclude(department="staff")
   treatment = Treatment.objects.all()
   context = {
     'department':department,
     'treatment':treatment
   }
   return render(request, 'adminTemp/department.html', context)
+
 
 # Admin - Department
 @login_required(login_url='login')
@@ -125,7 +125,7 @@ def departmentHistory(request):
   
   page = request.GET.get('page', 1)
 
-  paginator = Paginator(historydepartment, 10)
+  paginator = Paginator(historydepartment, 5)
   try:
       historydepartmentpage = paginator.page(page)
   except PageNotAnInteger:
@@ -294,7 +294,7 @@ def departmentAdd(request):
 # Admin - Appointment
     
 
-# Admin - Appointment List
+# Admin - Appointment List   
 @method_decorator(login_required, name='dispatch')
 @method_decorator(admin_only, name='dispatch')
 class ManageAppointmentTemplateView(ListView):
@@ -327,11 +327,11 @@ class ManageAppointmentTemplateView(ListView):
         email = EmailMessage(
             "About your appointment",
             message,
-            'geraldlayderos202@gmail.com',
+            'gonzalezdental3@gmail.com',
             [appointment.your_email],
         )
         email.content_subtype = "html"
-        #email.send()
+        email.send()
         
         messages.add_message(request, messages.SUCCESS, f"You accepted the appointment of {appointment.first_name} {appointment.last_name}")
         return HttpResponseRedirect(request.path)
@@ -358,11 +358,11 @@ class ManageAppointmentTemplateView(ListView):
         email = EmailMessage(
             "About your appointment",
             message,
-            'geraldlayderos202@gmail.com',
+            'gonzalezdental3@gmail.com',
             [appointment.your_email],
         )
         email.content_subtype = "html"
-        #email.send()
+        email.send()
 
 
         messages.add_message(request, messages.SUCCESS, f"You accepted the appointment of {appointment.first_name} {appointment.last_name}")
@@ -374,13 +374,23 @@ class ManageAppointmentTemplateView(ListView):
     def get_context_data(self,*args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         appointments = BookAppointment.objects.all()
+        context['day1'] = Account.objects.filter(schedule_day=1).exclude(department=5)
+        context['day2'] = Account.objects.filter(schedule_day=2).exclude(department=5)
+        context['day3'] = Account.objects.filter(schedule_day=3).exclude(department=5)
+        context['day4'] = Account.objects.filter(schedule_day=4).exclude(department=5)
+        context['day5'] = Account.objects.filter(schedule_day=5).exclude(department=5)
+        context['day6'] = Account.objects.filter(schedule_day=6).exclude(department=5)
+        context['day7'] = Account.objects.filter(schedule_day=7).exclude(department=5)
         context.update({   
           
         })
         return context
-
- 
+      
+      
+      
 # Admin - Book Appointment Table
+@login_required(login_url='login')
+@admin_only
 def BookAppointmentTable(request):
   context = {}
   
@@ -396,10 +406,51 @@ def BookAppointmentTable(request):
   
   return render(request, 'adminTemp/bookAppointmentTable.html', context=context)
 
+
+
+
+# Admin - Create Appointment
+@login_required(login_url='login')
+@admin_only
+def appointmentCreate(request):
+  form = CreateBookAppointmentForm()
+  if request.method == 'POST':
+    form = CreateBookAppointmentForm(request.POST)
+    
+    if form.is_valid():
+      obj = form.save(commit=False)
+      obj.accepted = True
+      obj.accepted_date = datetime.datetime.now()
+      obj.save()
+      return redirect('BookAppointmentTable')
+
+  context = {
+    'form':form
+  }
+  return render(request, 'adminTemp/appointmentForm.html',context)
+
+
+
+# Admin - Book Appointment Information
+@login_required(login_url='login')
+@admin_only
+def BookAppointmentInfo(request, id):
+  BookAppointmentInfo = BookAppointment.objects.get(id=id)
+  
+  
+  context={
+    'BookAppointmentInfo':BookAppointmentInfo
+  }
+  
+  
+  return render(request, 'adminTemp/bookAppointmentInfo.html', context)
+
     
     
 
 # Admin - Book Appointment Assign Doctor
+@login_required(login_url='login')
+@admin_only
     
 def assignDoctorAppointment(request, id):
   assignDoctor = BookAppointment.objects.get(id=id)
@@ -407,7 +458,7 @@ def assignDoctorAppointment(request, id):
   
   if request.method == 'POST':
     form = BookAppointmentForm(request.POST, instance=assignDoctor)
-    assignDoctor.is_deleted = True
+    assignDoctor.done = False
     if form.is_valid():
       form.save()
       return redirect('manage')
@@ -445,14 +496,24 @@ class virtualConsultationTemplateView(ListView):
         return HttpResponseRedirect(request.path)
       
 
+      
+      
+    #def get_queryset(self) :
+        queryset = VirtualConsult.objects.filter(accepted = False)
+        return queryset
+      
+    #def get_context_data(self, **kwargs):
+        context = super(virtualConsultationTemplateView, self).get_context_data(**kwargs)
+        context['virtualconsults'] = self.get_queryset().filter(is_deleted=False)
+        return context
     def get_context_data(self,*args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         virtualconsults = VirtualConsult.objects.all()
         context.update({   
           
         })
-        return context
-   
+        return context 
+
 
 # Admin - virtual Consultation Assign Doctor
 @login_required(login_url='login')
@@ -476,67 +537,10 @@ def assignDoctorVirtualConsult(request, id):
   }
   
   
-  return render(request, 'adminTemp/virtualConsultationAssign.html', context)   
+  return render(request, 'adminTemp/virtualConsultationAssign.html', context) 
+ 
 
 
-
-
-
-# Admin - Contact to be
-@method_decorator(login_required, name='dispatch')
-@method_decorator(admin_only, name='dispatch')
-class ContactTemplateView(ListView):
-    template_name = 'adminTemp/contact.html'
-    model = Contact
-    context_object_name = "contact"
-    login_required = True
-    paginate_by = 3
-    
-    
-    def post(self, request):
-        message = request.POST.get("my_message")
-        contact_id = request.POST.get("contact-id")
-        contact = Contact.objects.get(id=contact_id)
-        contact.accepted = True
-        contact.accepted_date = datetime.datetime.now()
-        contact.my_message = message
-
-        contact.save()
-        
-        
-    def get_context_data(self,*args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        contact = Contact.objects.all()
-        context.update({   
-          
-        })
-        return context
-      
-      
-# Admin - Contact Assign
-
-@login_required(login_url='login')
-@admin_only
-def contactForm(request,id):
-  assignContact = Contact.objects.get(id=id)
-  form = ContactForm(instance=assignContact)
-  
-  if request.method == "POST":
-    form = ContactForm(request.POST, instance=assignContact)
-    
-    if form.is_valid():
-      assignContact.assigned = True
-      assignContact.save()
-      form.save()
-      
-      return redirect('contacts')
-  context = {
-    'assignDoctorContact':assignContact,
-    'form':form
-  }
-  
-  
-  return render(request, 'adminTemp/contactForm.html', context)
 
 # Admin - Doctor
 
@@ -601,7 +605,7 @@ def registerStaff(request):
       username = form.cleaned_data.get('username')
       group = Group.objects.get(name = 'staff')
       user.groups.add(group)
-      Account.objects.create(user=user)
+      Account.objects.create(user=user, department_id=5)
       messages.success(request, 'The Staff Account is Successfuly Created for ' + username)
       form = CreateUserForm()
 
@@ -609,6 +613,9 @@ def registerStaff(request):
     'form':form
   }
   return render(request, 'adminTemp/registerStaff.html', context)
+
+
+
 
 # Admin - Patient
 
@@ -783,7 +790,7 @@ def load_treatment_fee(request):
     
 
 
-
+# Admin - Payment Edit
 @login_required(login_url='login')
 @admin_only
 def paymentEdit(request, id):
@@ -1006,28 +1013,6 @@ def account(request):
   return render(request, 'adminTemp/account.html',context)
 
 
-# Admin - Account Create
-@login_required(login_url='login')
-@admin_only
-def accountCreate(request):
-  form = CreateUserForm()
-  if request.method == 'POST':
-    form = CreateUserForm(request.POST)
-    if form.is_valid():
-      user = form.save()
-      username = form.cleaned_data.get('username')
-      group = Group.objects.get(name = 'admin')
-      user.groups.add(group)
-      messages.success(request, 'The DoctorAccount is Successfuly Created for ' + username)
-      form = CreateUserForm()
-  
-
-  context = {
-    'form':form
-  }
-  return render(request, 'adminTemp/accountForm.html',context)
-
-
 # Admin - Account Edit
 @login_required(login_url='login')
 @admin_only
@@ -1146,7 +1131,6 @@ class ManageAppointmentStaffTemplateView(ListView):
     
     
     
-    
     def post(self, request):
       if 'accept' in self.request.POST:
         appointment_id = request.POST.get("appointment-id")
@@ -1167,11 +1151,11 @@ class ManageAppointmentStaffTemplateView(ListView):
         email = EmailMessage(
             "About your appointment",
             message,
-            'geraldlayderos202@gmail.com',
+            'gonzalezdental3@gmail.com',
             [appointment.your_email],
         )
         email.content_subtype = "html"
-        #email.send()
+        email.send()
         
         messages.add_message(request, messages.SUCCESS, f"You accepted the appointment of {appointment.first_name} {appointment.last_name}")
         return HttpResponseRedirect(request.path)
@@ -1198,11 +1182,11 @@ class ManageAppointmentStaffTemplateView(ListView):
         email = EmailMessage(
             "About your appointment",
             message,
-            'geraldlayderos202@gmail.com',
+            'gonzalezdental3@gmail.com',
             [appointment.your_email],
         )
         email.content_subtype = "html"
-        #email.send()
+        email.send()
 
         messages.add_message(request, messages.SUCCESS, f"You accepted the appointment of {appointment.first_name} {appointment.last_name}")
         return HttpResponseRedirect(request.path)
@@ -1213,6 +1197,13 @@ class ManageAppointmentStaffTemplateView(ListView):
     def get_context_data(self,*args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         appointments = BookAppointment.objects.all()
+        context['day1'] = Account.objects.filter(schedule_day=1).exclude(department=5)
+        context['day2'] = Account.objects.filter(schedule_day=2).exclude(department=5)
+        context['day3'] = Account.objects.filter(schedule_day=3).exclude(department=5)
+        context['day4'] = Account.objects.filter(schedule_day=4).exclude(department=5)
+        context['day5'] = Account.objects.filter(schedule_day=5).exclude(department=5)
+        context['day6'] = Account.objects.filter(schedule_day=6).exclude(department=5)
+        context['day7'] = Account.objects.filter(schedule_day=7).exclude(department=5)
         context.update({   
           
         })
@@ -1229,7 +1220,7 @@ def assignDoctorStaffAppointment(request, id):
   
   if request.method == 'POST':
     form = BookAppointmentForm(request.POST, instance=assignDoctor)
-    assignDoctor.is_deleted = True
+    assignDoctor.done = False
     if form.is_valid():
       form.save()
       return redirect('manage')
@@ -1240,6 +1231,58 @@ def assignDoctorStaffAppointment(request, id):
   
   
   return render(request, 'staffTemp/bookAppointmentDoctor.html', context)
+
+
+# Staff - Book Appointment Table
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['staff'])
+def BookAppointmentTableStaff(request):
+  context = {}
+  
+  filter_appointment = BookAppointmentFilter(request.GET, queryset= BookAppointment.objects.all())
+  context['filter_appointment'] = filter_appointment
+  
+  paginated_appointment = Paginator(filter_appointment.qs ,10)
+  page_number = request.GET.get('page')
+  appointment_page = paginated_appointment.get_page(page_number)
+  
+  context['appointment_page'] = appointment_page
+  
+  
+  return render(request, 'staffTemp/bookAppointmentTable.html', context=context)
+
+# Staff - Create Appointment
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['staff'])
+def appointmentCreateStaff(request):
+  form = CreateBookAppointmentForm()
+  if request.method == 'POST':
+    form = CreateBookAppointmentForm(request.POST)
+    
+    if form.is_valid():
+      obj = form.save(commit=False)
+      obj.accepted = True
+      obj.accepted_date = datetime.datetime.now()
+      obj.save()
+      return redirect('BookAppointmentTableStaff')
+
+  context = {
+    'form':form
+  }
+  return render(request, 'staffTemp/appointmentForm.html',context)
+
+# Admin - Book Appointment Information
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['staff'])
+def BookAppointmentInfoStaff(request, id):
+  BookAppointmentInfoStaff = BookAppointment.objects.get(id=id)
+  
+  context={
+    'BookAppointmentInfo':BookAppointmentInfoStaff
+  }
+  
+  
+  return render(request, 'staffTemp/bookAppointmentInfo.html', context)
 
 
 # Staff - virtual Consultation
@@ -1444,7 +1487,7 @@ def paymentCreateStaff(request):
     form = PaymentForm(request.POST)
     if form.is_valid():
       form.save()
-      return redirect('payment')
+      return redirect('paymentStaff')
 
   context = {
     'form':form
@@ -1465,7 +1508,7 @@ def paymentEditStaff(request, id):
     form = PaymentForm(request.POST, instance=paymentEdit)
     if form.is_valid():
       form.save()
-      return redirect('payment')
+      return redirect('paymentStaff')
 
   context = {
     'paymentEdit':paymentEdit,
@@ -1673,7 +1716,7 @@ def reorder_levelStaff(request, pk):
 def dashboardDoctor(request):
   
   vr = VirtualConsult.objects.filter(accepted=False, assign_doctor= request.user.account)
-  ba = BookAppointment.objects.filter( is_deleted=False, assign_doctor= request.user.account)
+  ba = BookAppointment.objects.filter( done=False, assign_doctor= request.user.account)
   payment = Payment.objects.filter(status = 'unpaid' )
   
   context = {
@@ -1719,6 +1762,23 @@ def profileDoctorEdit(request):
 
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['staff']) 
+def inventoryStaff(request):
+  
+  context = {}
+  
+  filter_inventory = InventoryFilter(request.GET, queryset= Inventory.objects.all())
+  context['filter_inventory'] = filter_inventory
+  
+  paginated_inventory = Paginator(filter_inventory.qs ,10)
+  page_number = request.GET.get('page')
+  inventory_page = paginated_inventory.get_page(page_number)
+  
+  context['inventory_page'] = inventory_page
+
+  return render(request, 'staffTemp/inventory.html', context=context)
+
 
 
 # Doctor - Appointment
@@ -1728,19 +1788,26 @@ def profileDoctorEdit(request):
 @allowed_users(allowed_roles=['doctor'])
 def appointmentDoctor(request):
   users = request.user.account
-  user = BookAppointment.objects.filter( assign_doctor=users, is_deleted=False ).order_by('-accepted_date')
-  context = {
-    'user':user
-  }
-  return render(request, 'doctorTemp/appointment.html', context)
+  context = {}
+  
+  filter_appointment = BookAppointmentFilter(request.GET, queryset= BookAppointment.objects.filter( assign_doctor=users, done=False ).order_by('approved_date'))
+  context['filter_appointment'] = filter_appointment
+  
+  paginated_inventory = Paginator(filter_appointment.qs ,10)
+  page_number = request.GET.get('page')
+  appointment_page = paginated_inventory.get_page(page_number)
+  
+  context['appointment_page'] = appointment_page
 
+  return render(request, 'doctorTemp/appointment.html', context=context)
 
+# Doctor - Appointment Delete
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['doctor'])
 def appointmentDeleteDoctor(request, id):
   appointmentDeleteDoctor = BookAppointment.objects.get(id=id)
   if request.method == "POST":
-    appointmentDeleteDoctor.is_deleted = True
+    appointmentDeleteDoctor.done = True
     appointmentDeleteDoctor.save()
     return redirect('appointmentDoctor')
   context = {
@@ -1749,10 +1816,22 @@ def appointmentDeleteDoctor(request, id):
   return render(request, 'doctorTemp/appointmentDelete.html', context)
 
 
+# Doctor - Appointment Information
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['doctor'])
+def BookAppointmentInfoDoctor(request, id):
+  BookAppointmentInfo = BookAppointment.objects.get(id=id)
+  
+  context={
+    'BookAppointmentInfo':BookAppointmentInfo
+  }
+  
+  
+  return render(request, 'doctorTemp/bookAppointmentInfo.html', context)
 
 
 
-# Doctor - Book Appointment
+# Doctor - Virtual Consultation
 @method_decorator(login_required, name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['doctor']), name='dispatch') 
 class virtualConsultListView(ListView):
@@ -1765,7 +1844,11 @@ class virtualConsultListView(ListView):
 
     def get_queryset(self):
         user = self.request.user.account
-        return VirtualConsult.objects.filter(assign_doctor=user)
+        queryset = VirtualConsult.objects.filter(assign_doctor=user, accepted=False)
+        return queryset
+      
+      
+    
       
     def post(self, request):
         message = request.POST.get("my_message")
@@ -1780,31 +1863,32 @@ class virtualConsultListView(ListView):
         
         data = {
             "fname":virtualconsult.first_name,
+            "question":virtualconsult.message,
+            "doctor":virtualconsult.assign_doctor,
             "message":message,
         }
 
-        message = get_template('doctorTemp/emailvirtualconsult.html').render(data)
+        message = get_template('adminTemp/emailvirtualconsult.html').render(data)
         email = EmailMessage(
             "About your appointment",
             message,
-            'geraldlayderos202@gmail.com',
+            'gonzalezdental3@gmail.com',
             [virtualconsult.email],
         )
         email.content_subtype = "html"
-        #email.send()
+        email.send()
 
 
         messages.add_message(request, messages.SUCCESS, f"You accepted the virtual consult of {virtualconsult.first_name} {virtualconsult.last_name}")
         return HttpResponseRedirect(request.path)
       
-
-    def get_context_data(self,*args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        virtualconsults = VirtualConsult.objects.all()
-        context.update({   
-          
-        })
+    def get_context_data(self, **kwargs):
+        context = super(virtualConsultListView, self).get_context_data(**kwargs)
+        
+        context['virtualconsults'] = self.get_queryset()
+        
         return context
+      
       
       
 # Doctor - Virtual Consultation Assigned

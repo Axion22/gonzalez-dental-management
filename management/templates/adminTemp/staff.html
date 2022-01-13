@@ -2,6 +2,7 @@
 {% block activeDashboard %}{% endblock %}
 {% block activeStaff %}active open{% endblock %}
 {% block activeStaffList %}active open{% endblock %}
+{% block title %} Admin - Staff | Gonzalez Dental Clinic {% endblock %}
 
 
 
@@ -14,10 +15,10 @@
                     <div class="page-bar">
                         <div class="page-title-breadcrumb">
                             <div class=" pull-left">
-                                <div class="page-title">Staff Tables</div>
+                                <div class="page-title">Staff</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardAdmin' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
                                 <li class="active">Staffs</li>
                             </ol>
@@ -28,7 +29,7 @@
                         <div class="col-md-12">
                             <div class="card  card-box">
                                 <div class="card-head">
-                                    <header>Manage Staff's Account</header>
+                                    <header>Staff's Account</header>
                                 </div>
 
                                 <div class="card-body ">

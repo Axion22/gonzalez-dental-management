@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Book now - Gonzalez Dental Clinic {% endblock %}
+{% block meta_discription %} Booking page of Gonzalez Dental Clinic {% endblock %}
+{% block content %}
+
+  <!-- ***** Breadcrumb Area Start ***** -->
+  <div id="pricing1" class="breadcumb-area bg-gradient-overlay">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-12">
+          <h2  class="title">Make An Appointment </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div  class="breadcumb--con">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Booking</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Breadcrumb Area End ***** -->
+
+
+
+  <!-- Book An Oppointment Area Start -->
+  <section   class="book-an-oppointment-area section-padding-100 bg-gradient-overlay">
+    <div class="container">
+
+
+      <div class="row">
+        <div class="col-12">
+          <!-- Appointment Form -->
+          <div class="appointment-form" >
+            <form action="{% url 'appointment' %}" method="post">
+            {% csrf_token %}
+              <div class="row ">
+                <div class="col-md-6">
+                  <div class="form-group mb-25">
+                    <input type="text" name="first-name" class="form-control" placeholder="First Name" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-25">
+                    <input type="text" name="last-name" class="form-control" placeholder="Last Name" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-25">
+                    <input type="tel" name="your-phone" class="form-control" placeholder="Your Phone" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-25">
+                    <input type="email" name="your-email" class="form-control" placeholder="Your Email" required>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group mb-25">
+                    <input placeholder="Preferred Appointment Date" class="form-control" type="text" name="your-date" onfocus="(this.type = 'date')"  id="date"  required>
+                  </div>
+                </div>
+               
+                <div class="col-md-6">
+                  <div class="form-group mb-25">
+                    <select placeholder="Preferred Appointment Time" name="your-schedule" class="form-control" required>
+                      <option value="">Preferred Appointment Date</option>
+                      <option value="9 AM">09:00 am</option> 
+                      <option value="10 AM ">10:00 am</option>
+                      <option value="11 AM ">11:00 am</option>
+                      <option value="1 PM ">01:00 pm</option>
+                      <option value="2 PM ">02:00 pm</option>
+                      <option value="3 PM ">03:00 pm</option>
+                      <option value="4 PM ">04:00 pm</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group mb-25">
+                    <input type="text" name="service-required" class="form-control" placeholder="Service Required - Please type &quot;NOT SURE&quot;   if you dont know" required> 
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group mb-25">
+                    <textarea name="your-message" class="form-control" placeholder="Your Message" required></textarea>
+                  </div>
+                </div>
+
+
+                <div class="container ">
+                  <div class="row ">
+
+                    <div class="col-12 align-self-center">
+                      <div class="card">
+                        <div class="card-body">
+                          <center><h6>Health Declaration</h6></center>
+                          <hr>
+                          <center><h6>Do you have a fever or above normal temperature? *</h6></center>
+
+                          <center><h6>Have you experienced shortness of breathe or had trouble breathing? *</h6></center>
+
+                          <center><h6>Do you have a dry cough? *</h6></center>
+
+                          <center><h6>Do you have runny nose? *</h6></center>
+                          
+                          <center><h6>Have you recently lost or had a reduction in your sense of smell? *</h6></center>
+
+                          <center><h6>Do you have sore throat? *</h6></center>
+
+                          <center><h6>Do you have diarrhea? *</h6></center>
+
+                          <center><h6>Have you been in contact with someone who has tested positive for COVID-19? *</h6></center>
+
+                          <center><h6>Have you been tested for COVID-19? *</h6></center>
+
+                          <center><h6>Have you been tested for COVID-19 and are awaiting results? *</h6></center>
+
+                          <center><h6>Have you traveled outside the Philippines by air or cruise ship in the past 14 days? *</h6></center>
+
+                          <center><h6>Have you traveled within the Philippines by air, bus, or train within the past 14 days? *</h6></center>
+
+                          <center><h6>Do you have diabetes? *</h6></center>
+
+                          <center><h6>If so, do you have to take insulin injections? *</h6></center>
+                          
+                          <center><h6>Do you have asthma or COPD? *</h6></center>
+
+                          
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+
+                <div class="col-12">
+                  <div class="more-btn text-center mb-100">
+                    <button type="submit" class="btn dento-btn">Booking Now</button>
+                  </div>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Book An Oppointment Area End -->
+
+
+
+
+{% endblock %}

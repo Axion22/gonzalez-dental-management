@@ -23,7 +23,7 @@
               {% if treatment %}
               <button class="btn btn-success" hx-post="{% url 'treatmentUpdateForm' treatment.id %}">Submit</button>
               {% else %}
-              <button hx-post=".">Submit</button>
+              <button class=" btn " style="color:green;"hx-post=".">Submit</button>
               {% endif %}
           </div><div class="col-md-2"></div>
           

@@ -39,15 +39,15 @@ class Account(models.Model):
   department = models.ForeignKey(Department, blank = True, null=True, on_delete = models.SET_NULL)
   treatment = models.ForeignKey(Treatment, blank = True, null=True, on_delete = models.SET_NULL)
   Time = (
-  ('9 AM','9 am'),
-  ('10 AM','10 am'),
-  ('11 AM','11 am'),
-  ('12 PM','12 pm'),
-  ('1 PM','1 pm'),
-  ('2 PM','2 pm'),
-  ('3 PM','3 pm'),
-  ('4 PM','4 pm'),
-  ('5 PM','5 pm'),
+  ('9 am','9 am'),
+  ('10 am','10 am'),
+  ('11 am','11 am'),
+  ('12 pm','12 pm'),
+  ('1 pm','1 pm'),
+  ('2 pm','2 pm'),
+  ('3 pm','3 pm'),
+  ('4 pm','4 pm'),
+  ('5 pm','5 pm'),
 
   )
   schedule_time_In = models.CharField(max_length=50, choices=Time, null = True)

@@ -1,7 +1,8 @@
 {% extends 'doctorTemp/base.html' %}
 {% block activeDashboard %}{% endblock %}
 {% block activeAppointment %}active open{% endblock %}
-{% block activeBookAppointment %}active open{% endblock %}
+{% block activeBookAppointment %}active{% endblock %}
+{% block title %} Doctor - Appointment Table | Gonzalez Dental Clinic {% endblock %}
 {% load static %}
 
 
@@ -15,7 +16,7 @@
                                 <div class="page-title">Appointment List</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardDoctor' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
                                 <li class="active">Appointment</li>
                             </ol>
@@ -33,52 +34,58 @@
                     </div>
 
                     <div class="card-body ">
-                        <div class="row">
+                        <div class="row  justify-content-between">
+                            <div class="col-md-2 col-sm-5 col-xs-6" style="margin-bottom:10px;">
+                            </div>
+
+                            <div class="col-md-6 col-sm-6 col-xs-4" style="margin-bottom:10px;">
+                                <form action="" method="GET">
+                                    <div class="input-group">
+                                            {{filter_appointment.form.name}}
+                                            {{filter_appointment.form.approved_date}}
+                                            <div class="input-group-prepend">
+                                                <button type="submit" class="btn btn-secondary btn-sm"  value="search">
+                                                <i class="fa fa-search"></i>
+                                            </div>
+                                          </div>
+                                    </form>
+                                </div>
+                            </div></br>
                             <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover  order-column full-width" id="example4">
                                     <thead style="background-color:#36DB51;">
                                         <tr>
                                             <th> Patient Name</th>
-                                            <th> Assigned Doctor </th>
                                             <th> Schedule </th>
                                             <th> Service Required </th>
-                                            <th> Email </th>
-                                            <th> Contact No. </th>
-                                            <th> Accepted Date </th>
-                                            <th> Option </th>
+                                            <th> Action </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for appointments in user %}
+                                        {% for appointments in appointment_page %}
                                         <tr class="odd gradeX">
                                             <td>
                                                 {{appointments.first_name}} {{appointments.last_name}} 
                                             </td>
                                             <td>
-                                                {{appointments.assign_doctor}} 
-                                            </td>
-                                            <td>
-                                                {{appointments.approved_date}}, {{appointments.approved_time}}   
+                                                {{appointments.approved_time}} | {{appointments.approved_date}}    
                                             </td>
                                             <td>
                                                 {{appointments.service_required}}   
                                             </td>
                                             <td>
-                                                {{appointments.your_email}}   
-                                            </td>
-                                            <td>
-                                                {{appointments.your_phone}}   
-                                            </td>
-                                            <td>
-                                                {{appointments.accepted_date}}   
-                                            </td>
-                                            <td>
-                                                <a href="{% url 'appointmentDeleteDoctor' appointments.id %}"class="btn btn-xs dropdown-toggle no-margin" style="color:red;">Delete<i style="color:red;" class="fa fa-trash"></i></a>   
+                                               <center> <a href="{% url 'appointmentDeleteDoctor' appointments.id %}"class="btn btn-xs dropdown-toggle no-margin" style="color:green;">Done<i style="color:green;" class="fa fa-check"></i></a>  
+
+                                                <a href="{% url 'BookAppointmentInfoDoctor' appointments.id %}"class="btn btn-xs dropdown-toggle no-margin" style="color:#337ab7;">View<i style="color:#337ab7;" class="fa fa-eye"></i></a>  </center>
                                             </td>
                                         </tr>
                                         {% empty %}
                                      
-                                            <center style="font-size:20px;">There are no items in this Table</center><br>
+                                            <tr>
+                                                <td colspan="8">
+                                                <center style="font-size:20px;">There are no appointment right now.</center><br>
+                                                </td>
+                                            </tr>
        
                                         {% endfor %}
                                     </tbody>

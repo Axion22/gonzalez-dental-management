@@ -2,6 +2,8 @@
 {% block activeDashboard %}{% endblock %}
 {% block activePatient %}active open{% endblock %}
 {% block activePatientList %}active open{% endblock %}
+{% block title %} Admin - Patient Information | Gonzalez Dental Clinic {% endblock %}
+
 {% load static %}
 
 
@@ -25,15 +27,14 @@
                 <ol class="breadcrumb page-breadcrumb pull-right">
 
                     <li>
-                    <i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">
+                    <i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardAdmin' %}">
                     Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                     </li>
 
-                    <li><a class="parent-item" href="#">
-                    Forms</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    <li><a class="parent-item" href="{% url 'patient' %}">
+                    Patient</a>
                     </li>
 
-                    <li class="active">Form Layouts</li>
 
                 </ol>
             </div>
@@ -44,7 +45,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="card card-box">
                     <div class="card-head">
-                        <header>Form Controls</header>
+                        <header>Patient Information</header>
                     </div>
                     
                     <div class="form-body">

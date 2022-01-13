@@ -2,6 +2,7 @@
 {% block activeDashboard %}{% endblock %}
 {% block activeAppointment %}active open{% endblock %}
 {% block activeVirtualConsultation %}active open{% endblock %}
+{% block title %} Staff - Virtual Consultation | Gonzalez Dental Clinic {% endblock %}
 {% load static %}
 
 
@@ -19,8 +20,6 @@
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
                                 <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardStaff' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
-                                </li>
-                                <li><a class="parent-item" href="#">Appointment</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
                                 <li class="active">Virtual Consultation</li>
                             </ol>
@@ -128,11 +127,11 @@
                                 </div>
                             </div>
                             {% empty %}
-                            <div class="col-11 text-center mt-4 mb-4">
-                                <div style="text-align: center;">
-                                    <p style="font-size:20px;">There are no items in this Table</p>
-                                </div>
-                            </div><br>
+                                    
+                           
+                           <div class="col-11 text-center mt-4 mb-4">
+                            <p style="font-size:20px;align-items: center;">There are no virtual consultation right now</p>
+                        </div>
                         {% endfor %}
                 
                     

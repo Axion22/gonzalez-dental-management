@@ -1,7 +1,7 @@
 {% extends 'adminTemp/base.html' %}
 {% block activeDashboard %}{% endblock %}
 {% block activeDepartment %}active open{% endblock %}
-
+{% block title %} Admin - Department | Gonzalez Dental Clinic {% endblock %}
 
 {% block content %}
 
@@ -15,7 +15,7 @@
                                 <div class="page-title">Department</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardAdmin' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
                                 <li class="active">Department</li>
                             </ol>
@@ -65,7 +65,7 @@
                                             <th> ID </th>
                                             <th> Department </th>
                                             <th> Description </th>
-                                            <th> Edit </th>
+                                            <th> Actions </th>
                                         </tr>
                                     </thead>
                                     <tbody >
@@ -82,7 +82,7 @@
                                             </td>
                                             <td class="valigntop">
                                                 <div class="btn-group">
-                                                    <a href="{% url 'treatmentCreate' department.id %}" class="btn btn-xs btn-success dropdown-toggle no-margin" type="button" > Edit
+                                                    <a href="{% url 'treatmentCreate' department.id %}" class="btn btn-xs btn-success dropdown-toggle no-margin" type="button" > Update
                                                         <i style="color:white;" class="fa fa-wrench"></i>
                                                     </a>
                                                 </div>

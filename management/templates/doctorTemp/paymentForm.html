@@ -2,6 +2,7 @@
 {% block activeDashboard %}{% endblock %}
 {% block activePayment %}active open{% endblock %}
 {% block activePaymentForm%}active open{% endblock %}
+{% block title %} Doctor - Payment Form | Gonzalez Dental Clinic {% endblock %}
 {% load static %}
 
 
@@ -25,7 +26,7 @@
                                 <div class="page-title">Payment Form</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardDoctor' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
                                 <li class="active">Payment</li>
                             </ol>
@@ -48,7 +49,8 @@
 
 
                             <div class="card-body" id="bar-parent">
-                                <form action="" method="POST" id="payment"  data-branches-url="{% url 'ajax_load_treatment' %}"  novalidate>
+                                <form action="" method="POST" id="payment"  data-treatment-url="{% url 'ajax_treatment_fee' %}"
+                                data-branches-url="{% url 'ajax_load_treatment' %}"  novalidate>
                                 <div class="form-horizontal">
                                 {% csrf_token %}
                                     <div class="form-body">
@@ -205,6 +207,16 @@
             });
         });
     </script>
+    <script>
+        $(document.body).ready(function(){
+        $('#id_method').change(function() {
+                var selected = $(this).val();
+                if(selected == 'cash') {
+                $('#id_status').val('paid');
+                }
+            });
+        });
+    </script>
 
     <script>
         $(document.body).ready(function(){
@@ -229,6 +241,23 @@
             },
             success: function (data) {  
               $("#id_treatment").html(data);  
+            }
+          });
+    
+        });
+      </script>
+      <script>
+        $("#id_treatment").change(function () {
+          var url = $("#payment").attr("data-treatment-url");  
+          var treatmentId = $(this).val();  
+    
+          $.ajax({                      
+            url: url,                    
+            data: {
+              'treatment': treatmentId       
+            },
+            success: function (data) {  
+              $("#id_fee").val(data);
             }
           });
     

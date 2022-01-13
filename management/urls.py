@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import ManageAppointmentTemplateView, virtualConsultationTemplateView, virtualConsultListView, ManageAppointmentStaffTemplateView, ContactTemplateView, virtualConsultationStaff, paymentEditView
+from .views import ManageAppointmentTemplateView, virtualConsultationTemplateView, virtualConsultListView, ManageAppointmentStaffTemplateView, virtualConsultationStaff, paymentEditView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -28,12 +28,13 @@ urlpatterns = [
     path("manage-appointments/", ManageAppointmentTemplateView.as_view(), name="manage"),
     path('manage-appointments-assign/<int:id>/', views.assignDoctorAppointment, name='appointDoctor'),
     path('manage-appointments-table/', views.BookAppointmentTable, name='BookAppointmentTable'),
+    path('manage-appointments-information/<int:id>', views.BookAppointmentInfo, name='BookAppointmentInfo'),
+    path('manage-appointments-create/', views.appointmentCreate, name='BookAppointmentCreate'),
     
     path('virtual-consultation/', virtualConsultationTemplateView.as_view(), name='virtualConsultations'),
     path('virtual-consultation-assign/<int:id>/', views.assignDoctorVirtualConsult, name='assignDoctorVC'),
-    
-    path('contacts/', ContactTemplateView.as_view(), name='contacts'),
-    path('contactsform/<int:id>', views.contactForm, name='contactForm'),
+
+
     
 
     path('doctor/', views.doctor, name='doctor'),
@@ -69,7 +70,6 @@ urlpatterns = [
     
 
     path('account/', views.account, name='account'),
-    path('account-create/', views.accountCreate, name='accountCreate'),
     path('account-edit/<int:id>/', views.accountEdit, name='accountEdit'),
 
 
@@ -81,6 +81,7 @@ urlpatterns = [
 
     path('appointment-doctor/', views.appointmentDoctor, name='appointmentDoctor'),
     path('appointment-delete-doctor/<int:id>/', views.appointmentDeleteDoctor, name='appointmentDeleteDoctor'),
+    path('appointment-information-doctor/<int:id>/', views.BookAppointmentInfoDoctor, name='BookAppointmentInfoDoctor'),
     path('virtual-consultation-assigns/', virtualConsultListView.as_view(), name='virtualConsultationAssign'),
     
 
@@ -107,8 +108,12 @@ urlpatterns = [
     
     
     
-    path('manage-appointments-staff/', ManageAppointmentStaffTemplateView.as_view(), name='appointmentStaff'),
-    path('manage-appointments-assign-staff/<int:id>/', views.assignDoctorStaffAppointment, name='appointDoctorStaff'),
+    path('appointments-staff/', ManageAppointmentStaffTemplateView.as_view(), name='appointmentStaff'),
+    path('appointments-assign-staff/<int:id>/', views.assignDoctorStaffAppointment, name='appointDoctorStaff'),
+    path('appointments-table-staff/', views.BookAppointmentTableStaff, name='BookAppointmentTableStaff'),
+    path('appointments-information-staff/<int:id>/', views.BookAppointmentInfoStaff, name='BookAppointmentInfoStaff'),
+    path('manage-appointments-create-staff/', views.appointmentCreateStaff, name='BookAppointmentCreateStaff'),
+
     
     path("virtual-consultation-staff/", virtualConsultationStaff.as_view(), name="virtualConsultationsStaff"),
     path('virtual-consultation-assign-staff/<int:id>/', views.assignStaffVirtualConsult, name='assignStaffVC'),

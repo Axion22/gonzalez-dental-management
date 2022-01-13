@@ -2,6 +2,7 @@
 {% block activeDashboard %}{% endblock %}
 {% block activePatient %}active open{% endblock %}
 {% block activePatientList %}active open{% endblock %}
+{% block title %} Doctor - Patient | Gonzalez Dental Clinic {% endblock %}
 {% load static %}
 
 
@@ -16,7 +17,7 @@
                     <div class="page-title">Patient List</div>
                 </div>
                 <ol class="breadcrumb page-breadcrumb pull-right">
-                    <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardDoctor' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                     </li>
                     <li class="active">Patients</li>
                 </ol>
@@ -73,9 +74,9 @@
                                 
                                     <td>{{patient.id}}</td>
                                     <td>
-                                    <a style="color:#32CD32;"href="{% url 'patientInfoDoctor' patient.id %}">
-                                    {{patient.patient_firstName}} {{patient.patient_middleName}} {{patient.patient_lastName}} {{patient.patient_suffixName}}
-                                    </a>
+                                    
+                                        {{patient.patient_firstName}} {{patient.patient_middleName}} {{patient.patient_lastName}} {{patient.patient_suffixName}}
+                                    
                                     </td>
                                     <td>{{patient.patient_age}}</td>
                                     <td>{{patient.patient_sex}}</td>
@@ -83,8 +84,10 @@
                                     <td>{{patient.birth_date}}</td>
                                     <td class="valigntop">
                                         <div class="btn-group">
-                                            <a style="color:#32CD32;" href="{% url 'patientEditDoctor' patient.id %}" class="btn btn-xs btn-success dropdown-toggle no-margin" type="button">
-                                                Update<i style="color:white;" class="fa fa-wrench"></i>
+                                            <a href="{% url 'patientInfoDoctor' patient.id %}"class="btn btn-xs dropdown-toggle no-margin" style="color:#337ab7;">View<i style="color:#337ab7;" class="fa fa-eye"></i></a>
+                                                    
+                                            <a href="{% url 'patientEditDoctor' patient.id %}"class="btn btn-xs dropdown-toggle no-margin" style="color:#18ce0f;">Update<i style="color:#18ce0f;" class="fa fa-wrench"></i></a>
+
                                             </a>
                                         </div>
                                     </td>
@@ -92,7 +95,7 @@
                                 </tr>
                                 {% empty %}
                                  
-                                        <center style="font-size:20px;">There are no items in this Table</center><br>
+                                        <center style="font-size:20px;">There are no patient right now.</center><br>
                                 {% endfor %}
                             </tbody>
                         </table>

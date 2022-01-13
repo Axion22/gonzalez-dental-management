@@ -2,6 +2,7 @@
 {% block activeDashboard %}{% endblock %}
 {% block activeInventory %}active open{% endblock %}
 {% block activeInventoryList %}active open{% endblock %}
+{% block title %} Admin - Inventory | Gonzalez Dental Clinic {% endblock %}
 {% load static %}
 
 {% block extracss %}
@@ -21,10 +22,10 @@
         <div class="page-bar">
             <div class="page-title-breadcrumb">
                 <div class=" pull-left">
-                    <div class="page-title">Inventory Tables</div>
+                    <div class="page-title">Inventory</div>
                 </div>
                 <ol class="breadcrumb page-breadcrumb pull-right">
-                    <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardAdmin' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                     </li>
                     <li class="active">Inventory</li>
                 </ol>
@@ -35,7 +36,7 @@
             <div class="col-md-12">
                 <div class="card  card-box">
                     <div class="card-head">
-                        <header>Manage Inventory</header>
+                        <header>Inventory Table</header>
                     </div><br>
 
                     
@@ -77,7 +78,7 @@
                                                 <th> Price </th>
                                                 <th> Exp Date </th>
                                                 <th> Quantity </th>
-                                                <th> Edit </th>
+                                                <th> Action </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -87,9 +88,8 @@
                                                     {{inventory.id}}
                                                 </td>
                                                 <td>
-                                                    <a style="color:green;" href="{% url 'inventoryManage' inventory.id%}">
+                                                    
                                                         {{inventory.product_name}}
-                                                    </a>
                                                 </td>
                                                 <td>
                                                     {{inventory.company_name}}
@@ -112,9 +112,14 @@
                                                 </td>
                                                 <td class="valigntop">
                                                     <div class="btn-group">
-                                                        <a href="{% url 'inventoryEdit' inventory.id %}" class="btn btn-xs btn-success dropdown-toggle no-margin" type="button" > Update
-                                                            <i style="color:white;" class="fa fa-wrench"></i>
-                                                        </a>
+                                                        <center>
+
+                                                            <a href="{% url 'inventoryManage' inventory.id %}"class="btn btn-xs dropdown-toggle no-margin" style="color:#337ab7;">Manage<i style="color:#337ab7;" class="fa fa-tasks"></i></a>
+                                                            
+                                                            <a href="{% url 'inventoryEdit' inventory.id %}"class="btn btn-xs dropdown-toggle no-margin" style="color:#18ce0f;">Update<i style="color:#18ce0f;" class="fa fa-wrench"></i></a>
+                                                            
+
+                                                        </center>
                                                     </div>
                                                 </td>
                                             </tr>

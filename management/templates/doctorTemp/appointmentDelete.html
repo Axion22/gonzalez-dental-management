@@ -1,7 +1,8 @@
 {% extends 'doctorTemp/base.html' %}
 {% block activeDashboard %}{% endblock %}
 {% block activeAppointment %}active open{% endblock %}
-{% block activeBookAppointment %}active open{% endblock %}
+{% block activeBookAppointment %}active{% endblock %}
+{% block title %} Doctor - Delete Appointment | Gonzalez Dental Clinic {% endblock %}
 {% load static %}
 
 {% block content %}
@@ -16,7 +17,7 @@
                                 <div class="page-title">Payment Form</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardDoctor' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
                                 <li class="active">Payment</li>
                             </ol>
@@ -32,7 +33,7 @@
 
                                 <div class="card-body" id="bar-parent">
                                    
-                                    <h3> Do you want to Delete "{{appoint.first_name}} {{appoint.last_name}}'s Appointment"?</h3>
+                                    <label> Are you sure that <span style="color:green;">{{appoint.first_name}} {{appoint.last_name}} </span>appointment is done?</label>
                                     <form action="{% url 'appointmentDeleteDoctor' appoint.id %}" method="POST">
                                       <div class="form-horizontal">
                                       {% csrf_token %}

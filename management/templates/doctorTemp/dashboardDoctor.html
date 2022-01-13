@@ -14,13 +14,30 @@
                                 <div class="page-title">Dashboard</div>
                             	</div>
 															<ol class="breadcrumb page-breadcrumb pull-right">
-																	<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+																	<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardDoctor' %}">Home</a>&nbsp;</i>
 																	</li>
-																	<li class="active">Dashboard</li>
 															</ol>
                         		</div>
               		</div>
-<div class="row">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<div class="row">
+															<a style="font-family: Arial, Helvetica, sans-serif;color:green;" href="{% url 'profileDoctor' %}" ><h5 class="card-title">My Account |</h5>
+															</a>
+
+															<a style="font-family: Arial, Helvetica, sans-serif;color:green;" href="{% url 'patientDoctor' %}" ><h5 class="card-title"> Patient |</h5>
+															</a>
+
+															<a style="font-family: Arial, Helvetica, sans-serif;color:green;" href="{% url 'appointmentDoctor' %}" ><h5 class="card-title"> Book Appointment |</h5>
+															</a>
+
+															<a style="font-family: Arial, Helvetica, sans-serif;color:green;" href="{% url 'virtualConsultationAssign' %}" ><h5 class="card-title">Virtual Consultation |</h5>
+															</a>
+
+															<a style="font-family: Arial, Helvetica, sans-serif;color:green;" href="{% url 'paymentDoctor' %}" ><h5 class="card-title">Payments |</h5>
+															</a>
+										</div>
+									</div><br>
+												<div class="row">
 													<div class="col-sm-12">
 														<div class="card-box">
 															<div class="card-body ">
@@ -32,7 +49,8 @@
 													</div>
 												</div>
 
-												</br></br></br></br>
+												
+
 
 												<div class="container">
 													<div class="row">
@@ -45,7 +63,7 @@
 																	<div class="card-head">
 																		<center>
 																				<a href="{% url 'appointmentDoctor' %}"><p style="font-size:30px;,font-family: Arial, Helvetica, sans-serif;color:green;">Appointment</p>
-																				<p style="color:green;">Appointment that didn't assigned to the doctors</p></a>
+																				<p style="color:green;">Appointments you haven’t finished yet</p></a>
 																		</center>
 																	</div>
 
@@ -56,7 +74,7 @@
 																				<thead style="background-color:#c3e6cb;">
 																					<tr>
 																						<th> Patient Name </th>
-																						<th><center> Submission Date </center></th>
+																						<th><center> Appointment Schedule </center></th>
 																					</tr>
 																				</thead>
 
@@ -67,12 +85,12 @@
 																							{{ba.first_name}} {{ba.last_name}}
 																						</td>
 																						<td>	
-																							{{ba.date_created}}
+																							<span style="color:green;">{{ba.approved_time}}</span> | {{ba.approved_date}} 
 																						</td>
 																					</tr>
 
 																					{% empty %}
-																					<tr><td colspan="2"><center>There are no items in this Table</center><br>
+																					<tr><td colspan="2"><center>There are no appointment in this table</center><br>
 
 																					{% endfor %}
 																				</tbody>
@@ -92,7 +110,7 @@
 																	<div class="card-head">
 																		<center>
 																				<a href="{% url 'virtualConsultationAssign' %}"><p style="font-size:30px;,font-family: Arial, Helvetica, sans-serif;color:green;">Virtual Consultation</p>
-																				<p style="color:green;">Submission that didn't assigned to the doctors</p></a>
+																				<p style="color:green;">Submitted virtual consultations that you<br> have not yet done</p></a>
 																		</center>
 																	</div>
 
@@ -119,7 +137,7 @@
 																					</tr>
 
 																					{% empty %}
-																					<tr><td colspan="3"><center>There are no items in this Table</center><br>
+																					<tr><td colspan="3"><center>There are no virtual consultations  in this table</center><br>
 
 																					{% endfor %}
 																				</tbody>
@@ -146,7 +164,7 @@
 																	<div class="card-head">
 																		<center>
 																				<a href="{% url 'paymentDoctor' %}"><p style="font-size:35px;,font-family: Arial, Helvetica, sans-serif;color:green;">Payment</p>
-																				<p style="color:green;">patient's with unpaid payments</p></a>
+																				<p style="color:green;">Patient with balance payments</p></a>
 																		</center>
 																	</div>
 																	
@@ -177,7 +195,7 @@
 																					</tr>
 
 																					{% empty %}
-																					<tr><td colspan="3"><center>There are no items in this Table</center><br>
+																					<tr><td colspan="3"><center>There are no patient that have balance</center><br>
 
 																					{% endfor %}
 																				</tbody>

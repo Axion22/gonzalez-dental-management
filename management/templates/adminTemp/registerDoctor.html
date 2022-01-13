@@ -2,6 +2,7 @@
 {% block activeDashboard %}{% endblock %}
 {% block activeDoctor %}active open{% endblock %}
 {% block activeDoctorList %}active open{% endblock %}
+{% block title %} Admin - Register Doctor | Gonzalez Dental Clinic {% endblock %}
 {% load static %}
 
 
@@ -14,12 +15,12 @@
                 <div class="page-bar">
                         <div class="page-title-breadcrumb">
                             <div class=" pull-left">
-                                <div class="page-title">Add Doctor</div>
+                                <div class="page-title">Doctor</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardAdmin' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
-                                <li><a class="parent-item" href="#">Doctor</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><a class="parent-item" href="{% url 'doctor' %}">Doctor</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
                                 <li class="active"> Add Doctor</li>
                             </ol>

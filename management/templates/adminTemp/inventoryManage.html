@@ -2,6 +2,8 @@
 {% block activeDashboard %}{% endblock %}
 {% block activeInventory %}active open{% endblock %}
 {% block activeInventoryList %}active open{% endblock %}
+{% block title %} Admin - Manage Inventory | Gonzalez Dental Clinic {% endblock %}
+
 {% load static %}
 
 
@@ -22,14 +24,14 @@
                     <div class="page-bar">
                         <div class="page-title-breadcrumb">
                             <div class=" pull-left">
-                                <div class="page-title">Advance Tables</div>
+                                <div class="page-title">Inventory</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardAdmin' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
-                                <li><a class="parent-item" href="#">Data Tables</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><a class="parent-item" href="{% url 'inventory' %}">Inventory</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
-                                <li class="active">Advance Tables</li>
+                                <li class="active">Inventory Manage</li>
                             </ol>
                         </div>
                     </div>
@@ -56,26 +58,28 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th> Product Name </th>
-                                                <th> Company Name </th>
                                                 <th> Unit Price </th>
                                                 <th> Quantity </th>
                                                 <th> Reorder Level </th>
+                                                <th> Action </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="odd gradeX">
                                                 <td>{{inventoryManage.id}}</td>
                                                 <td>{{inventoryManage.product_name}}</td>
-                                                <td>{{inventoryManage.company_name}}</td>
                                                 <td>{{inventoryManage.unit_prize}}</td>
                                                 <td>{{inventoryManage.quantity}}</td>
-                                                <td>
-                                                    <a href="{% url 'reorder_level' inventoryManage.id %}">
-                                                    {{inventoryManage.reorder_level}}
-                                                    </a>
+                                                <td>    
+                                                    {{inventoryManage.reorder_level}}      
+                                                </td>
+                                                <td> 
+                                                    <center>
+                                                        <a href="{% url 'reorder_level' inventoryManage.id %}"class="btn btn-xs dropdown-toggle no-margin" style="color:#18ce0f;" title="Update Reorder Level">Update<i style="color:#18ce0f;" class="fa fa-edit"></i></a>
+                                                    </center>
                                                 </td>
 
-                                                </tr>  
+                                            </tr>  
                                                     
                                         </tbody>
                                     </table>  
@@ -120,10 +124,10 @@
                                             <td>{{history.product_name}}</td>
                                             <td>{{history.unit_prize}}</td>
                                             <td>{{history.reorder_level}}</td>
-                                            <td>{{history.receive_by}}</td>
+                                            <td>{{history.receive_by|default:" "}}</td>
                                             <td>{{history.receive_quantity}}</td>
-                                            <td>{{history.issue_by}}</td>
-                                            <td>{{history.issue_to}}</td>
+                                            <td>{{history.issue_by|default:" "}}</td>
+                                            <td>{{history.issue_to|default:" "}}</td>
                                             <td>{{history.issue_quantity}}</td>
                                             <td>{{history.history_date}}</td>
 

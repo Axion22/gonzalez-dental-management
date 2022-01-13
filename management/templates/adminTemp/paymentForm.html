@@ -2,6 +2,8 @@
 {% block activeDashboard %}{% endblock %}
 {% block activePayment %}active open{% endblock %}
 {% block activePaymentList %}active open{% endblock %}
+{% block title %} Admin - Payment Form | Gonzalez Dental Clinic {% endblock %}
+
 {% load static %}
 
 {% block extracss %}
@@ -23,14 +25,14 @@
                     <div class="page-bar">
                         <div class="page-title-breadcrumb">
                             <div class=" pull-left">
-                                <div class="page-title">Advance Tables</div>
+                                <div class="page-title">Payment </div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardAdmin' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
-                                <li><a class="parent-item" href="#">Data Tables</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><a class="parent-item" href="{% url 'payment' %}">Payment</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
-                                <li class="active">Advance Tables</li>
+                                <li class="active">Payment Form</li>
                             </ol>
                         </div>
                     </div>
@@ -39,7 +41,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="card card-box">
                                 <div class="card-head">
-                                    <header>Create Form Controls</header>
+                                    <header>Payment Form </header>
                                 </div>
                             </br>
                             
@@ -230,7 +232,6 @@
         });
     </script>
     <script>
-        window.addEventListener('load', function (){
         $(document.body).ready(function(){
         $('#id_status').change(function() {
                 var selected = $(this).val();
@@ -239,8 +240,8 @@
                 }
             });
         });
-    }
     </script>
+
     <script>
         $("#id_department").change(function () {
           var url = $("#payment").attr("data-branches-url");  

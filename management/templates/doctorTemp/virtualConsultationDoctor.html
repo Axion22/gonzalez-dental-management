@@ -1,7 +1,8 @@
 {% extends 'doctorTemp/base.html' %}
 {% block activeDashboard %}{% endblock %}
 {% block activeAppointment %}active open{% endblock %}
-{% block activeVirtualConsultation %}active open{% endblock %}
+{% block activeVirtualConsultation %}active{% endblock %}
+{% block title %} Doctor - Virtual Consultation | Gonzalez Dental Clinic {% endblock %}
 
 {% block extracss %}
 <style>
@@ -141,7 +142,14 @@
                                 </div>
                             </div>
                         
-                        {% endfor %}
+                            {% empty %}
+                                    
+                           
+                           <div class="col-11 text-center mt-4 mb-4">
+                            <p style="font-size:20px;align-items: center;">There are no virtual consultation right now</p>
+                        </div>
+
+                    {% endfor %}
                 
                     
                         <div class="container">

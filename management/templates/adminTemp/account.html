@@ -2,6 +2,7 @@
 {% block activeDashboard %}{% endblock %}
 {% block activeAccount %}active open{% endblock %}
 {% block activeAccountList %}active open{% endblock %}
+{% block title %} Admin - Account | Gonzalez Dental Clinic {% endblock %}
 {% load static %}
 
 {% block content %}
@@ -15,7 +16,7 @@
                                 <div class="page-title">Accounts Tables</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardAdmin' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
                                 <li class="active">Accounts</li>
                             </ol>
@@ -34,12 +35,6 @@
                                 <br>
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6 col-xs-6">
-                                            <div class="btn-group">
-                                                <a href="{% url 'accountCreate' %}" id="addRow1" class="btn btn-success">
-                                                    Add New Admin <i style="color:white;" class="fa fa-plus"></i>
-                                                </a>
-                                            </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-6">&nbsp;</div>
                                   </div>
 
 
@@ -51,7 +46,7 @@
                                                 <th> Username </th>
                                                 <th> Last Login </th>
                                                 <th> Role </th>
-                                                <th> Edit </th>
+                                                <th> Action </th>
                                             </tr>
                                         </thead>
                                         <tbody>

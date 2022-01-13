@@ -78,20 +78,65 @@ TreatmentFormSet = inlineformset_factory(
   
 )
 
- 
- 
 class BookAppointmentForm(forms.ModelForm):
+  assign_doctor = forms.ModelChoiceField(queryset=Account.objects.all(), empty_label='assign to doctor',widget=forms.Select(attrs = {'class':'form-control','type':'password' }))
+  
+  #to remove staff
+  def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['assign_doctor'].queryset = Account.objects.exclude(
+    department=5)
+  
   class Meta:
     model = BookAppointment
-    fields = '__all__'
-    exclude = ['first_name','last_name','your_phone','your_email','service_required','your_schedule','your_date','your_message','date_created','approved_date','approved_time','accepted','accepted_date',]
+    fields = ['assign_doctor']
+    exclude = ['first_name', 'last_name', 'your_phone', 'your_email', 'service_required', 'your_message', 'approved_date', 'approved_time','your_schedule','your_date','date_created','accepted', 'accepted_date','done']
+
+ 
+class CreateBookAppointmentForm(forms.ModelForm):
+  assign_doctor = forms.ModelChoiceField(queryset=Account.objects.all(), empty_label='assign to doctor',widget=forms.Select(attrs = {'class':'form-control','type':'password' }))
+  
+  #to remove staff
+  def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['assign_doctor'].queryset = Account.objects.exclude(
+    department=5)
+  
+  class Meta:
+    model = BookAppointment
+    fields = ['first_name', 'last_name', 'your_phone', 'your_email', 'service_required', 'your_message', 'approved_date', 'approved_time','assign_doctor']
+    exclude = ['your_schedule','your_date','date_created','accepted', 'accepted_date','done']
+    time = (('', 'time...'),('9:00 am','9:00 am'),('9:30 am','9:30 am'),('10:00 am','10:00 am'),
+          ('10:30 am','10:30 am'),('11:00 am','11:00 am'),('11:30 am','11:30 am'),('12:00 pm','12:00 pm'),('12:30 pm','12:30 pm'),('1:00 pm','1:00 pm'),
+          ('1:30 pm','1:30 pm'),('2:00 pm','2:00 pm'),('2:30 pm','2:30 pm'),
+          ('3:00 pm','3:00 pm'),('3:30 pm','3:30 pm'),('4:00 pm','4:00 pm'),
+          ('4:30 pm','4:30 pm'),)
     
     widgets = {
-      'assign_doctor' : forms.Select(attrs = {'class':'form-control' }),
+      'first_name': forms.TextInput(attrs = {'class':'form-control','placeholder':'first name...' }),
+      'last_name': forms.TextInput(attrs = {'class':'form-control','placeholder':'last name...' }),
+      'your_phone': forms.TextInput(attrs = {'class':'form-control','placeholder':'phone...' }),
+      'your_email': forms.TextInput(attrs = {'class':'form-control','placeholder':'email...' }),
+      'service_required': forms.TextInput(attrs = {'class':'form-control','placeholder':'service required...' }),
+      'approved_time': forms.Select(choices=time,attrs = {'class':'form-control','placeholder':'time...' }),
+      
+      'your_message': forms.Textarea( attrs = {'class':'form-control','placeholder':'Comment...' }),
+      'approved_date': forms.DateInput(
+        format=('%Y-%m-%d'),
+        attrs={'class': 'form-control', 
+               'placeholder': 'Select a date',
+               'type': 'date'
+              }),
     }    
 
 
 class VirtualConsultationForm(forms.ModelForm):
+  
+  #to remove staff
+  def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['assign_doctor'].queryset = Account.objects.exclude(
+    department=5)
   class Meta:
     model = VirtualConsult
     fields = '__all__'
@@ -216,7 +261,13 @@ class PatientForm(forms.ModelForm):
     }
 
 class PaymentForm(forms.ModelForm):
-    
+  
+  #to remove staff
+  def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['doctor_name'].queryset = Account.objects.exclude(
+    department=5)
+        
   class Meta:
     
     model = Payment
@@ -245,7 +296,11 @@ class PaymentForm(forms.ModelForm):
         super(PaymentForm, self).__init__(**kwargs)
         if user:
             self.fields['doctor_name'].queryset = Payment.objects.exclude(doctor_name=['doctor'])
-                    
+            
+    
+            
+
+                   
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

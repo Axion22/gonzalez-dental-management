@@ -11,7 +11,12 @@ class BookAppointmentForm(forms.ModelForm):
       'last_name': forms.TextInput(attrs = {'class':'form-control' }),
       'phone': forms.TextInput(attrs = {'class':'form-control' }),
       'email': forms.TextInput(attrs = {'class':'form-control' }),
-      'day': forms.TextInput(attrs = {'class':'form-control' }),
+      'day' : forms.DateInput(
+        format=('%Y-%m-%d'),
+        attrs={'class': 'form-control input-height-sm', 
+               'placeholder': 'Select a date',
+               'type': 'date'
+              }),
       'time': forms.TextInput(attrs = {'class':'form-control' }),
       'service': forms.TextInput(attrs = {'class':'form-control' }),
       'message': forms.Textarea(attrs = {'class':'form-control' }),

@@ -2,6 +2,7 @@
 {% block activeDashboard %}{% endblock %}
 {% block activePatient %}active open{% endblock %}
 {% block activePatientList %}active open{% endblock %}
+{% block title %} Doctor - Patient Form | Gonzalez Dental Clinic {% endblock %}
 {% load static %}
 
 
@@ -15,7 +16,7 @@
                                 <div class="page-title">Patient Form</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardDoctor' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
                                 <li class="active">Patient</li>
                             </ol>
@@ -27,7 +28,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="card card-box">
                     <div class="card-head">
-                        <header>Add Patient</header>
+                        <header>Patient Form</header>
                     </div>
                                 
                                 

@@ -14,12 +14,41 @@
                                 <div class="page-title">Dashboard</div>
                             	</div>
 															<ol class="breadcrumb page-breadcrumb pull-right">
-																	<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+																	<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;
 																	</li>
-																	<li class="active">Dashboard</li>
 															</ol>
                         		</div>
               		</div>
+
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<div class="row"> 
+											<a style="font-family: Arial, Helvetica, sans-serif;color:green;" href="{% url 'profileStaff' %}" ><h5 class="card-title">My Account |</h5>
+											</a>
+
+											<a style="font-family: Arial, Helvetica, sans-serif;color:green;" href="{% url 'appointmentStaff' %}" ><h5 class="card-title">Appointment |</h5>
+											</a>
+
+											<a style="font-family: Arial, Helvetica, sans-serif;color:green;" href="{% url 'BookAppointmentTableStaff' %}" ><h5 class="card-title">Appointment Table |</h5>
+											</a>
+
+											<a style="font-family: Arial, Helvetica, sans-serif;color:green;" href="{% url 'virtualConsultationsStaff' %}" ><h5 class="card-title">Virtual Consultations |</h5>
+											</a>
+
+											
+
+											<a style="font-family: Arial, Helvetica, sans-serif;color:green;" href="{% url 'doctorStaff' %}" ><h5 class="card-title">Doctor |</h5>
+											</a>
+
+											<a style="font-family: Arial, Helvetica, sans-serif;color:green;" href="{% url 'doctorStaff' %}" ><h5 class="card-title">Patient |</h5>
+											</a>
+
+											<a style="font-family: Arial, Helvetica, sans-serif;color:green;" href="{% url 'inventoryStaff' %}" ><h5 class="card-title">Inventory</h5>
+											</a>
+
+											
+
+										</div>
+									</div><br>
 												<div class="row">
 													<div class="col-sm-12">
 														<div class="card-box">
@@ -32,7 +61,7 @@
 													</div>
 												</div>
 
-
+												
 												<div class="container">
 													<div class="row">
 
@@ -102,8 +131,11 @@
 																									
 																							</tr>
 																							{% empty %}
-																					 
-																									<center style="font-size:20px;">There are no items in this Table</center><br>
+																							<tr>
+																								<td colspan="7">
+																									<center style="font-size:20px;">There are no scheduled doctor</center><br>
+																								</td>
+																							</tr>
 																							{% endfor %}
 																					</tbody>
 																	</table>
@@ -114,6 +146,8 @@
 													</div>
 												</div>
 
+
+												
 
 
 
@@ -155,7 +189,7 @@
 																					</tr>
 
 																					{% empty %}
-																					<tr><td colspan="2"><center>There are no items in this Table</center><br>
+																					<tr><td colspan="2"><center>There are no appointment in this table</center><br>
 
 																					{% endfor %}
 																				</tbody>
@@ -202,7 +236,7 @@
 																					</tr>
 
 																					{% empty %}
-																					<tr><td colspan="3"><center>There are no items in this Table</center><br>
+																					<tr><td colspan="3"><center>There are no virtual consultation in this table</center><br>
 
 																					{% endfor %}
 																				</tbody>
@@ -229,7 +263,7 @@
 																	<div class="card-head">
 																		<center>
 																				<a href="{% url 'paymentStaff' %}"><p style="font-size:35px;,font-family: Arial, Helvetica, sans-serif;color:green;">Payment</p>
-																				<p style="color:green;">patient's with unpaid payments</p></a>
+																				<p style="color:green;">patient's with balance payments</p></a>
 																		</center>
 																	</div>
 																	
@@ -260,7 +294,12 @@
 																					</tr>
 
 																					{% empty %}
-																					<center style="font-size:20px;">There are no items in this Table</center><br>
+																					<tr>
+																						<td colspan="3">
+																							<center style="font-size:15px;">There are no payment in this table</center><br>
+																						</td>
+																					</tr>
+																				
 
 																					{% endfor %}
 																				</tbody>
@@ -316,7 +355,11 @@
 																					</tr>
 																					
 																					{% empty %}
-																					<center style="font-size:20px;">There are no items in this Table</center><br>
+																					<tr>
+																						<td colspan="3">
+																							<center style="font-size:15px;">There are no item in this table</center><br>
+																						</td>
+																					</tr>
 																					{% endfor %}
 																				</tbody>
 																			</table>

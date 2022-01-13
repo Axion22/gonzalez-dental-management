@@ -1,0 +1,125 @@
+{% extends 'adminTemp/base.html' %}
+{% block activeDashboard %}{% endblock %}
+{% block activeAppointment %}active open{% endblock %}
+{% block activeAppointmentTable %}active{% endblock %}
+{% block title %} Admin - Create Appointment | Gonzalez Dental Clinic {% endblock %}
+{% load static %}
+
+
+
+
+{% block content %}
+
+
+<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Appointment</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardAdmin' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="{% url 'inventory' %}">Appointment</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active"> Appointment Form</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-box">
+                            <div class="card-head">
+                                    <header>Appointment Form</header>
+                            </div>
+                                
+                                <div class="card-body" id="bar-parent">
+                                    <form action="" method="POST">
+                                    <div class="form-horizontal">
+                                    {% csrf_token %}
+                                        <div class="form-body">
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">
+                                                </label>
+                                                <div class="col-md-6">
+                                                    {{form.assign_doctor}}  </div>
+                                              </div>
+
+
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">
+                                                    
+                                                </label>
+                                                <div class="col-md-3">
+                                                    {{form.first_name}}
+                                                </div>
+                                                <div class="col-md-3">
+                                                    {{form.last_name}} </div>
+                                            </div>
+
+
+
+                                            
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">
+                                                </label>
+                                                <div class="col-md-3">
+                                                    {{form.your_phone}} </div>
+                                              <div class="col-md-3">
+                                                  {{form.your_email}} </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                              <label class="control-label col-md-3">
+                                              </label>
+                                              <div class="col-md-3">
+
+                                                  {{form.approved_date}}
+                                                  
+                                              </div>
+                                            <div class="col-md-3">
+                                                {{form.approved_time}} </div>
+                                          </div>
+                                            <div class="form-group row">
+                                              <label class="control-label col-md-3">
+                                              </label>
+                                              <div class="col-md-6">
+                                                  {{form.service_required}} </div>
+                                            </div>
+                                            <div class="form-group row">
+                                              <label class="control-label col-md-3">
+                                              </label>
+                                              <div class="col-md-6">
+                                                  {{form.your_message}} </div>
+                                            </div>
+
+                                            
+                                            
+
+
+                                            
+                                            
+
+                                            
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="offset-md-3 col-md-9">
+                                                    <button type="submit" class="btn btn-info">Submit</button>
+                                                    <a href="{% url 'BookAppointmentTable' %}" type="button" class="btn btn-default">Cancel</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end page content -->
+
+
+{% endblock %}

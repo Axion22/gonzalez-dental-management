@@ -2,6 +2,7 @@
 {% block activeDashboard %}{% endblock %}
 {% block activeInventory %}active open{% endblock %}
 {% block activeInventoryList %}active open{% endblock %}
+{% block title %} Staff - Receive Inventory | Gonzalez Dental Clinic {% endblock %}
 {% load static %}
 
 
@@ -19,11 +20,9 @@
                                 <div class="page-title">Inventory</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardStaff' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
-                                <li><a class="parent-item" href="#">Inventory</a>&nbsp;<i class="fa fa-angle-right"></i>
-                                </li>
-                                <li class="active"> Add Inventory</li>
+                                <li class="active"> Receive Inventory</li>
                             </ol>
                         </div>
                     </div>

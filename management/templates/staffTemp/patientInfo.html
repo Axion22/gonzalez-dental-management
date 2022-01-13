@@ -2,6 +2,7 @@
 {% block activeDashboard %}{% endblock %}
 {% block activePatient %}active open{% endblock %}
 {% block activePatientList %}active open{% endblock %}
+{% block title %} Staff - Patient Information | Gonzalez Dental Clinic {% endblock %}
 {% load static %}
 
 
@@ -18,22 +19,18 @@
                     <ul class="page-title nav navbar-nav navbar-right ">
                         <li class="material-icons" style="font-size: 1.2em;">  info
                         </li>&nbsp;&nbsp;
-                     <span><b>Patient Information</b></span>
+                     <span><b>Patient </b></span>
                     </ul>
                 </div>
                 
                 <ol class="breadcrumb page-breadcrumb pull-right">
 
                     <li>
-                    <i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">
+                    <i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardStaff' %}">
                     Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                     </li>
 
-                    <li><a class="parent-item" href="#">
-                    Forms</a>&nbsp;<i class="fa fa-angle-right"></i>
-                    </li>
-
-                    <li class="active">Form Layouts</li>
+                    <li class="active">Patient Information</li>
 
                 </ol>
             </div>
@@ -44,7 +41,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="card card-box">
                     <div class="card-head">
-                        <header>Form Controls</header>
+                        <header>Patient Information</header>
                     </div>
                     
                     <div class="form-body">

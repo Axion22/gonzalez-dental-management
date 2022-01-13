@@ -10,15 +10,16 @@ class BookAppointment(models.Model):
   your_email = models.CharField(max_length=60, null = True)
   service_required = models.CharField(max_length=60, null = True)
   your_schedule = models.CharField(max_length=60, null = True)
-  your_date = models.CharField(max_length=60, null = True)
+  your_date = models.DateField( null = True)
   your_message = models.TextField( blank=True)
-  date_created = models.DateTimeField(auto_now_add = True)
-  approved_date = models.CharField(max_length=60, null = True)
+  approved_date = models.DateField(max_length=60, null = True)
   approved_time = models.CharField(max_length=60, null = True)
   assign_doctor = models.ForeignKey(Account, null=True, on_delete = models.SET_NULL)
   accepted = models.BooleanField(default=False)
   accepted_date = models.DateTimeField(auto_now_add = False , null = True)
-  is_deleted = models.BooleanField(default=False)
+  done = models.BooleanField(default=False)
+  
+  date_created = models.DateTimeField(auto_now_add = True)
   
   class Meta:
     ordering = ('-date_created',)

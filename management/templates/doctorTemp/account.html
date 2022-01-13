@@ -1,6 +1,7 @@
 {% extends 'doctorTemp/base.html' %}
 {% block activeDashboard %}{% endblock %}
 {% block activeMyAccount %}active open{% endblock %}
+{% block title %} Doctor - {{request.user.first_name}} {{request.user.last_name}} | Gonzalez Dental Clinic {% endblock %}
 {% load static %}
 
 
@@ -14,7 +15,7 @@
                                 <div class="page-title">Profile Page</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardDoctor' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
                                 <li class="active">My Account</li>
                             </ol>

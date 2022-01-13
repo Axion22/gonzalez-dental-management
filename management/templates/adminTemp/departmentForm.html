@@ -1,6 +1,7 @@
 {% extends 'adminTemp/base.html' %}
 {% block activeDashboard %}{% endblock %}
 {% block activeDepartment %}active open{% endblock %}
+{% block title %} Admin - Department Form | Gonzalez Dental Clinic {% endblock %}
 {% load static %}
 
 
@@ -15,14 +16,12 @@
                     <div class="page-bar">
                         <div class="page-title-breadcrumb">
                             <div class=" pull-left">
-                                <div class="page-title">Department Form</div>
+                                <div class="page-title">Department</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
                                 <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
-                                <li><a class="parent-item" href="#">Department</a>&nbsp;<i class="fa fa-angle-right"></i>
-                                </li>
-                                <li class="active"> Department Form</li>
+                                <li class="active"> Update Department</li>
                             </ol>
                         </div>
                     </div>
@@ -31,7 +30,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="card card-box">
                                 <div class="card-head">
-                                        <header>Edit {{ department.department }}</header>
+                                        <header>Update {{ department.department }}</header>
                                 </div>
                           
                                 

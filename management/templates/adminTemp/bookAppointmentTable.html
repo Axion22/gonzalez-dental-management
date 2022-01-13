@@ -1,7 +1,8 @@
 {% extends 'adminTemp/base.html' %}
 {% block activeDashboard %}{% endblock %}
 {% block activeAppointment %}active open{% endblock %}
-{% block activeAppointmentTable %}active open{% endblock %}
+{% block activeAppointmentTable %}active{% endblock %}
+{% block title %} Admin - Appointment List | Gonzalez Dental Clinic {% endblock %}
 {% load static %}
 
 {% block extracss %}
@@ -21,12 +22,12 @@
         <div class="page-bar">
             <div class="page-title-breadcrumb">
                 <div class=" pull-left">
-                    <div class="page-title">Inventory Tables</div>
+                    <div class="page-title">Appointment</div>
                 </div>
                 <ol class="breadcrumb page-breadcrumb pull-right">
                     <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                     </li>
-                    <li class="active">Inventory</li>
+                    <li class="active">Appointment</li>
                 </ol>
             </div>
         </div>
@@ -35,7 +36,7 @@
             <div class="col-md-12">
                 <div class="card  card-box">
                     <div class="card-head">
-                        <header>Manage Inventory</header>
+                        <header> Appointment List</header>
                     </div><br>
 
                     
@@ -43,11 +44,20 @@
                     <div class="card-body "></br>
 
                             <div class="container ">
-                            <div class="row justify-content-end">
-                              <div class="col-4" style="margin-bottom:10px;">
+                            <div class="row justify-content-between">
+                                <div class="col-md-2 col-sm-5 col-xs-6" style="margin-bottom:10px;">
+                                    <div class="btn-group">
+                                        <a href="{% url 'BookAppointmentCreate' %}" id="addRow1" class="btn btn-success">
+                                        Add New 
+                                            <i style="color:white;" class="fa fa-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-4" style="margin-bottom:10px;">
                                 <form action="" method="GET">
                                     <div class="input-group">
-                                            {{filter_appointment.form.first_name}}
+                                            {{filter_appointment.form.name}}
+                                            {{filter_appointment.form.approved_date}}
                                             <div class="input-group-prepend">
                                                 <button type="submit" class="btn btn-secondary btn-sm"  value="search">
                                                 <i class="fa fa-search"></i>
@@ -66,11 +76,10 @@
                                             <tr>
                                                 <th> ID </th>
                                                 <th> Client Name </th>
-                                                <th> Client Email </th>
-                                                <th> Client Contact </th>
                                                 <th> Scheduled Date & Time </th>
                                                 <th> Appointmented to </th>
-                                                <th> Deleted</th>
+                                                <th> Status</th>
+                                                <th> Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -83,23 +92,23 @@
                                                     {{appointmentTable.first_name}} {{appointmentTable.last_name}}
                                                 </td>
                                                 <td>
-                                                    {{appointmentTable.your_email}}
-                                                </td>
-                                                <td>
-                                                    {{appointmentTable.your_phone}}
-                                                </td>
-                                                <td>
                                                     {{appointmentTable.approved_date|default:"--"}} |   {{appointmentTable.approved_time|default:"--"}}
                                                 </td>
                                                 <td>
-                                                    {{appointmentTable.assign_doctor|default:"Not yet Assigned"}}
+                                                    {{appointmentTable.assign_doctor|default:"<span style='color:red;''>Not yet assigned</span"}}
                                                 </td>
                                                 <td>
-                                                    {% if appointmentTable.is_deleted == False %}
-                                                        <div style="color: #B22222;">{{appointmentTable.is_deleted|yesno:"Yes,No"}}</div>
+                                                    {% if appointmentTable.done == False %}
+                                                        <div style="color: red;">{{appointmentTable.done|yesno:"Completed,In Process"}}</div>
                                                     {% else %}
-                                                        <div style="color: #228B22;">{{appointmentTable.is_deleted|yesno:"Yes,No"}}</div>
+                                                        <div style="color: #228B22;">{{appointmentTable.done|yesno:"Completed,In Process"}}</div>
                                                     {% endif %}
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        
+                                                        <a href="{% url 'BookAppointmentInfo' appointmentTable.id %}"class="btn btn-xs dropdown-toggle no-margin" style="color:#337ab7;">view<i style="color:#337ab7;" class="fa fa-eye"></i></a>
+                                                    <center>
                                                 </td>
                                                 
                                             </tr>

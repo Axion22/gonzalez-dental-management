@@ -2,6 +2,7 @@
 {% block activeDashboard %}{% endblock %}
 {% block activeInventory %}active open{% endblock %}
 {% block activeInventoryList %}active open{% endblock %}
+{% block title %} Staff - Manage Inventory | Gonzalez Dental Clinic {% endblock %}
 {% load static %}
 
 
@@ -22,14 +23,12 @@
                     <div class="page-bar">
                         <div class="page-title-breadcrumb">
                             <div class=" pull-left">
-                                <div class="page-title">Advance Tables</div>
+                                <div class="page-title"> Inventory</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="{% url 'dashboardStaff' %}">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
-                                <li><a class="parent-item" href="#">Data Tables</a>&nbsp;<i class="fa fa-angle-right"></i>
-                                </li>
-                                <li class="active">Advance Tables</li>
+                                <li class="active">Manage Inventory</li>
                             </ol>
                         </div>
                     </div>
@@ -56,22 +55,25 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th> Product Name </th>
-                                                <th> Company Name </th>
                                                 <th> Unit Price </th>
                                                 <th> Quantity </th>
                                                 <th> Reorder Level </th>
+                                                <th> Action </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="odd gradeX">
                                                 <td>{{inventoryManage.id}}</td>
                                                 <td>{{inventoryManage.product_name}}</td>
-                                                <td>{{inventoryManage.company_name}}</td>
                                                 <td>{{inventoryManage.unit_prize}}</td>
                                                 <td>{{inventoryManage.quantity}}</td>
                                                 <td>
-                                                    <a href="{% url 'reorder_levelStaff' inventoryManage.id %}">
                                                     {{inventoryManage.reorder_level}}
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <a href="{% url 'reorder_levelStaff' inventoryManage.id %}"class="btn btn-xs dropdown-toggle no-margin" style="color:#18ce0f;" title="Update Reorder Level">Update<i style="color:#18ce0f;" class="fa fa-edit"></i></a>
+                                                    </center> 
                                                     </a>
                                                 </td>
 

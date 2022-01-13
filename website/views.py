@@ -18,6 +18,7 @@ def home(request):
   }
   return render(request, 'home.html', context)
 
+
 def contact(request):
   if request.method == "POST":
     form = ContactForm(request.POST, request.FILES)
@@ -40,8 +41,8 @@ def contact(request):
     email = EmailMessage(
       subject= f"{message_name} from Contact - Gonzalez Dental Clinic.",
       body=template,
-      from_email= 'geraldlayderos202@gmail.com',
-      to = ['axionultra@gmail.com','geraldlayderos202@gmail.com'],
+      from_email= 'gonzalezdental3@gmail.com',
+      to = ['ronald.rodriguez@cdsp.edu.ph','gonzalezdental3@gmail.com','gerald.layderos@cdsp.edu.ph'],
     )
     email.send()
     
@@ -99,8 +100,8 @@ def service(request):
     email = EmailMessage(
       subject= f"{first_name} {last_name} from Virtual Consultation - Gonzalez Dental Clinic.",
       body=template,
-      from_email= 'geraldlayderos202@gmail.com',
-      to = ['axionultra@gmail.com','geraldlayderos202@gmail.com'],
+      from_email= 'gonzalezdental3@gmail.com',
+      to = ['ronald.rodriguez@cdsp.edu.ph','gonzalezdental3@gmail.com','gerald.layderos@cdsp.edu.ph'],
     )
     email.send()
 
@@ -147,12 +148,19 @@ def appointment(request):
     
 
 
-    template = render_to_string('email.html',{'fname':first_name,'lname':last_name, 'email':your_email,'service_required':service_required,'your_schedule':your_schedule,'your_date':your_date,'your_phone':your_phone})
+    template = render_to_string('email.html',{
+      'fname':first_name,
+      'lname':last_name,
+      'your_email':your_email,
+      'service_required':service_required,
+      'your_schedule':your_schedule,
+      'your_date':your_date,
+      'your_phone':your_phone})
     email = EmailMessage(
       subject= f"{first_name} {last_name} from Appointment -  Gonzalez Dental Clinic.",
       body=template,
-      from_email= 'geraldlayderos202@gmail.com',
-      to = ['axionultra@gmail.com','geraldlayderos202@gmail.com'],
+      from_email= 'gonzalezdental3@gmail.com',
+      to = ['ronald.rodriguez@cdsp.edu.ph','gonzalezdental3@gmail.com','gerald.layderos@cdsp.edu.ph'],
     )
     email.send()
     
@@ -177,3 +185,6 @@ def appointment(request):
 
 def FAQs(request):
   return render(request, 'FAQs.html', {})
+
+
+

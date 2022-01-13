@@ -9,7 +9,7 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta name="description" content="Responsive Admin Template" />
     <meta name="author" content="Sunray" />
-    <title>Sunray | Bootstrap Responsive Hospital Admin Template</title>
+    <title>{% block title %} Staff | Gonzalez Dental Clinic {% endblock %}</title>
     <!-- google font -->
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" type="text/css" />
@@ -24,6 +24,38 @@
  <!-- END HEAD -->
 	<!--CSS-->
 	{% include 'adminTemp/css.html' %}
+	<style>
+		.nav-link:hover{
+			background-color: #F8F8F8;
+		}
+		.main-menu{
+  position:fixed;
+  top:6vh;
+  left:0;
+  height:100vh;
+
+  overflow: hidden;
+  white-space: nowrap;
+  transition: .3s ease;
+}
+.main-menu:hover{
+  overflow-y: scroll;
+}
+.main-menu .menu-item:hover{
+  cursor: pointer;
+}
+
+
+::-webkit-scrollbar{
+  width: 5px;
+}
+::-webkit-scrollbar-track{
+  background: transparent !important  ;
+}
+::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+}
+	</style>
  	{% block extracss %}
 	
   {% endblock extracss %}
@@ -119,9 +151,9 @@
     <!-- start page container -->
     <div class="page-container" style="min-height:100vh;">
  			<!-- start sidebar menu -->
- 			<div class="sidebar-container">
+ 			<nav class="sidebar-container">
  				<div class="sidemenu-container navbar-collapse collapse fixed-menu">
-	                <div id="remove-scroll" class="left-sidemenu">
+	                <div id="remove-scroll" class="left-sidemenu main-menu">
 	                    <ul class="sidemenu  page-header-fixed slimscroll-style" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
 	                        <li class="sidebar-toggler-wrapper hide">
 	                            <div class="sidebar-toggler">
@@ -140,14 +172,14 @@
 	                                </div>
 	                            </div>
 	                        </li>
-	                        <li class="nav-item {% block activeDashboard %}active open{% endblock %}">
+	                        <li class="menu-item nav-item {% block activeDashboard %}active open{% endblock %}">
 														<a href="{% url 'dashboardAdmin' %}" class="nav-link nav-toggle">
 															<i class="material-icons">dashboard</i>
 															<span class="title">Dashboard</span>
 															<span class="selected"></span>
 														</a>
 													</li>
-													<li class="nav-item {% block activeMyAccount %}{% endblock %}">
+													<li class="menu-item nav-item {% block activeMyAccount %}{% endblock %}">
 														<a href="{% url 'profileStaff' %}" class="nav-link nav-toggle">
 																<i class="material-icons">account_circle</i>
 																<span class="title">My Account</span>
@@ -155,29 +187,41 @@
 														</a>
 												</li>
 			
+
+												<li class="menu-item {% block activeAppointment %}{% endblock %}">
+													<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle "><i class="material-icons">assignment</i>
+														<span class="title">Appointment</span>
+														<span class="arrow open"></span></a>
+													<ul class="collapse list-unstyled " id="homeSubmenu">
+		
+														<li  class="menu-item nav-item {% block activeAppointmentList %}{% endblock %} ">
+															<a style="color:#818488;" href="{% url 'appointmentStaff' %}" class="nav-link "> 
+															<span style="font-weight:400;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+																Book Appointment </span>
+															</a>
+														</li>
+		
+														<li class="menu-item {% block activeAppointmentTable %}{% endblock %} ">
+															<a style="color:#818488;" href="{% url 'BookAppointmentTableStaff' %}" class="nav-link "> 
+															<span style="font-weight:400;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																Appointment List</span>
+															</a>
+														</li>
+														
+		
+														<li class="menu-item nav-item {% block activeVirtualConsultation %}{% endblock %} ">
+															<a style="color:#818488;" href="{% url 'virtualConsultationsStaff' %}" class="nav-link "> 
+															<span style="font-weight:400;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+																Virtual Consultation </span>
+															</a>
+														</li>
+		
+													</ul>
+											</li>
+
 			
-													<li class="nav-item {% block activeAppointment %}{% endblock %} ">
-														<a href="#" class="nav-link nav-toggle">
-															<i class="material-icons">assignment</i>
-															<span class="title">Appointment</span>
-															<span class="arrow open"></span>
-														</a>
 			
-														<ul class="sub-menu">
-															<li class="nav-item {% block activeAppointmentList %}{% endblock %} ">
-																<a href="{% url 'appointmentStaff' %}" class="nav-link "> 
-																<span class="title">Book Appointment</span>
-																</a>
-															</li>
-															<li class="nav-item {% block activeVirtualConsultation %}{% endblock %} ">
-																<a href="{% url 'virtualConsultationsStaff' %}" class="nav-link "> 
-																<span class="title">	Virtual Consultation </span>
-																</a>
-															</li>
-														</ul>
-													</li>
-			
-													<li class="nav-item {% block activeDoctor %}{% endblock %} ">
+													<li class="menu-item nav-item {% block activeDoctor %}{% endblock %} ">
 														<a href="{% url 'doctorStaff' %}" class="nav-link nav-toggle"> 
 															<i class="fa fa-user-md"></i>
 															<span class="title">Doctor</span> 
@@ -185,21 +229,21 @@
 													</li>
 			
 			
-													<li class="nav-item {% block activePatient %}{% endblock %} ">
+													<li class="menu-item nav-item {% block activePatient %}{% endblock %} ">
 														<a href="{% url 'patientStaff' %}" class="nav-link nav-toggle"> 
 														<i class="material-icons">accessible</i>
 														<span class="title">Patients</span> 
 														</a>
 													</li>
 			
-													<li class="nav-item {% block activePayment %}{% endblock %} ">
+													<li class="menu-item nav-item {% block activePayment %}{% endblock %} ">
 														<a href="{% url 'paymentStaff' %}" class="nav-link nav-toggle"> 
 														<i class="material-icons">monetization_on</i>
 														<span class="title">Payments</span>
 														</a>
 													</li>
 			
-													<li class="nav-item {% block activeInventory %}{% endblock %} ">
+													<li class="menu-item nav-item {% block activeInventory %}{% endblock %} ">
 														<a href="{% url 'inventoryStaff' %}" class="nav-link nav-toggle"> 
 														<i class="material-icons f-left">assignment_turned_in</i> 
 														<span class="title">Inventory</span>
@@ -207,7 +251,7 @@
 													</li>
 
 			
-													<li class="nav-item  ">
+													<li class="menu-item nav-item  ">
 														<a href="{% url 'logout' %}" class="nav-link nav-toggle"> 
 														<i class="material-icons f-left">input</i> 
 														<span class="title">Logout</span>
@@ -219,7 +263,7 @@
 	                    </ul>
 	                </div>
         </div>
-      </div>
+      </nav>
 			 <!-- end sidebar menu -->
 
 

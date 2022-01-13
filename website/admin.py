@@ -3,7 +3,7 @@ from .forms import BookAppointmentForm
 from .models import BookAppointment, VirtualConsult, Contact
 
 class BookAppointmentAdmin(admin.ModelAdmin):
-   list_display = ['first_name','last_name','your_email','service_required', 'approved_date', 'approved_time', 'assign_doctor', 'accepted','accepted_date','is_deleted']
+   list_display = ['first_name','last_name','your_email','service_required', 'approved_date', 'approved_time', 'assign_doctor', 'accepted','accepted_date','done']
    form = BookAppointmentForm
    list_filter = ['first_name', 'last_name']
    search_fields = ['first_name', 'last_name']
