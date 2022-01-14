@@ -12,10 +12,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o5w@*z3tv04nfuk*8r-w8jfk&yv)r9e=!(_*v-ebdrqd&9$vrk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
+#pythonanywhere.com
+#ALLOWED_HOSTS = ['gerald2000.pythonanywhere.com']
 
 # Application definition
 
@@ -82,19 +84,16 @@ WSGI_APPLICATION = 'dentist.wsgi.application'
 #}
 
 
-#MySQL Database
-
+#pythonanywhere.com
 #DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'djangodental',
-#        'USER': 'root',
-#        'PASSWORD': '',
-#        'HOST': 'localhost',
-#        'PORT': '3306',
+#        'NAME': 'gerald2000$django_dental_management',
+#        'USER': 'gerald2000',
+#        'PASSWORD': 'IBM222000',
+#        'HOST': 'gerald2000.mysql.pythonanywhere-services.com',
 #    }
 #}
-
 
 
 DATABASES = {
